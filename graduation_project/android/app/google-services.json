@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "826212704198",
+    "project_id": "dentaignose-a0427",
+    "storage_bucket": "dentaignose-a0427.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826212704198:android:91fca304d76aa2695e9cc7",
+        "android_client_info": {
+          "package_name": "com.example.graduation_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD02RiPzIcT20DnXfqu2aYen9mHdXJ_yFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

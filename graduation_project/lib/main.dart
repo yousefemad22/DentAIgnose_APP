@@ -15,7 +15,16 @@ import 'package:graduation_project/receptionist/home.dart';
 import 'package:graduation_project/student/home.dart';
 import 'package:graduation_project/student/student_profile.dart';
 import 'package:graduation_project/student/widget/all_Reports_page.dart';
-void main(){
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
+
+void main() async {
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
