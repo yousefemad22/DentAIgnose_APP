@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/questiones/widget/design.dart';
 
 class PatientDataForm extends StatefulWidget {
   @override
@@ -128,7 +129,9 @@ class _PatientDataFormState extends State<PatientDataForm> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Design(),));
+                          },
                           child: Text('Next',
                               style: TextStyle(color: Colors.blue)),
                           style: ElevatedButton.styleFrom(

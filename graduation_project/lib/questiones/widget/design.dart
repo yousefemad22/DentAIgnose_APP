@@ -132,7 +132,8 @@ class _DesignState extends State<Design> {
             bottom: 20,
             right: 20,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+              },
               child: Text('Next',
                   style: TextStyle(
                       color: Color(0xFF26A6FE),

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:graduation_project/questiones/question.dart';
+import 'package:graduation_project/questiones/widget/design.dart';
 class DateQuestionScreen extends StatefulWidget {
   @override
   _DateQuestionScreenState createState() => _DateQuestionScreenState();
@@ -179,14 +180,19 @@ class _DateQuestionScreenState extends State<DateQuestionScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => CategoryQuestionScreen()),
+                      builder: (context) => Design()),
                 );
               },
-              child: Text('Next',
-                  style: TextStyle(
-                      color: Color(0xFF26A6FE),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18)),
+              child: ElevatedButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Design(),));
+                },
+                child: Text('Next',
+                    style: TextStyle(
+                        color: Color(0xFF26A6FE),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18)),
+              ),
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   minimumSize: Size(87, 34)),
