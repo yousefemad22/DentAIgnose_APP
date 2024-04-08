@@ -22,14 +22,14 @@ import 'firebase_options.dart';
 // ...
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-
   final MaterialColor customPrimarySwatch = MaterialColor(
     0xff21a9f0,
     <int, Color>{
@@ -53,11 +53,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Start(),
+      home: Start(),
     );
   }
 }
-
