@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDHW5CQthSIMEOdbkjiQE1wv_t9Z5ziPxE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>826212704198</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.graduationProject.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>dentaignose-a0427</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dentaignose-a0427.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:826212704198:ios:976e9ac8d86bfe075e9cc7</string>
+</dict>
+</plist>

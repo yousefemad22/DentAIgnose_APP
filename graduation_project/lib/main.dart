@@ -15,12 +15,21 @@ import 'package:graduation_project/receptionist/home.dart';
 import 'package:graduation_project/student/home.dart';
 import 'package:graduation_project/student/student_profile.dart';
 import 'package:graduation_project/student/widget/all_Reports_page.dart';
-void main(){
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-
   final MaterialColor customPrimarySwatch = MaterialColor(
     0xff21a9f0,
     <int, Color>{
@@ -44,11 +53,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Start(),
+      home: Start(),
     );
   }
 }
-
