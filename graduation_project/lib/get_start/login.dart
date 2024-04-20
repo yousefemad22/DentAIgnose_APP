@@ -47,13 +47,13 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 50, left: 45, ),
+                  margin: EdgeInsets.only(top: 30, left: 45, ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(70),
                     color: Colors.white,
                   ),
-                  height: 500,
-                  width: 300,
+                  height: 400,
+                  width: 350,
                   child: Column(
                     children: [
                       Spacer(
@@ -84,7 +84,7 @@ class Login extends StatelessWidget {
                           alignment: Alignment.center,
                           // child: Center(
                           child: Text(
-                            'Doctor',
+                            'Dentist',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500,),
                           ),

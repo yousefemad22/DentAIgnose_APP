@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:graduation_project/Edit_profile/edit_profile.dart';
 
 class student_profile extends StatelessWidget {
+  final Map studentData;
+  student_profile({required this.studentData});
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 390;
@@ -96,7 +99,7 @@ class student_profile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              ' Hassan ',
+                              studentData['fName'] + " " + studentData['lName'],
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.inter(
@@ -106,7 +109,7 @@ class student_profile extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'hassan@gmail.com',
+                              studentData['email'],
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.inter(
@@ -123,7 +126,7 @@ class student_profile extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Edit_Profile()));
+                                  builder: (context) => Edit_Profile(userData: studentData,)));
                         },
                         icon: Icon(
                           Icons.border_color_outlined,
@@ -135,7 +138,8 @@ class student_profile extends StatelessWidget {
                 ),
                 buildTextContainer("Settings", ffem, fem),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 4 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 4 * fem),
                   padding:
                       EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                   width: double.infinity,
@@ -193,7 +197,8 @@ class student_profile extends StatelessWidget {
                 ),
                 buildTextContainer("More", ffem, fem),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                   padding:
                       EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                   width: double.infinity,

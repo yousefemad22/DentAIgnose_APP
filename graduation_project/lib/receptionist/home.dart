@@ -9,8 +9,12 @@ import 'package:graduation_project/navigationbar/navigationbar2.dart';
 import 'package:graduation_project/questiones/patient_Data.dart';
 import 'package:graduation_project/student/widget/learnSection.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 class receptionPage extends StatefulWidget {
-  const receptionPage({super.key});
+  final Map receptionistData;
+  receptionPage({super.key, required this.receptionistData});
 
   @override
   State<receptionPage> createState() => _receptionPage();
@@ -21,6 +25,39 @@ class _receptionPage extends State<receptionPage> {
   bool visible_add_box = true;
   bool visible_questioniers = false;
   bool visible_questioniers_box = false;
+
+    late DatabaseReference _databaseReference;
+
+  dynamic data;
+
+  @override
+  void initState() {
+    super.initState();
+    // print("inint state");
+    fetchreceptionistData();
+  }
+
+  void fetchreceptionistData() {
+    print("fetch person data");
+    _databaseReference = FirebaseDatabase.instance.ref("persons");
+    print("connected");
+    _databaseReference.child(widget.receptionistData['id'].toString()).onValue.listen((event) {
+      print("in person");
+      var des = event.snapshot.value;
+      setState(() {
+        data = des;
+        print("in data");
+        print(data);
+        widget.receptionistData["fName"] = data['fName'];
+        widget.receptionistData["mName"] = data['mName'];
+        widget.receptionistData["lName"] = data['lName'];
+        widget.receptionistData["age"] = data['age'];
+        widget.receptionistData["gender"] = data['gender'];
+        widget.receptionistData["number"] = data['number'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,8 +65,10 @@ class _receptionPage extends State<receptionPage> {
       home: Scaffold(
         body: ListView(
           children: [
-            const appbar2(),
-            const SizedBox(height: 30,),
+            appbar2(userData: widget.receptionistData,),
+            const SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -195,7 +234,11 @@ class _receptionPage extends State<receptionPage> {
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
-                              Image.asset('images/patient 1.png',width: 38,height: 43,)
+                              Image.asset(
+                                'images/patient 1.png',
+                                width: 38,
+                                height: 43,
+                              )
                             ],
                           ),
                         ),
@@ -302,17 +345,21 @@ class _receptionPage extends State<receptionPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             sectionTitle(title: 'Articles'),
             const divider(),
             const allReports(),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             sectionTitle(title: 'Overview'),
             const divider(),
             const overView(),
           ],
         ),
-        bottomNavigationBar: const navigationbar2(),
+        bottomNavigationBar: navigationbar2(userData: widget.receptionistData),
       ),
     );
   }

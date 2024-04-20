@@ -1,10 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graduation_project/Edit_profile/edit_profile.dart';
 
-class doctor_Profile extends StatelessWidget {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:graduation_project/dentist/home.dart';
+import 'package:graduation_project/get_start/create_account.dart';
+
+class doctor_Profile extends StatefulWidget {
+  final Map dentistData;
+  doctor_Profile({required this.dentistData});
+
+  @override
+  State<doctor_Profile> createState() => _doctor_ProfileState();
+}
+
+class _doctor_ProfileState extends State<doctor_Profile> {
+  // late DatabaseReference _databaseReference;
+
+  // int? password;
+  // String email = "";
+
+  // dynamic data;
+
+  // void main() {
+  //   print("fetch person data");
+  //   _databaseReference = FirebaseDatabase.instance.ref("Account");
+  //   print("connected");
+  //   _databaseReference.child(widget.dentistData['id'].toString()).onValue.listen((event) {
+  //     print("in account");
+  //     var des = event.snapshot.value;
+  //     setState(() {
+  //       data = des;
+  //       print("in data");
+  //       print(data);
+  //       email = data['email'];
+  //       password = data['[password]'];
+
+  //     });
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 390;
@@ -86,29 +125,44 @@ class doctor_Profile extends StatelessWidget {
                         backgroundColor: Color(0xffe3e2e7),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(
-                            15 , 10 , 65 , 8 ),
+                        margin: EdgeInsets.fromLTRB(15, 10, 65, 8),
                         width: 155 * fem,
                         height: double.infinity,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Ahmed Hassan ',
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        '${widget.dentistData['fName'][0].toUpperCase()}${widget.dentistData['fName'].substring(1)} ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18 * ffem,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        '${widget.dentistData['lName'][0].toUpperCase()}${widget.dentistData['lName'].substring(1)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18 * ffem,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.inter(
-                                fontSize: 18 * ffem,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xff000000),
-                              ),
                             ),
                             Text(
-                              'ahmed_hassan@gmail.com',
+                              widget.dentistData['email'],
                               softWrap: true,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.inter(
-                                fontSize: 11*fem ,
+                                fontSize: 11 * fem,
                                 fontWeight: FontWeight.w600,
                                 color: Color(0xff000000),
                               ),
@@ -121,7 +175,8 @@ class doctor_Profile extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Edit_Profile()));
+                                  builder: (context) => Edit_Profile(
+                                      userData: widget.dentistData)));
                         },
                         icon: Icon(
                           Icons.border_color_outlined,
@@ -133,7 +188,8 @@ class doctor_Profile extends StatelessWidget {
                 ),
                 buildTextContainer("Staff", ffem, fem),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                   padding:
                       EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                   width: double.infinity,
@@ -156,42 +212,63 @@ class doctor_Profile extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      buildCustomRow(
-                        text: "Add Receptionist",
-                        icon1: Icon(
-                          Icons.person,
-                          color: Colors.black,
-                          size: fem * 30,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    Create_account(user: "receptionists"),
+                              ));
+                        },
+                        child: buildCustomRow(
+                          text: "Add Receptionist",
+                          icon1: Icon(
+                            Icons.person,
+                            color: Colors.black,
+                            size: fem * 30,
+                          ),
+                          icon2: Icon(
+                            CupertinoIcons.right_chevron,
+                            color: Colors.black,
+                            size: fem * 30,
+                          ),
+                          fem: fem,
+                          ffem: ffem,
                         ),
-                        icon2: Icon(
-                          CupertinoIcons.right_chevron,
-                          color: Colors.black,
-                          size: fem * 30,
-                        ),
-                        fem: fem,
-                        ffem: ffem,
                       ),
-                      buildCustomRow(
-                        text: 'Add Intern Student',
-                        icon1: Icon(
-                          CupertinoIcons.person,
-                          color: Colors.black,
-                          size: fem * 30,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    Create_account(user: "students"),
+                              ));
+                        },
+                        child: buildCustomRow(
+                          text: 'Add Intern Student',
+                          icon1: Icon(
+                            CupertinoIcons.person,
+                            color: Colors.black,
+                            size: fem * 30,
+                          ),
+                          icon2: Icon(
+                            CupertinoIcons.right_chevron,
+                            color: Colors.black,
+                            size: fem * 30,
+                          ),
+                          fem: fem,
+                          ffem: ffem,
                         ),
-                        icon2: Icon(
-                          CupertinoIcons.right_chevron,
-                          color: Colors.black,
-                          size: fem * 30,
-                        ),
-                        fem: fem,
-                        ffem: ffem,
                       ),
                     ],
                   ),
                 ),
                 buildTextContainer("Settings", ffem, fem),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 4 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 4 * fem),
                   padding:
                       EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                   width: double.infinity,
@@ -249,7 +326,8 @@ class doctor_Profile extends StatelessWidget {
                 ),
                 buildTextContainer("More", ffem, fem),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
+                  margin:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 4 * fem),
                   padding:
                       EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                   width: double.infinity,
