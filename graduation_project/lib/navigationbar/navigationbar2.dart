@@ -4,14 +4,14 @@ import 'package:graduation_project/notification/notification.dart';
 import 'package:graduation_project/student/student_profile.dart';
 
 class navigationbar2 extends StatefulWidget {
-  const navigationbar2({super.key});
+  final Map userData;
+  navigationbar2({super.key, required this.userData});
 
   @override
   State<navigationbar2> createState() => _navigationbarState();
 }
 
 class _navigationbarState extends State<navigationbar2> {
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -19,7 +19,6 @@ class _navigationbarState extends State<navigationbar2> {
       _selectedIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +55,7 @@ class _navigationbarState extends State<navigationbar2> {
                         'images/home.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 0
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 0 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(0);
@@ -80,9 +77,7 @@ class _navigationbarState extends State<navigationbar2> {
                         'images/magnifying-glass.png',
                         width: 30,
                         height: 30,
-                        color: _selectedIndex == 1
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 1 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(1);
@@ -104,13 +99,15 @@ class _navigationbarState extends State<navigationbar2> {
                         'images/notification.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 2
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 2 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(2);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => notification(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => notification(),
+                            ));
                       },
                     ),
                     const Text('Notification ',
@@ -129,12 +126,14 @@ class _navigationbarState extends State<navigationbar2> {
                         'images/user.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 3
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 3 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => student_profile(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => student_profile(studentData: widget.userData),
+                            ));
                         _onItemTapped(3);
                       },
                     ),
@@ -143,7 +142,6 @@ class _navigationbarState extends State<navigationbar2> {
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         )),
-
                   ],
                 ),
               ],
@@ -154,5 +152,3 @@ class _navigationbarState extends State<navigationbar2> {
     );
   }
 }
-
-

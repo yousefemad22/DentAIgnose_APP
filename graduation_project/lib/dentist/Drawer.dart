@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/dentist/docto_profile.dart';
 import 'package:graduation_project/dentist/home.dart';
+import 'package:graduation_project/get_start/create_account.dart';
 import 'package:graduation_project/get_start/login.dart';
 import 'package:graduation_project/notification/notification.dart';
 
 class drawer extends StatelessWidget {
-  const drawer({super.key});
+  final Map dentistData;
+
+  drawer({super.key, required this.dentistData});
 
   @override
   Widget build(BuildContext context) {
@@ -28,24 +32,44 @@ class drawer extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 50, left: 20),
-              child: const Row(
+              child: Row(
                 children: [
                   CircleAvatar(
                     radius: 40.0,
                     backgroundImage:
-                    NetworkImage('https://example.com/avatar.jpg'),
+                        NetworkImage('https://example.com/avatar.jpg'),
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Column(
                     children: [
-                      Text(
-                        'Ahmed Hassan',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.white),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: dentistData['fName'][0].toUpperCase() +
+                                  dentistData['fName'].substring(1) +
+                                  ' ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            TextSpan(
+                              text: dentistData['lName'][0].toUpperCase() +
+                                  dentistData['lName'].substring(1),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white,
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Text(
                         'Doctor',
@@ -64,16 +88,16 @@ class drawer extends StatelessWidget {
               thickness: .5, // Set the thickness of the divider
               indent: 50, // Set the indent (left padding) of the divider
               endIndent:
-              50, // Set the end indent (right padding) of the divider
+                  50, // Set the end indent (right padding) of the divider
             ),
             Container(
               margin: const EdgeInsets.only(top: 20, left: 20),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return dentistPage();
-                      }));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return dentistPage(dentistData: dentistData);
+                  }));
                 },
                 child: const Row(
                   children: [
@@ -96,10 +120,10 @@ class drawer extends StatelessWidget {
               margin: const EdgeInsets.only(top: 20, left: 20),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return notification();
-                      }));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return notification();
+                  }));
                 },
                 child: const Row(
                   children: [
@@ -121,18 +145,26 @@ class drawer extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 20, left: 20),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => doctor_Profile(
+                          dentistData: dentistData,
+                        ),
+                      ));
+                },
                 child: const Row(
                   children: [
                     Icon(
-                      Icons.settings,
+                      Icons.person,
                       size: 30,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
-                      "Settings",
+                      "Profile",
                       style: TextStyle(fontSize: 18),
                     )
                   ],
@@ -147,12 +179,19 @@ class drawer extends StatelessWidget {
               thickness: 1, // Set the thickness of the divider
               indent: 50, // Set the indent (left padding) of the divider
               endIndent:
-              50, // Set the end indent (right padding) of the divider
+                  50, // Set the end indent (right padding) of the divider
             ),
             Container(
               margin: const EdgeInsets.only(top: 20, left: 20),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Create_account(user: "receptionists"),
+                      ));
+                },
                 child: const Row(
                   children: [
                     Icon(
@@ -173,7 +212,14 @@ class drawer extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 20, left: 20),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            Create_account(user: "students"),
+                      ));
+                },
                 child: Row(
                   children: [
                     Image.asset(
@@ -193,20 +239,24 @@ class drawer extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 180,
+              height: 20,
             ),
             const Divider(
               color: Colors.white, // Set the color of the divider
               thickness: 1, // Set the thickness of the divider
               indent: 50, // Set the indent (left padding) of the divider
               endIndent:
-              50, // Set the end indent (right padding) of the divider
+                  50, // Set the end indent (right padding) of the divider
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin: const EdgeInsets.only(top: 0, left: 20),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login(),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login(),
+                      ));
                 },
                 child: Row(
                   children: [

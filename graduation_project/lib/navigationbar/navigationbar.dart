@@ -3,14 +3,15 @@ import 'package:graduation_project/dentist/docto_profile.dart';
 import 'package:graduation_project/notification/notification.dart';
 
 class navigationbar extends StatefulWidget {
-  const navigationbar({super.key});
+
+  final Map dentistData;
+  navigationbar({super.key, required this.dentistData});
 
   @override
   State<navigationbar> createState() => _navigationbarState();
 }
 
 class _navigationbarState extends State<navigationbar> {
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -18,7 +19,6 @@ class _navigationbarState extends State<navigationbar> {
       _selectedIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +55,7 @@ class _navigationbarState extends State<navigationbar> {
                         'images/home.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 0
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 0 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(0);
@@ -79,9 +77,7 @@ class _navigationbarState extends State<navigationbar> {
                         'images/magnifying-glass.png',
                         width: 30,
                         height: 30,
-                        color: _selectedIndex == 1
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 1 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(1);
@@ -103,13 +99,15 @@ class _navigationbarState extends State<navigationbar> {
                         'images/notification.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 2
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 2 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
                         _onItemTapped(2);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => notification(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => notification(),
+                            ));
                       },
                     ),
                     const Text('Notification ',
@@ -128,12 +126,15 @@ class _navigationbarState extends State<navigationbar> {
                         'images/user.png',
                         width: 32,
                         height: 32,
-                        color: _selectedIndex == 3
-                            ? Colors.blue
-                            : Colors.black,
+                        color: _selectedIndex == 3 ? Colors.blue : Colors.black,
                       ),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => doctor_Profile(),));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  doctor_Profile(dentistData: widget.dentistData),
+                            ));
                         _onItemTapped(3);
                       },
                     ),
@@ -142,7 +143,6 @@ class _navigationbarState extends State<navigationbar> {
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         )),
-
                   ],
                 ),
               ],
@@ -153,5 +153,3 @@ class _navigationbarState extends State<navigationbar> {
     );
   }
 }
-
-

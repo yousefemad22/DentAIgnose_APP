@@ -1,32 +1,96 @@
-
 import 'package:flutter/material.dart';
 import 'package:graduation_project/dentist/home.dart';
 import 'package:graduation_project/get_start/create_account.dart';
 import 'package:graduation_project/password/forget_password.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+class Welcome extends StatefulWidget {
+  Welcome({super.key});
+
+  @override
+  State<Welcome> createState() => _WelcomeState();
+}
+
+class _WelcomeState extends State<Welcome> {
+  late DatabaseReference _databaseReference;
+
+  late TextEditingController _email;
+  late TextEditingController _password;
+
+  dynamic data;
+  int i = 0;
+
+  var allAccounts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _email = TextEditingController(text: "");
+    _password = TextEditingController(text: "");
+
+    fetchData();
+  }
+
+  void fetchData() {
+    print("fetch data");
+    _databaseReference = FirebaseDatabase.instance
+        .refFromURL("https://dentaignose-a0427-default-rtdb.firebaseio.com/");
+    print("connected");
+    _databaseReference.child("accounts").onValue.listen((event) {
+      print("in account");
+      var des = event.snapshot.value;
+      setState(() {
+        data = des;
+        print("in data");
+        while (i < data.length) {
+          print("in while");
+          print(data[i]['email']);
+          allAccounts.add((data[i]['email'], data[i]['password']));
+          i++;
+        }
+        print(allAccounts);
+      });
+    });
+  }
+
+  void showWrongCredentialsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("Wrong email or password. Please try again."),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  begin:Alignment.topLeft,
+                  begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF1bade1),Color(0xFF26a6fe),Color(0xFF9de8fc)
-                  ]
-
-
-              )
-
-          ),
+                Color(0xFF1bade1),
+                Color(0xFF26a6fe),
+                Color(0xFF9de8fc)
+              ])),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-
             body: SingleChildScrollView(
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
@@ -37,14 +101,17 @@ class Welcome extends StatelessWidget {
                     child: Container(
                         width: 200,
                         height: 200,
-
                         child: Image(image: AssetImage('images/لوجو.png'))),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 70),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 70),
                     child: Text(
                       'DentAIgnose',
-                      style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.w500,),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   Padding(
@@ -52,9 +119,13 @@ class Welcome extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child: Text(
+                      child: const Text(
                         'W e l c o m e',
-                        style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.w700,),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -63,9 +134,13 @@ class Welcome extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child: Text(
+                      child: const Text(
                         'B a c k - D r ...',
-                        style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.w700,),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -75,23 +150,24 @@ class Welcome extends StatelessWidget {
                         height: 40,
                         width: 350,
                         child: TextField(
-                          decoration: InputDecoration(
-                              icon: const Icon(Icons.mail),
+                          controller: _email,
+                          decoration: const InputDecoration(
+                              icon: Icon(Icons.mail),
 
                               //iconColor: Colors.white,
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Enter your Email',
+                              hintText: 'Enter your Email @dentist.com',
                               hintStyle: TextStyle(color: Colors.grey),
                               contentPadding: EdgeInsets.only(top: 3, left: 10),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
+                                      BorderRadius.all(Radius.circular(10.0))),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white))),
-                        )),),
-
+                        )),
+                  ),
 
                   // Padding(
                   //     padding: EdgeInsets.only(top: 30,bottom: 18,left: 18,right: 18),
@@ -164,30 +240,42 @@ class Welcome extends StatelessWidget {
                     child: SizedBox(
                         height: 40,
                         width: 350,
-                        child: TextField(
-                          decoration: InputDecoration(
-                              icon: const Icon(Icons.password),
-
-                              //iconColor: Colors.white,
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Enter your Password',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              //icon: Icons.mail,
-                              //hintStyle: TextStyle(color: Colors.grey),
-                              contentPadding: EdgeInsets.only(top: 3, left: 10),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white),
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white))),
-                        )),),
+                        child: TextFormField(
+                          controller: _password,
+                          obscureText: true,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Password cannot be empty';
+                            }
+                            return null; // Return null if the input is valid
+                          },
+                          decoration: const InputDecoration(
+                            icon: Icon(Icons.password),
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Enter your Password',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            contentPadding: EdgeInsets.only(top: 3, left: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                        )),
+                  ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => forgetPassword(),));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => forgetPassword(),
+                          ));
                     },
-                    child: Padding(
+                    child: const Padding(
                       padding: EdgeInsets.only(left: 10, top: 5),
                       child: Text(
                         'Forget Password?',
@@ -198,26 +286,70 @@ class Welcome extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 30,bottom: 10,left: 20),
+                            padding:
+                                EdgeInsets.only(top: 30, bottom: 10, left: 20),
                             child: Text(
                               'Login',
-                              style: TextStyle(fontSize: 40, color: Colors.white,fontWeight: FontWeight.w500,),
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                              ),
                               //textAlign: TextAlign.start,
                             ),
                           )),
                       Padding(
-                        padding: EdgeInsets.only(left: 180,top: 30),
+                        padding: const EdgeInsets.only(left: 180, top: 30),
                         child: GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (BuildContext context) {
-                                  return dentistPage();
-                                }));
+                          onTap: () {
+                            bool f = false;
+
+                            Map dentistData = {
+                              "id": "",
+                              // "dentistId": "",
+                              // "accountId": "",
+                              "email": "",
+                              "password": "",
+                              // "personId": "",
+                              'fName': "",
+                              'mName': "",
+                              'lName': "",
+                              'age': "",
+                              'gender': "",
+                              'number': "",
+                            };
+
+                            var check = (_email.text, _password.text);
+
+                            // check for account existance
+                            for (var i = 0; i < allAccounts.length; i++) {
+                              if (check == allAccounts[i]) {
+                                f = true;
+                                dentistData['id'] = i;
+                                dentistData['email'] = _email.text;
+                                dentistData['password'] = _password.text;
+                              }
+                            }
+                            // if account exists
+                            if (f) {
+                              // showWrongCredentialsDialog(context, "Logged in",
+                              //     "Intern Student Logged in Successfully.");
+
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return dentistPage(dentistData: dentistData);
+                              }));
+                            } else {
+                              // if not exist
+                              showWrongCredentialsDialog(context);
+                            }
+                            _email.text = "";
+                            _password.text = "";
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.login,
                             size: 40,
                             color: Colors.white,
@@ -239,14 +371,18 @@ class Welcome extends StatelessWidget {
                         padding: EdgeInsets.only(left: 8),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (BuildContext context) {
-                                  return Create_account();
-                                }));
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return Create_account(user: "dentists",);
+                            }));
                           },
                           child: Text(
                             "Sign Up",
-                            style: TextStyle(fontSize: 25, color: Colors.white,fontWeight: FontWeight.w500,),
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ),

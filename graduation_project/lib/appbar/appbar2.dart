@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+
 class appbar2 extends StatelessWidget {
-  const appbar2({super.key});
+  final Map userData;
+  appbar2({super.key, required this.userData});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         Container(
-          margin: const EdgeInsets.only( left: 5, right: 5),
+          margin: const EdgeInsets.only(left: 5, right: 5),
           height: 65.0,
           decoration: BoxDecoration(
             color: Colors.white,
@@ -33,14 +35,13 @@ class appbar2 extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 25.0,
-                  backgroundImage:
-                  AssetImage('images/3403753 1.png'),
+                  backgroundImage: AssetImage('images/3403753 1.png'),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
-                const Text(
-                  'DR/Ahmed',
+                Text(
+                  userData['fName'] + " " + userData['lName'],
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

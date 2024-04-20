@@ -38,10 +38,13 @@ dependencies:
   google_fonts: ^5.0.1
   get: ^4.6.5
   firebase_core: ^2.27.1
+  cloud_firestore: ^4.16.1
+  firebase_database: ^10.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_image_compress: ^1.0.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
