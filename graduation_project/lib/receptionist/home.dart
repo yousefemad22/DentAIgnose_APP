@@ -6,7 +6,7 @@ import 'package:graduation_project/dentist/widget/overView.dart';
 import 'package:graduation_project/dentist/widget/section.dart';
 import 'package:graduation_project/navigationbar/navigationbar.dart';
 import 'package:graduation_project/navigationbar/navigationbar2.dart';
-import 'package:graduation_project/questiones/patient_Data.dart';
+import 'package:graduation_project/receptionist/Xray.dart';
 import 'package:graduation_project/student/widget/learnSection.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +26,7 @@ class _receptionPage extends State<receptionPage> {
   bool visible_questioniers = false;
   bool visible_questioniers_box = false;
 
-    late DatabaseReference _databaseReference;
+  late DatabaseReference _databaseReference;
 
   dynamic data;
 
@@ -41,7 +41,10 @@ class _receptionPage extends State<receptionPage> {
     print("fetch person data");
     _databaseReference = FirebaseDatabase.instance.ref("persons");
     print("connected");
-    _databaseReference.child(widget.receptionistData['id'].toString()).onValue.listen((event) {
+    _databaseReference
+        .child(widget.receptionistData['id'].toString())
+        .onValue
+        .listen((event) {
       print("in person");
       var des = event.snapshot.value;
       setState(() {
@@ -65,7 +68,9 @@ class _receptionPage extends State<receptionPage> {
       home: Scaffold(
         body: ListView(
           children: [
-            appbar2(userData: widget.receptionistData,),
+            appbar2(
+              userData: widget.receptionistData,
+            ),
             const SizedBox(
               height: 30,
             ),
@@ -243,35 +248,43 @@ class _receptionPage extends State<receptionPage> {
                           ),
                         ),
                       ),
-                      Container(
-                        width: 133,
-                        height: 66,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xffffffff),
-                          boxShadow: [
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'X-rays',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Image.asset('images/x-ray 1.png')
-                          ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => Xray())));
+                        },
+                        child: Container(
+                          width: 133,
+                          height: 66,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xffffffff),
+                            boxShadow: [
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              const Text(
+                                'X-rays',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                              Image.asset('images/x-ray 1.png')
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -301,10 +314,7 @@ class _receptionPage extends State<receptionPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (context) => PatientDataForm()),
-                      );
+                      print('fill');
                     },
                     child: Container(
                       width: 266,

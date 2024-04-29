@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:graduation_project/get_start/login.dart';
 
 import 'package:graduation_project/roboflow_connection.dart';
-// import 'package:http/http.dart' as http;
+
+import 'package:http/http.dart' as http;
 
 class Start extends StatefulWidget {
   const Start({super.key});
@@ -13,29 +16,13 @@ class Start extends StatefulWidget {
 }
 
 class _StartState extends State<Start> {
-  final RoboflowClient client = RoboflowClient(
-    apiUrl: 'https://detect.roboflow.com',
-    apiKey: 'pBgyltHaxBfEFNMlUFmm',
-  );
+  var url = 'http://10.0.2.2:5000/pred';
+  var data;
+  String output = 'Initial Output';
 
-  String predictionResult = '';
-
-  Future predict(String imagePath, String modelId) async {
-    try {
-      // Perform inference
-      Map<String, dynamic> result = await client.infer(imagePath, modelId);
-
-      // Handle the result according to your app's requirements
-      setState(() {
-        predictionResult = result.toString();
-        print(predictionResult);
-      });
-    } catch (e) {
-      setState(() {
-        predictionResult = 'Error: $e';
-        print(predictionResult);
-      });
-    }
+  fetchdata(String url) async {
+    http.Response response = await http.get(Uri.parse(url));
+    return response.body;
   }
 
   @override
@@ -93,12 +80,17 @@ class _StartState extends State<Start> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      onPressed: () =>
-                          predict("D:\flutter\Projs\DentAIgnose_APP\graduation_project\images\(532).jpg", "dental-annotation/7"),
+                      onPressed: () {
+                        data = fetchdata(url);
+                        var decoded = jsonDecode(data);
+                        setState(() {
+                          output = decoded['output'];
+                        });
+                      },
                       child: Text('Predict'),
                     ),
                     SizedBox(height: 20),
-                    Text('Prediction Result: $predictionResult'),
+                    Text('Prediction Result: $output'),
                   ],
                 ),
               ),
