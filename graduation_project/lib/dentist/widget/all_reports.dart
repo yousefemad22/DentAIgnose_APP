@@ -48,7 +48,7 @@ class _allReportsState extends State<allReports> {
                   color: Color(0xff26a6fe)),
             ),
             SizedBox(
-              width: 120,
+              width: 100,
             ),
             Image.asset(
               'images/right-arrow 2.png',
