@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/dentist/docto_profile.dart';
 import 'package:graduation_project/notification/notification.dart';
 import 'package:graduation_project/student/student_profile.dart';
+import 'package:graduation_project/student/chatbot.dart';
 
 class navigationbar2 extends StatefulWidget {
   final Map userData;
@@ -90,33 +91,62 @@ class _navigationbarState extends State<navigationbar2> {
                         )),
                   ],
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      child: Image.asset(
-                        'images/notification.png',
-                        width: 32,
-                        height: 32,
-                        color: _selectedIndex == 2 ? Colors.blue : Colors.black,
+                if(widget.userData['email'].endsWith("@intern.com"))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        child: Image.asset(
+                          'images/chatbot.png',
+                          width: 32,
+                          height: 32,
+                          color: _selectedIndex == 2 ? Colors.blue : Colors.black,
+                        ),
+                        onTap: () {
+                          _onItemTapped(2);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatBotPage(),
+                              ));
+                        },
                       ),
-                      onTap: () {
-                        _onItemTapped(2);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => notification(),
-                            ));
-                      },
-                    ),
-                    const Text('Notification ',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ],
-                ),
+                      const Text('Chatbot ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
+                if(!widget.userData['email'].endsWith("@intern.com"))
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        child: Image.asset(
+                          'images/notification.png',
+                          width: 32,
+                          height: 32,
+                          color: _selectedIndex == 2 ? Colors.blue : Colors.black,
+                        ),
+                        onTap: () {
+                          _onItemTapped(2);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => notification(),
+                              ));
+                        },
+                      ),
+                      const Text('Notification ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ],
+                  ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

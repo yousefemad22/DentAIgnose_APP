@@ -6,6 +6,7 @@ import 'package:graduation_project/dentist/widget/overView.dart';
 import 'package:graduation_project/dentist/widget/section.dart';
 import 'package:graduation_project/navigationbar/navigationbar.dart';
 import 'package:graduation_project/navigationbar/navigationbar2.dart';
+import 'package:graduation_project/questiones/patient_Data.dart';
 import 'package:graduation_project/receptionist/Xray.dart';
 import 'package:graduation_project/student/widget/learnSection.dart';
 
@@ -66,13 +67,16 @@ class _receptionPage extends State<receptionPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: appbar2(
+          userData: widget.receptionistData,
+        ),
         body: ListView(
           children: [
-            appbar2(
-              userData: widget.receptionistData,
-            ),
+            // appbar2(
+            //   userData: widget.receptionistData,
+            // ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -210,7 +214,10 @@ class _receptionPage extends State<receptionPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          print('patient');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => PatientDataForm())));
                         },
                         child: Container(
                           width: 133,
@@ -367,6 +374,8 @@ class _receptionPage extends State<receptionPage> {
             sectionTitle(title: 'Overview'),
             const divider(),
             const overView(),
+
+            const SizedBox(height: 20,),
           ],
         ),
         bottomNavigationBar: navigationbar2(userData: widget.receptionistData),

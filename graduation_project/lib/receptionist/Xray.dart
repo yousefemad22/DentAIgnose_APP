@@ -1,75 +1,131 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:graduation_project/roboflow.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Xray extends StatelessWidget {
+import 'package:graduation_project/receptionist/cutXrays.dart';
+
+class Xray extends StatefulWidget {
   Xray({super.key});
 
+  @override
+  State<Xray> createState() => _XrayState();
+}
+
+class _XrayState extends State<Xray> {
   File? image;
+  String? imageUrl;
+
+  var finalImageData;
+
+  final ImagePredictionService predictionService = ImagePredictionService();
+  String? newImagePath;
+  var pred;
 
   getCameraImage() async {
     final ImagePicker picker = ImagePicker();
 
-    final XFile? imageGallery =
+    final XFile? imageCamera =
         await picker.pickImage(source: ImageSource.camera);
 
-    image = File(imageGallery!.path);
+    if (imageCamera != null) {
+      image = File(imageCamera!.path);
+    }
+    setState(() {
+      finalImageData = [imageCamera!, image];
+    });
   }
 
   getGalleryImage() async {
     final ImagePicker picker = ImagePicker();
 
-    final XFile? imageGallery =
-        await picker.pickImage(source: ImageSource.gallery);
+    final XFile? imageGallery = await picker.pickImage(
+        source: ImageSource.gallery, maxWidth: 200, maxHeight: 200);
 
-    image = File(imageGallery!.path);
+    if (imageGallery != null) {
+      image = File(imageGallery!.path);
+      setState(() {
+        finalImageData = [imageGallery!, image];
+      });
+    }
+
+    // await image!.copy('graduation_project/images/xrays/new.jpg');
+
+    // Save the picked image to a file
+    await saveImageToFile(image!);
+
+    print(imageGallery);
+  }
+
+  Future<void> saveImageToFile(File imageFile) async {
+    final Directory directory = await getApplicationDocumentsDirectory();
+
+    // Ensure the directory exists; create it if it doesn't
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    // Create a file with a different name (output.jpg)
+    final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    final File newImageFile = File('${directory.path}/$timestamp.jpg');
+
+    // Copy the picked image file to the new file location
+    await imageFile.copy(newImageFile.path);
+
+    newImagePath = newImageFile.path;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xFF1A7AC5),
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          title: Text("upload X-ray"),
+        ),
         body: SingleChildScrollView(
           child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: BackButtonIcon(),
-                  ),
-                  SizedBox(
-                    width: 200,
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          'assets/لوجو 2.png',
-                          width: 100,
-                          height: 100,
-                        ),
-                        Text(
-                          "Dentalgnose",
-                          style: TextStyle(
-                            color: Color(0xFFD9D6D6),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 30),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       const CircleAvatar(
+            //         backgroundColor: Colors.white,
+            //         child: BackButtonIcon(),
+            //       ),
+            //       const SizedBox(
+            //         width: 200,
+            //       ),
+            //       Expanded(
+            //         child: Column(
+            //           mainAxisSize: MainAxisSize.min,
+            //           children: [
+            //             Image.asset(
+            //               'images/لوجو.png',
+            //               width: 100,
+            //               height: 100,
+            //             ),
+            //             Text(
+            //               "DentAIgnose",
+            //               style: TextStyle(
+            //                 color: Color(0xFFD9D6D6),
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const SizedBox(
               height: 50,
             ),
@@ -88,47 +144,95 @@ class Xray extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                GestureDetector(
-                  onTap: () => getGalleryImage(),
-                  child: const Column(
-                    children: [
-                      Icon(
-                          size: 50,
-                          Icons.file_upload_outlined,
-                          color: Colors.white),
-                      SizedBox(
-                        height: 20,
+                if (image == null)
+                  GestureDetector(
+                    onTap: () {
+                      getGalleryImage();
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                            size: 50,
+                            Icons.file_upload_outlined,
+                            color: Colors.white),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          " Choose image ",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (image == null)
+                  GestureDetector(
+                    onTap: () {
+                      getCameraImage();
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(size: 50, Icons.camera, color: Colors.white),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          " Capture image ",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                if (pred != null)
+                  Container(
+                    width: 300,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        pred != null ? pred.toString() : "DAMN",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
-                      Text(
-                        " Choose image ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                // if (pred != null)
+                //   Text(
+                //     cutTheShit(newImagePath, pred).toString(),
+                //     style: TextStyle(fontSize: 20),
+                //   ),
+                if (image != null && pred == null)
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.blue,
+                          Color.fromARGB(255, 81, 88, 81)
+                        ], // Adjust colors as needed
+                      ),
+                      borderRadius: BorderRadius.circular(
+                          20.0), // Adjust radius as needed
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: SizedBox(
+                        width: 200, // Set the maximum width here
+                        child: Image.file(
+                          image!, // Assuming image is not null
+                          fit: BoxFit
+                              .cover, // Adjust how the image fits within the box
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () => getCameraImage(),
-                  child: const Column(
-                    children: [
-                      Icon(size: 50, Icons.camera, color: Colors.white),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        " Capture image ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  )
               ],
             ),
             const SizedBox(
@@ -138,7 +242,22 @@ class Xray extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  var imageName = basename(finalImageData[0]!.path);
+
+                  var refStorage =
+                      FirebaseStorage.instance.ref("X-rays/$imageName");
+
+                  await refStorage.putFile(image!);
+
+                  imageUrl = await refStorage.getDownloadURL();
+
+                  var jj = await predictionService.predictImage(newImagePath!);
+                  setState(() {
+                    pred = jj;
+                  });
+                  print(jj);
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12.5),
                   child: Text(

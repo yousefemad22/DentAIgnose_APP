@@ -5,6 +5,7 @@ import 'package:graduation_project/dentist/widget/section.dart';
 import 'package:graduation_project/navigationbar/navigationbar.dart';
 import 'package:graduation_project/navigationbar/navigationbar2.dart';
 import 'package:graduation_project/student/widget/learnSection.dart';
+import 'package:graduation_project/receptionist/Xray.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -38,7 +39,10 @@ class _studentPageState extends State<studentPage> {
     print("fetch person data");
     _databaseReference = FirebaseDatabase.instance.ref("persons");
     print("connected");
-    _databaseReference.child(widget.studentData['id'].toString()).onValue.listen((event) {
+    _databaseReference
+        .child(widget.studentData['id'].toString())
+        .onValue
+        .listen((event) {
       print("in person");
       var des = event.snapshot.value;
       setState(() {
@@ -55,17 +59,21 @@ class _studentPageState extends State<studentPage> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: appbar2(
+          userData: widget.studentData,
+        ),
         body: ListView(
           children: [
-            appbar2(userData: widget.studentData),
+            // appbar2(
+            //   userData: widget.studentData
+            // ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -200,7 +208,8 @@ class _studentPageState extends State<studentPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('x-ray');
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) => Xray())));
                     },
                     child: Container(
                       width: 266,
@@ -243,10 +252,10 @@ class _studentPageState extends State<studentPage> {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     width: 358,
                     height: 108,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xff9de8fd),
                       boxShadow: [
                         BoxShadow(
@@ -266,8 +275,8 @@ class _studentPageState extends State<studentPage> {
                       height: 66,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Color(0xffffffff),
-                        boxShadow: [
+                        color: const Color(0xffffffff),
+                        boxShadow: const [
                           BoxShadow(
                             color: Color(0x3f000000),
                             offset: Offset(0, 4),
@@ -285,7 +294,7 @@ class _studentPageState extends State<studentPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
+                      const Text(
                         'Fill questionnaires',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
@@ -310,6 +319,8 @@ class _studentPageState extends State<studentPage> {
             ),
             sectionTitle(title: 'Reports'),
             const allReports(),
+
+            const SizedBox(height: 20,),
           ],
         ),
         bottomNavigationBar: navigationbar2(userData: widget.studentData),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class appbar2 extends StatelessWidget {
+class appbar2 extends StatelessWidget implements PreferredSizeWidget {
   final Map userData;
   appbar2({super.key, required this.userData});
 
@@ -9,8 +9,11 @@ class appbar2 extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          margin: const EdgeInsets.only(left: 5, right: 5),
-          height: 65.0,
+          margin: const EdgeInsets.only(
+            left: 5,
+            right: 5,
+          ),
+          height: 100.0,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -29,42 +32,45 @@ class appbar2 extends StatelessWidget {
         ),
         Positioned(
           child: AppBar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  radius: 25.0,
-                  backgroundImage: AssetImage('images/3403753 1.png'),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  userData['fName'] + " " + userData['lName'],
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF26A6FE)),
-                ),
-                const SizedBox(
-                  width: 140,
-                ),
-                Column(
-                  children: [
-                    Image.asset(
-                      'images/logo2.png',
-                      width: 65,
-                      height: 42,
-                    ),
-                    const Text('DentAIgnose',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF26A6FE)))
-                  ],
-                ),
-              ],
+            title: Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 25.0,
+                    backgroundImage: AssetImage('images/3403753 1.png'),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    userData['fName'] + " " + userData['lName'],
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF26A6FE)),
+                  ),
+                  const SizedBox(
+                    width: 120,
+                  ),
+                  Column(
+                    children: [
+                      Image.asset(
+                        'images/logo2.png',
+                        width: 65,
+                        height: 42,
+                      ),
+                      const Text('DentAIgnose',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF26A6FE)))
+                    ],
+                  ),
+                ],
+              ),
             ),
             backgroundColor: Colors.transparent,
           ),
@@ -72,4 +78,7 @@ class appbar2 extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(75.0);
 }
