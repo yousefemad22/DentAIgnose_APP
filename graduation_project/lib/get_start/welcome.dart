@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/dentist/dentistHomes.dart';
 import 'package:graduation_project/dentist/home.dart';
 import 'package:graduation_project/get_start/create_account.dart';
 import 'package:graduation_project/password/forget_password.dart';
@@ -340,7 +341,8 @@ class _WelcomeState extends State<Welcome> {
 
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return dentistPage(dentistData: dentistData);
+                                return dentistHomes(dentistData: dentistData);
+                                // return dentistPage(dentistData: dentistData);
                               }));
                             } else {
                               // if not exist

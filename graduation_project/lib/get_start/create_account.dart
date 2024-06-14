@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:graduation_project/dentist/dentistHomes.dart';
 import 'package:graduation_project/dentist/home.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,12 +44,12 @@ class _Create_accountState extends State<Create_account> {
     print("connected");
     _databaseReference.child("persons").onValue.listen((event) {
       dynamic des = event.snapshot.value;
-      index = des.length;
+      index = des == null ? 0 : des.length;
       print(index);
     });
     _databaseReference.child(widget.user).onValue.listen((event) {
       dynamic des = event.snapshot.value;
-      dentistIndex = des.length;
+      dentistIndex = des == null ? 0 : des.length;
       print(dentistIndex);
     });
   }
@@ -370,10 +371,10 @@ class _Create_accountState extends State<Create_account> {
 
                             showWrongCredentialsDialog(context, "Added",
                                 "${widget.user.capitalize} Registerd Successfully :).");
-
+                            
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return dentistPage(dentistData: dentistData);
+                              return dentistHomes(dentistData: dentistData);
                             }));
                           }
                         },

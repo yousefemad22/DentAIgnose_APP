@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class appbar extends StatelessWidget {
+class appbar extends StatelessWidget implements PreferredSizeWidget {
   final Map dentistData;
 
   // final Map dentistData;
@@ -80,10 +80,10 @@ class appbar extends StatelessWidget {
                       height: 42,
                     ),
                     const Text('DentAIgnose',
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF26A6FE)))
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF26A6FE))),
                   ],
                 ),
               ],
@@ -94,4 +94,6 @@ class appbar extends StatelessWidget {
       ],
     );
   }
+  @override
+  Size get preferredSize => Size.fromHeight(75.0);
 }

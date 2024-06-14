@@ -12,37 +12,13 @@ import 'package:graduation_project/get_start/create_account.dart';
 
 class doctor_Profile extends StatefulWidget {
   final Map dentistData;
-  doctor_Profile({required this.dentistData});
+  doctor_Profile({super.key, required this.dentistData});
 
   @override
   State<doctor_Profile> createState() => _doctor_ProfileState();
 }
 
 class _doctor_ProfileState extends State<doctor_Profile> {
-  // late DatabaseReference _databaseReference;
-
-  // int? password;
-  // String email = "";
-
-  // dynamic data;
-
-  // void main() {
-  //   print("fetch person data");
-  //   _databaseReference = FirebaseDatabase.instance.ref("Account");
-  //   print("connected");
-  //   _databaseReference.child(widget.dentistData['id'].toString()).onValue.listen((event) {
-  //     print("in account");
-  //     var des = event.snapshot.value;
-  //     setState(() {
-  //       data = des;
-  //       print("in data");
-  //       print(data);
-  //       email = data['email'];
-  //       password = data['[password]'];
-
-  //     });
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -50,31 +26,8 @@ class _doctor_ProfileState extends State<doctor_Profile> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          bottomOpacity: 0,
-          elevation: 0,
-          toolbarHeight: fem * 60,
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              CupertinoIcons.arrow_left,
-              color: Colors.black,
-              size: fem * 35,
-            ),
-          ),
-          title: Text(
-            'Profile ',
-            style: TextStyle(
-              fontSize: 25 * ffem,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
-        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(14 * fem, 0 * fem, 14 * fem, 10 * fem),

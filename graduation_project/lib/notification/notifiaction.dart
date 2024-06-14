@@ -15,28 +15,29 @@ class notification extends StatelessWidget {
         .size
         .width / baseWidth;
     double ffem = fem * 0.97;
-    return Scaffold(appBar: AppBar(
-      bottomOpacity: 0,
-      elevation: 0,
-      toolbarHeight: fem * 60,
-      backgroundColor: Colors.white,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: Icon(CupertinoIcons.arrow_left, color: Colors.black,
-          size: fem * 35,
-        ),
-        iconSize: fem * 52,
-      ),
-      title: Text('Notification ',
-        style: TextStyle(
-          fontSize: 25 * ffem,
-          fontWeight: FontWeight.w700,
-          color: Colors.black,
-        ),
-      ),
-    ),
+    return Scaffold(
+      // appBar: AppBar(
+      //   bottomOpacity: 0,
+      //   elevation: 0,
+      //   toolbarHeight: fem * 60,
+      //   backgroundColor: Colors.white,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     icon: Icon(CupertinoIcons.arrow_left, color: Colors.black,
+      //       size: fem * 35,
+      //     ),
+      //     iconSize: fem * 52,
+      //   ),
+      //   title: Text('Notification ',
+      //     style: TextStyle(
+      //       fontSize: 25 * ffem,
+      //       fontWeight: FontWeight.w700,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding:  EdgeInsets.fromLTRB(15 * fem, 5 * fem, 13 * fem, 10 * fem),
         child: Column(

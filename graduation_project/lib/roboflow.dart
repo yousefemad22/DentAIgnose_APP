@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class ImagePredictionService {
-  static final String API_KEY = 'pBgyltHaxBfEFNMlUFmm';
+  static final String API_KEY = 'api-key';
   static final String MODEL_ENDPOINT = 'dental-annotation/5';
 
   Future<Map<String, dynamic>> predictImage(String image) async {

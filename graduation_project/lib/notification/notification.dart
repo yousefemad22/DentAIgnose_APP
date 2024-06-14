@@ -13,44 +13,44 @@ class notification extends StatelessWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-      appBar: AppBar(
-        bottomOpacity: 0,
-        elevation: 0,
-        toolbarHeight: fem * 60,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            CupertinoIcons.arrow_left,
-            color: Colors.black,
-            size: fem * 35,
-          ),
-          iconSize: fem * 52,
-        ),
-        title: Text(
-          'Notification ',
-          style: TextStyle(
-            fontSize: 25 * ffem,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   bottomOpacity: 0,
+      //   elevation: 0,
+      //   toolbarHeight: fem * 60,
+      //   backgroundColor: Colors.white,
+      //   leading: IconButton(
+      //     onPressed: () {
+      //       Navigator.pop(context);
+      //     },
+      //     icon: Icon(
+      //       CupertinoIcons.arrow_left,
+      //       color: Colors.black,
+      //       size: fem * 35,
+      //     ),
+      //     iconSize: fem * 52,
+      //   ),
+      //   title: Text(
+      //     'Notification ',
+      //     style: TextStyle(
+      //       fontSize: 25 * ffem,
+      //       fontWeight: FontWeight.w700,
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(15 * fem, 5 * fem, 13 * fem, 10 * fem),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: EdgeInsets.fromLTRB(20 * fem, 0, 42 * fem, 0 * fem),
-              width: double.infinity,
-              height: 1.5 * fem,
-              decoration: const BoxDecoration(
-                color: Color(0xff26a6fe),
-              ),
-            ),
+            // Container(
+            //   margin: EdgeInsets.fromLTRB(20 * fem, 0, 42 * fem, 0 * fem),
+            //   width: double.infinity,
+            //   height: 1.5 * fem,
+            //   decoration: const BoxDecoration(
+            //     color: Color(0xff26a6fe),
+            //   ),
+            // ),
             Expanded(
               child: ListView.builder(
                 itemCount: viewModel.data.length,
