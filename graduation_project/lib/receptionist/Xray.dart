@@ -168,11 +168,9 @@ class _XrayState extends State<Xray> {
               //     ],
               //   ),
               // ),
-
               // const SizedBox(
               //   height: 50,
               // ),
-
               // const Text(
               //   "Upload your X-ray",
               //   textAlign: TextAlign.center,
@@ -307,7 +305,7 @@ class _XrayState extends State<Xray> {
                     // Cut image
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context)=> ImageFromUrl(imageURL: imageUrl!, prediction: pred)));
-
+                    
                     // boundary box image
                     // Navigator.push(
                     //     context,
