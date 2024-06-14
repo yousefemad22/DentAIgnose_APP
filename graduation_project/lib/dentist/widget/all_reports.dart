@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/student/widget/all_Reports_page.dart';
 
+// The bar in the Home Page
 class allReports extends StatefulWidget {
-  const allReports({super.key});
+  allReports({super.key});
 
   @override
   State<allReports> createState() => _allReportsState();
@@ -13,8 +14,8 @@ class _allReportsState extends State<allReports> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Report()));
+        Navigator.push(context,
+         MaterialPageRoute(builder: ((context) => Report())));
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 15),

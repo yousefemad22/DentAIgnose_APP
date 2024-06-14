@@ -1,61 +1,59 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:graduation_project/appbar/appbar.dart';
-import 'package:graduation_project/dentist/Drawer.dart';
-import 'package:graduation_project/dentist/dentistHomes.dart';
+import 'package:graduation_project/appbar/appbar2.dart';
 import 'package:graduation_project/dentist/docto_profile.dart';
-import 'package:graduation_project/dentist/home.dart';
 import 'package:graduation_project/notification/notification.dart';
+import 'package:graduation_project/student/chatbot.dart';
+import 'package:graduation_project/student/home.dart';
 import 'package:graduation_project/student/student_profile.dart';
 
-
-class navigationbar extends StatefulWidget {
-  final Map dentistData;
-  navigationbar({super.key, required this.dentistData});
+class studentNavigationBar extends StatefulWidget {
+  final Map studentData;
+  const studentNavigationBar({super.key, required this.studentData});
 
   @override
-  State<navigationbar> createState() => _navigationbarState();
+  State<studentNavigationBar> createState() => _NavigationBarState();
 }
 
-class _navigationbarState extends State<navigationbar> {
+class _NavigationBarState extends State<studentNavigationBar> {
   int _selectedIndex = 0;
   late DatabaseReference _databaseReference;
   dynamic data;
 
   List<Widget> _pages = [];
+
   @override
   void initState() {
     super.initState();
     _pages = [
-      HomePage(dentistData: widget.dentistData),
+      HomePage(studentData: widget.studentData),
       SearchPage(),
-      NotificationPage(),
-      DentistProfile(dentistData: widget.dentistData),
+      ChatbotPage(),
+      StudentProfile(studentData: widget.studentData),
     ];
-    fetchDentistData();
+    fetchstudentData();
   }
 
-  void fetchDentistData() {
+  void fetchstudentData() {
     print("fetch person data");
     _databaseReference = FirebaseDatabase.instance.ref("persons");
     print("connected");
     _databaseReference
-        .child(widget.dentistData['id'].toString())
+        .child(widget.studentData['id'].toString())
         .onValue
         .listen((event) {
       print("in person");
       var des = event.snapshot.value;
-      // print(des.toString());
       setState(() {
         data = des;
         print("in data");
         print(data);
-        widget.dentistData["fName"] = data['fName'];
-        widget.dentistData["mName"] = data['mName'];
-        widget.dentistData["lName"] = data['lName'];
-        widget.dentistData["age"] = data['age'];
-        widget.dentistData["gender"] = data['gender'];
-        widget.dentistData["number"] = data['number'];
+        widget.studentData["fName"] = data['fName'];
+        widget.studentData["mName"] = data['mName'];
+        widget.studentData["lName"] = data['lName'];
+        widget.studentData["age"] = data['age'];
+        widget.studentData["gender"] = data['gender'];
+        widget.studentData["number"] = data['number'];
       });
     });
   }
@@ -69,12 +67,7 @@ class _navigationbarState extends State<navigationbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(dentistData: widget.dentistData),
-      // drawer: drawer(dentistData: widget.dentistData),
-      drawer: Drawer(
-          child: drawer(
-        dentistData: widget.dentistData,
-      )),
+      appBar: appbar2(userData: widget.studentData),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,
@@ -105,7 +98,7 @@ class _navigationbarState extends State<navigationbar> {
                 children: <Widget>[
                   buildNavItem('images/home.png', 'Home', 0),
                   buildNavItem('images/magnifying-glass.png', 'Search', 1),
-                  buildNavItem('images/notification.png', 'Notification', 2),
+                  buildNavItem('images/chatbot.png', 'Chatbot', 2),
                   buildNavItem('images/user.png', 'Profile', 3),
                 ],
               ),
@@ -145,12 +138,13 @@ class _navigationbarState extends State<navigationbar> {
 }
 
 class HomePage extends StatelessWidget {
-  final Map dentistData;
-  HomePage({required this.dentistData});
+  final Map studentData;
+  const HomePage({super.key, required this.studentData});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: dentistPage(dentistData: dentistData),
+      body: studentPage(studentData: studentData),
     );
   }
 }
@@ -163,19 +157,19 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       // body: Center(child: Text('Search Page')),
       body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                hintText: 'Enter a search term',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                ),
-              ),
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: _searchController,
+          decoration: InputDecoration(
+            labelText: 'Search',
+            hintText: 'Enter a search term',
+            prefixIcon: Icon(Icons.search),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.0)),
             ),
           ),
+        ),
+      ),
     );
   }
 }
@@ -184,19 +178,28 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: notification(),
+      body: ChatBotPage(),
     );
   }
 }
 
-class DentistProfile extends StatelessWidget {
-  final Map dentistData;
-  DentistProfile({required this.dentistData});
+class ChatbotPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: doctor_Profile(dentistData: dentistData),
-      body: student_profile(studentData: dentistData),
+      body: ChatBotPage(),
+    );
+  }
+}
+
+class StudentProfile extends StatelessWidget {
+  final Map studentData;
+  const StudentProfile({super.key, required this.studentData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: student_profile(studentData: studentData),
     );
   }
 }

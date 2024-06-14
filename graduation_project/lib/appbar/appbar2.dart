@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+String capitalizeWords(String text) {
+  return text.split(" ").map((str) => str[0].toUpperCase() + str.substring(1).toLowerCase()).join(" ");
+}
 class appbar2 extends StatelessWidget implements PreferredSizeWidget {
   final Map userData;
   appbar2({super.key, required this.userData});
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +50,12 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
                     width: 5,
                   ),
                   Text(
-                    userData['fName'] + " " + userData['lName'],
+                    capitalizeWords("${userData['fName'] + " " + userData['lName']}"),
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF26A6FE)),
+                        color: Color(0xFF26A6FE),
+                        ),
                   ),
                   const SizedBox(
                     width: 120,
@@ -78,7 +83,6 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
-
   @override
   Size get preferredSize => Size.fromHeight(75.0);
 }

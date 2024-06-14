@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:graduation_project/get_start/welcome.dart';
 import 'package:graduation_project/receptionist/reciptionist_login.dart';
@@ -9,35 +8,33 @@ class Login extends StatelessWidget {
   const Login({super.key});
   @override
   Widget build(BuildContext context) {
+    // Use MediaQuery to get the size of the current screen
+    final Size screenSize = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin:Alignment.topLeft,
+                begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF1bade1),Color(0xFF26a6fe),Color(0xFF9de8fc)
+                  Color(0xFF1bade1), Color(0xFF26a6fe), Color(0xFF9de8fc)
                 ]
-
-
             )
-
         ),
         child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 80, left: 35),
-                  // padding: EdgeInsets.only(bottom: 2),
+                  margin: EdgeInsets.only(top: screenSize.height * 0.1, left: screenSize.width * 0.1, right: screenSize.width * 0.1),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: Color(0XFF005d9a)),
-                  width: 230,
-                  height: 70,
+                  width: screenSize.width * 0.8,
+                  height: 70,  // Fixed height as it is a small element
                   child: Center(
                     child: Text(
                       'Login as',
@@ -47,24 +44,20 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 30, left: 45, ),
+                  margin: EdgeInsets.only(top: 30, left: screenSize.width * 0.12, right: screenSize.width * 0.12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(70),
                     color: Colors.white,
                   ),
-                  height: 400,
-                  width: 350,
+                  height: screenSize.height * 0.7,
+                  width: screenSize.width * 0.85,
                   child: Column(
                     children: [
-                      Spacer(
-                        flex: 1,
-                      ),
+                      Spacer(),
                       Image(
                         image: AssetImage('images/logo2.png'),
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
+                      Spacer(),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(context,
@@ -73,35 +66,25 @@ class Login extends StatelessWidget {
                               }));
                         },
                         child: Container(
-                          padding: EdgeInsets.only(
-                            bottom: 2,
-                          ),
-
-
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.blue),
                           alignment: Alignment.center,
-                          // child: Center(
                           child: Text(
                             'Dentist',
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500,),
                           ),
-                          //),
                           height: 60,
-                          width: 190,
+                          width: 190, // Consider making this relative to screen size
                         ),
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
+                      Spacer(),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => student_login(),));
                         },
                         child: Container(
-                          //padding: EdgeInsets.only(top: 4),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.blue),
@@ -112,18 +95,15 @@ class Login extends StatelessWidget {
                             style: TextStyle(fontSize: 30, color: Colors.white,fontWeight: FontWeight.w500,),
                           ),
                           height: 60,
-                          width: 190,
+                          width: 190, // Consider making this relative to screen size
                         ),
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
+                      Spacer(),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => reciptionist_login(),));
                         },
                         child: Container(
-                          //padding: EdgeInsets.only(top: 4),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.blue),
@@ -134,12 +114,10 @@ class Login extends StatelessWidget {
                             style: TextStyle(fontSize: 30, color: Colors.white,fontWeight: FontWeight.w500,),
                           ),
                           height: 60,
-                          width: 190,
+                          width: 190, // Consider making this relative to screen size
                         ),
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
+                      Spacer(),
                     ],
                   ),
                 ),
