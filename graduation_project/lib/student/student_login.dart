@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/password/forget_password.dart';
+import 'package:graduation_project/student/callPage.dart';
 import 'package:graduation_project/student/home.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -60,30 +61,55 @@ class _WelcomeState extends State<student_login> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: const Color(0xFF258ffd),
+      home: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+              Color(0xFF1bade1),
+              Color(0xFF26a6fe),
+              Color(0xFF9de8fc)
+            ])),
+        child: Scaffold(
+        backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Image(
-                image: AssetImage("images/لوجو.png"),
-                height: 150,
-              ),
               const SizedBox(
-                height: 15.0,
-              ),
-              const Text(
-                'DentAIgnose',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 37,
-                  fontWeight: FontWeight.bold,
+                  height: 50.0,
                 ),
-              ),
-              const SizedBox(
-                height: 50.0,
-              ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // SizedBox(width: 5,),
+                      CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 20,
+                          child: GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: const Icon(Icons.arrow_back,
+                                  color: Color(0xFF26A6FE)))),
+                      // SizedBox(
+                      //   width: 20.0,
+                      // ),
+                      Text(
+                        'DentAIgnose',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 37,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Image(
+                        image: AssetImage("images/لوجو.png"),
+                        height: 50,
+                      ),
+                    ]),
+                const SizedBox(
+                  height: 50.0,
+                ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -266,7 +292,8 @@ class _WelcomeState extends State<student_login> {
 
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return studentPage(studentData: studentData);
+                                return studentCallPage(studentData: studentData);
+                                // return studentPage(studentData: studentData);
                               }));
                             } else {
                               // if not exist
@@ -293,7 +320,7 @@ class _WelcomeState extends State<student_login> {
           ),
         ),
       ),
-    );
+    ),);
   }
 }
 

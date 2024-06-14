@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:graduation_project/dentist/home.dart';
-import 'package:graduation_project/receptionist/home.dart';
-import 'package:graduation_project/student/home.dart';
+import 'package:graduation_project/dentist/dentistHomes.dart';
+import 'package:graduation_project/receptionist/callPage.dart';
+import 'package:graduation_project/student/callPage.dart';
 
 //import '../utils.dart';
 
@@ -92,6 +92,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
     double ffem = fem * 0.97;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           bottomOpacity: 0,
@@ -225,13 +226,13 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
                               if (currentProfile == "dentist") {
-                                return dentistPage(
+                                return dentistHomes(
                                     dentistData: widget.userData);
                               } else if (currentProfile == 'intern') {
-                                return studentPage(
+                                return studentCallPage(
                                     studentData: widget.userData);
                               } else {
-                                return receptionPage(
+                                return receptionCallPage(
                                     receptionistData: widget.userData);
                               }
                             }));

@@ -13,6 +13,7 @@ class divider extends StatelessWidget {
     );
   }
 }
+
 class verticalDivider extends StatelessWidget {
   const verticalDivider({super.key});
 
@@ -23,7 +24,7 @@ class verticalDivider extends StatelessWidget {
       thickness: 2,
       indent: 25,
       endIndent: 25,
-      width: 20,
+      width: 50,
     );
   }
 }

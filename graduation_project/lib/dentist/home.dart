@@ -13,70 +13,41 @@ import 'package:firebase_database/firebase_database.dart';
 class dentistPage extends StatefulWidget {
   final Map dentistData;
 
-  dentistPage({required this.dentistData});
+  dentistPage({super.key, required this.dentistData});
 
   @override
   State<dentistPage> createState() => _dentistPageState();
 }
 
 class _dentistPageState extends State<dentistPage> {
-  late DatabaseReference _databaseReference;
 
-  dynamic data;
 
   @override
   void initState() {
     super.initState();
     // print("inint state");
-    fetchDentistData();
-  }
-
-  void fetchDentistData() {
-    print("fetch person data");
-    _databaseReference = FirebaseDatabase.instance.ref("persons");
-    print("connected");
-    _databaseReference.child(widget.dentistData['id'].toString()).onValue.listen((event) {
-      print("in person");
-      var des = event.snapshot.value;
-      setState(() {
-        data = des;
-        print("in data");
-        print(data);
-        widget.dentistData["fName"] = data['fName'];
-        widget.dentistData["mName"] = data['mName'];
-        widget.dentistData["lName"] = data['lName'];
-        widget.dentistData["age"] = data['age'];
-        widget.dentistData["gender"] = data['gender'];
-        widget.dentistData["number"] = data['number'];
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // var index;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        drawer: Drawer(
-            child: drawer(
-          dentistData: widget.dentistData,
-        )),
+    return Scaffold(
+        // drawer: Drawer(
+        //     child: drawer(
+        //       dentistData: widget.dentistData,
+        // )),
+        // appBar: appbar(
+        //   dentistData: widget.dentistData,
+        // ),
         body: ListView(
           children: [
-            appbar(
-              dentistData: widget.dentistData,
-            ),
             sectionTitle(title: 'Reports'),
             const divider(),
-            const allReports(),
+            allReports(),
             sectionTitle(title: 'Overview'),
             const divider(),
             const overView(),
           ],
         ),
-        bottomNavigationBar: navigationbar(dentistData: widget.dentistData),
-      ),
     );
   }
 }

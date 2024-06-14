@@ -9,28 +9,25 @@ class detials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:AppBar(
+        appBar: AppBar(
           bottomOpacity: 0,
           elevation: 0,
-
-          backgroundColor:Colors.white,
+          backgroundColor: Colors.white,
           leading: IconButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.pop(context);
             },
-            icon:Icon( CupertinoIcons.arrow_left,color: Colors.black,
-              size:50,
+            icon: Icon(
+              CupertinoIcons.arrow_left,
+              color: Colors.black,
+              size: 50,
             ),
-
           ),
         ),
-        body: Center(child: Text('''${data[index].datesend},
-       ${data[index].name}
-       
-       ''',style: TextStyle(
-
-            fontSize: 50
-        ),))
-    );
+        body: Center(
+            child: Text(
+          "damnnnnnnnn",
+          style: TextStyle(fontSize: 50),
+        )));
   }
 }

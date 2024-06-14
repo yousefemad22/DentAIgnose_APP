@@ -30,40 +30,43 @@ class _ChatBotPageState extends State<ChatBotPage> {
   }
 
   Future<void> _getBotResponse(String query) async {
-    final response = await http.post(
-      Uri.parse('https://api.openai.com/v1/completions'),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer YOUR_OPENAI_KEY',
-      },
-      body: jsonEncode({
-        "model": "gpt-3.5-turbo",
-        "messages": [
-          {"role": "user", "content": query}
-        ]
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      final botResponse =
-          jsonDecode(response.body)['choices'][0]['message']['content'];
-      final botMessage = types.TextMessage(
-        author: types.User(id: 'bot'),
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: _randomString(),
-        text: botResponse,
+    try {
+      final response = await http.post(
+        Uri.parse('https://api.openai.com/v1/completions'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_OPENAI_KEY',
+        },
+        body: jsonEncode({
+          "model": "text-davinci-003",  // Specify the correct model
+          "prompt": query,
+          "max_tokens": 150
+        }),
       );
 
-      setState(() {
-        _messages.insert(0, botMessage);
-      });
-    } else {
-      // Handle error
+      if (response.statusCode == 200) {
+        final botResponse = jsonDecode(response.body)['choices'][0]['text'].trim();
+        final botMessage = types.TextMessage(
+          author: types.User(id: 'bot'),
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          id: _randomString(),
+          text: botResponse,
+        );
+
+        setState(() {
+          _messages.insert(0, botMessage);
+        });
+      } else {
+        // Handle HTTP errors
+        throw Exception('Failed to fetch response: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle general errors
       final errorMessage = types.TextMessage(
         author: types.User(id: 'bot'),
         createdAt: DateTime.now().millisecondsSinceEpoch,
         id: _randomString(),
-        text: 'Error: ${response.statusCode}',
+        text: 'Error: ${e.toString()}',
       );
 
       setState(() {
@@ -84,9 +87,10 @@ class _ChatBotPageState extends State<ChatBotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat Bot'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Chat Bot'),
+      //   backgroundColor: Colors.blueGrey,
+      // ),
       body: Chat(
         messages: _messages,
         onSendPressed: _handleSendPressed,
