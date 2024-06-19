@@ -51,80 +51,82 @@ class _ReportState extends State<Report> {
   Widget build(BuildContext context) {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
-    return Scaffold(
-      appBar: AppBar(
-        bottomOpacity: 0,
-        elevation: 0,
-        toolbarHeight: fem * 60,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            CupertinoIcons.arrow_left,
-            color: Colors.black,
-            size: fem * 35,
-          ),
-          iconSize: fem * 52,
-        ),
-        title: GestureDetector(
-          onTap: () {
-            setState() {}
-            ;
-          },
-          child: Text(
-            'All Reports',
-            style: TextStyle(
-              fontSize: 25 * ffem,
-              // fontWeight: FontWeight.w700,
+    double ffem = fem * 0.8;
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          bottomOpacity: 0,
+          elevation: 0,
+          toolbarHeight: fem * 60,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              CupertinoIcons.arrow_left,
               color: Colors.black,
+              size: fem * 35,
+            ),
+            iconSize: fem * 52,
+          ),
+          title: GestureDetector(
+            onTap: () {
+              setState() {}
+              ;
+            },
+            child: Text(
+              'All Reports',
+              style: TextStyle(
+                fontSize: 25 * ffem,
+                // fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(18 * fem, 10 * fem, 11 * fem, 3 * fem),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-          ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            FutureBuilder<List<ReportsModel?>>(
-              future: reportsPrevData(reportsIndex!), // Call your method here
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator(
-                    color: Colors.blue,
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("Error damnnnnn: ${snapshot.error}");
-                } else if (snapshot.hasData) {
-                  var data = snapshot.data!;
-                  return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      var report = data[index];
-                      return _cardsReport(
-                        context: context,
-                        fem: fem,
-                        ffem: ffem,
-                        metaData: report!,
-                        index: index,
-                      );
-                    },
-                  );
-                } else {
-                  return Text("No data available");
-                }
-              },
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(18 * fem, 10 * fem, 11 * fem, 3 * fem),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
             ),
-          ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              FutureBuilder<List<ReportsModel?>>(
+                future: reportsPrevData(reportsIndex!), // Call your method here
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator(
+                      color: Colors.blue,
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("Error damnnnnn: ${snapshot.error}");
+                  } else if (snapshot.hasData) {
+                    var data = snapshot.data!;
+                    return ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        var report = data[index];
+                        return _cardsReport(
+                          context: context,
+                          fem: fem,
+                          ffem: ffem,
+                          metaData: report!,
+                          index: index,
+                        );
+                      },
+                    );
+                  } else {
+                    return Text("No data available");
+                  }
+                },
+              ),
+            ]),
+          ),
         ),
       ),
     );
@@ -206,7 +208,8 @@ class _ReportState extends State<Report> {
                             ),
                           )),
                       Text(
-                        "By ${metaData!.user + " " + metaData!.userFname + " " + metaData!.userMname + " " + metaData!.userLname}",
+                        // "By ${metaData!.user + " " + metaData!.userFname + " " + metaData!.userMname + " " + metaData!.userLname}",
+                        "By ",
                         style: TextStyle(
                           fontSize: 15 * ffem,
                           fontWeight: FontWeight.w700,

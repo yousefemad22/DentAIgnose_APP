@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:graduation_project/Edit_profile/edit_profile.dart';
 import 'package:graduation_project/get_start/login.dart';
+import 'package:graduation_project/receptionist/allReceptionists.dart';
 
 class student_profile extends StatelessWidget {
   final Map studentData;
@@ -12,9 +13,9 @@ class student_profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 390;
+    double baseWidth = 400;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
+    double ffem = fem * 1;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -114,13 +115,13 @@ class student_profile extends StatelessWidget {
                   ],
                 ),
               ),
-              buildTextContainer("Settings", ffem, fem),
+              buildTextContainer("Additionals", ffem, fem),
               Container(
                 margin: EdgeInsets.fromLTRB(0 * fem, 4 * fem, 0 * fem, 4 * fem),
                 padding:
                     EdgeInsets.fromLTRB(10 * fem, 8 * fem, 7 * fem, 2 * fem),
                 width: double.infinity,
-                height: 228 * fem,
+                // height: 228 * fem,
                 decoration: BoxDecoration(
                   color: Color(0xffffffff),
                   borderRadius: BorderRadius.circular(10 * fem),
@@ -139,27 +140,69 @@ class student_profile extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    buildCustomRow(
-                      text: "Language",
-                      icon1: Icon(Icons.language,
-                          color: Colors.black, size: fem * 30),
-                      icon2: Icon(
-                        CupertinoIcons.right_chevron,
-                        color: Colors.black,
-                        size: fem * 30,
-                      ),
-                      fem: fem,
-                      ffem: ffem,
-                    ),
-                    buildCustomRow(
-                      text: 'Darkmode',
-                      icon1: Icon(CupertinoIcons.moon_fill,
-                          color: Colors.black, size: fem * 30),
-                      icon2: Icon(CupertinoIcons.right_chevron,
-                          color: Colors.black, size: fem * 30),
-                      fem: fem,
-                      ffem: ffem,
-                    ),
+                    studentData['email'].endsWith("@dentist.com") ||
+                            studentData['email'].endsWith("@receptionist.com")
+                        ? GestureDetector(
+                          child: buildCustomRow(
+                              text: "All Patient",
+                              icon1: Icon(Icons.group_rounded,
+                                  color: Colors.black, size: fem * 30),
+                              icon2: Icon(
+                                CupertinoIcons.right_chevron,
+                                color: Colors.black,
+                                size: fem * 30,
+                              ),
+                              fem: fem,
+                              ffem: ffem,
+                            ),
+                        )
+                        : const SizedBox(
+                            height: 1,
+                          ),
+                    studentData['email'].endsWith("@dentist.com")
+                        ? GestureDetector(
+                          onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => All_reciptionist(
+                                          who: "receptionists")));
+                            },
+                          child: buildCustomRow(
+                              text: 'All Receptionists',
+                              icon1: Icon(Icons.person_3_sharp,
+                                  color: Colors.black, size: fem * 30),
+                              icon2: Icon(CupertinoIcons.right_chevron,
+                                  color: Colors.black, size: fem * 30),
+                              fem: fem,
+                              ffem: ffem,
+                            ),
+                        )
+                        : SizedBox(
+                            height: 1,
+                          ),
+                    studentData['email'].endsWith("@dentist.com")
+                        ? GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => All_reciptionist(
+                                          who: "students")));
+                            },
+                            child: buildCustomRow(
+                              text: 'All Interns',
+                              icon1: Icon(CupertinoIcons.person_2,
+                                  color: Colors.black, size: fem * 30),
+                              icon2: Icon(CupertinoIcons.right_chevron,
+                                  color: Colors.black, size: fem * 30),
+                              fem: fem,
+                              ffem: ffem,
+                            ),
+                          )
+                        : SizedBox(
+                            height: 1,
+                          ),
                     buildCustomRow(
                       text: 'Change Password',
                       icon1: Icon(Icons.key_rounded,
@@ -295,7 +338,7 @@ Widget buildCustomRow({
               text,
               style: TextStyle(
                 fontFamily: 'Inter',
-                fontSize: 19 * ffem,
+                fontSize: 15 * ffem,
                 fontWeight: FontWeight.bold,
                 height: 1.2125 * ffem / fem,
                 color: Color(0xff000000),

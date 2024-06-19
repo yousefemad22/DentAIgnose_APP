@@ -8,11 +8,13 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Stack(
       children: <Widget>[
         Container(
-          margin: const EdgeInsets.only(left: 5, right: 5),
-          height: 65.0,
+          margin:  EdgeInsets.symmetric(horizontal: screenSize.width*.03),
+          height: screenSize.height*0.065,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: const BorderRadius.only(
@@ -31,62 +33,69 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         Positioned(
           child: AppBar(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // const CircleAvatar(
-                //     radius: 25.0,
-                //     backgroundImage: AssetImage('images/3403753 1.png')),
-                // const SizedBox(
-                //   width: 5,
-                // ),
-                RichText(
-                  text: TextSpan(
+            title: Container(
+              margin: EdgeInsets.only(right: screenSize.width*0.01),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      TextSpan(
-                        text: dentistData['fName'][0].toUpperCase() +
-                            dentistData['fName'].substring(1) +
-                            ' ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Color(0xFF26A6FE),
-                          decoration: TextDecoration.none,
+                      const CircleAvatar(
+                          radius: 20.0,
+                          backgroundImage: AssetImage('images/3403753 1.png')),
+                       SizedBox(
+                        width: screenSize.width*0.02,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: dentistData['fName'][0].toUpperCase() +
+                                  dentistData['fName'].substring(1) +
+                                  ' ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenSize.width*0.04,
+                                color: Color(0xFF26A6FE),
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                            TextSpan(
+                              text: dentistData['lName'][0].toUpperCase() +
+                                  dentistData['lName'].substring(1),
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenSize.width*0.04,
+                                color: Color(0xFF26A6FE),
+                                decoration: TextDecoration.none,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      TextSpan(
-                        text: dentistData['lName'][0].toUpperCase() +
-                            dentistData['lName'].substring(1),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Color(0xFF26A6FE),
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
+
+
                     ],
                   ),
-                ),
-                
-                const SizedBox(
-                  width: 90,
-                ),
-                Column(
-                  children: [
-                    Image.asset(
-                      'images/logo2.png',
-                      width: 65,
-                      height: 42,
-                    ),
-                    const Text('DentAIgnose',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF26A6FE))),
-                  ],
-                ),
-              ],
+                  Column(
+                    children: [
+                      Image.asset(
+                        'images/logo2.png',
+                        width: screenSize.width*0.1,
+                        // height: 42,
+                      ),
+                       Text('DentAIgnose',
+                          style: TextStyle(
+                              fontSize: screenSize.width*0.03,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF26A6FE))),
+                    ],
+                  ),
+                ],
+              ),
             ),
             backgroundColor: Colors.transparent,
           ),

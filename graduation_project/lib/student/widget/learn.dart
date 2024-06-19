@@ -28,22 +28,22 @@ class _LearnState extends State<Learn> {
         _showArticles = false;
         _showVideo = true;
         _showPodcast = false;
-      }
-      else if(widget.whichLearn == 3){
+      } else if (widget.whichLearn == 3) {
         _showArticles = false;
         _showVideo = false;
         _showPodcast = true;
-      }
-      else{
+      } else {
         _showArticles = true;
         _showVideo = false;
         _showPodcast = false;
-
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         bottomOpacity: 0,
@@ -57,13 +57,13 @@ class _LearnState extends State<Learn> {
           icon: Icon(
             CupertinoIcons.arrow_left,
             color: Colors.black,
-            size: 35,
+            size: screenSize.width * 0.08,
           ),
         ),
         title: Text(
           'Learn',
           style: TextStyle(
-            fontSize: 30,
+            fontSize: screenSize.width * 0.055,
             // fontWeight: FontWeight.w800,
             color: Colors.black,
           ),
@@ -72,6 +72,9 @@ class _LearnState extends State<Learn> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: screenSize.height * 0.01,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -82,7 +85,8 @@ class _LearnState extends State<Learn> {
                           ? Color(0xff26a6fe)
                           : Colors.transparent),
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * .015),
                     child: Center(
                       child: Align(
                         child: SizedBox(
@@ -102,9 +106,9 @@ class _LearnState extends State<Learn> {
                               'Articles',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2125,
+                                  fontSize: screenSize.width * 0.05,
+
+                                  // height: 1.2125,
                                   color: _showArticles
                                       ? Colors.white
                                       : Color(0xff26a6fe)),
@@ -121,7 +125,8 @@ class _LearnState extends State<Learn> {
                       color:
                           _showVideo ? Color(0xff26a6fe) : Colors.transparent),
                   child: Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * .015),
                     child: Center(
                       child: Align(
                         child: SizedBox(
@@ -140,9 +145,8 @@ class _LearnState extends State<Learn> {
                               'Videos',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2125,
+                                  fontSize: screenSize.width * 0.05,
+                                  // height: 1.2125,
                                   color: _showVideo
                                       ? Colors.white
                                       : Color(0xff26a6fe)),
@@ -171,7 +175,8 @@ class _LearnState extends State<Learn> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: screenSize.width * .015),
                       child: Center(
                         child: Align(
                           child: SizedBox(
@@ -179,9 +184,8 @@ class _LearnState extends State<Learn> {
                               'Podcast',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2125,
+                                  fontSize: screenSize.width * 0.05,
+                                  // height: 1.2125,
                                   color: _showPodcast
                                       ? Colors.white
                                       : Color(0xff26a6fe)),
@@ -195,7 +199,7 @@ class _LearnState extends State<Learn> {
               ],
             ),
             SizedBox(
-              height: 2,
+              height: screenSize.height * 0.015,
             ),
             Center(
               child: Column(
@@ -249,7 +253,7 @@ class _ArticleListPageState extends State<ArticleListPage> {
         jsonResponse['resultList']['result'].map(
           (article) => {
             'title': article['title'] as String,
-            'pubYear': article['pubYear'] as String,
+            // 'pubYear': article['pubYear'] as String,
             'authorString': article['authorString'] as String,
           },
         ),

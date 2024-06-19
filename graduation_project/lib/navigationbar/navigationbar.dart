@@ -68,50 +68,52 @@ class _navigationbarState extends State<navigationbar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appbar(dentistData: widget.dentistData),
-      // drawer: drawer(dentistData: widget.dentistData),
-      drawer: Drawer(
-          child: drawer(
-        dentistData: widget.dentistData,
-      )),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: _pages,
-      ),
-      bottomNavigationBar: Stack(
-        children: <Widget>[
-          Positioned(
-            child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              height: 85,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.8),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, -3),
+    return SafeArea(
+      child: Scaffold(
+        appBar: appbar(dentistData: widget.dentistData),
+        // drawer: drawer(dentistData: widget.dentistData),
+        drawer: Drawer(
+            child: drawer(
+          dentistData: widget.dentistData,
+        )),
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: _pages,
+        ),
+        bottomNavigationBar: Stack(
+          children: <Widget>[
+            Positioned(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                height: 85,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  buildNavItem('images/home.png', 'Home', 0),
-                  buildNavItem('images/magnifying-glass.png', 'Search', 1),
-                  buildNavItem('images/notification.png', 'Notification', 2),
-                  buildNavItem('images/user.png', 'Profile', 3),
-                ],
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.8),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, -3),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    buildNavItem('images/home.png', 'Home', 0),
+                    buildNavItem('images/magnifying-glass.png', 'Search', 1),
+                    buildNavItem('images/notification.png', 'Notification', 2),
+                    buildNavItem('images/user.png', 'Profile', 3),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -160,10 +162,13 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       // body: Center(child: Text('Search Page')),
       body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05
+            ),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(

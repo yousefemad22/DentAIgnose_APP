@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +10,7 @@ import 'package:graduation_project/dentist/widget/section.dart';
 import 'package:graduation_project/questiones/questionnaireComponents.dart';
 import 'model_report.dart';
 import 'package:graduation_project/appbar/appbar2.dart';
+import 'package:graduation_project/reports/x-ray_presenting.dart';
 
 // Page that contains every report separately with details
 class report extends StatefulWidget {
@@ -85,8 +87,10 @@ class _ReportState extends State<report> {
         if (des['x-rayId'] != null) {
           DataSnapshot xRayData =
               await xRaysReference.child(des['x-rayId'].toString()).get();
+          print(xRayData);
           xrayImageURL = xRayData.child("imagePath").value;
           prediction = xRayData.child("pred").value;
+          print(xrayImageURL);
         }
 
         if (des['choiceId'] != null) {
@@ -108,7 +112,7 @@ class _ReportState extends State<report> {
   Widget build(BuildContext context) {
     double baseWidth = 470;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
+    double ffem = fem * 0.90;
     return FutureBuilder(
       future: _loadingFuture, // This will call the method to load the data
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -118,198 +122,226 @@ class _ReportState extends State<report> {
             return Text('Error: ${snapshot.error}');
           } else {
             // Build the UI once the data is loaded
-            return Scaffold(
-              appBar: appbar3(
-                title: "Report",
-                backColor: Colors.blue,
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      15 * fem, 5 * fem, 15 * fem, 10 * fem),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (patientData!['fName'] != null)
-                        Column(
-                          children: [
-                            sectionTitle(title: 'Patient info'),
-                            const divider(),
-                            shadowedBox(
-                              fem: fem,
-                              childWidget: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+            return SafeArea(
+              child: Scaffold(
+                appBar: appbar3(
+                  title: "Report",
+                  backColor: Colors.blue,
+                ),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(
+                        15 * fem, 5 * fem, 15 * fem, 10 * fem),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (patientData!['fName'] != null)
+                          Column(
+                            children: [
+                              sectionTitle(title: 'Patient info'),
+                              const divider(),
+                              shadowedBox(
+                                fem: fem,
+                                childWidget: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    pateintInfo(
+                                        ffem: ffem,
+                                        stat: "Name",
+                                        dynam: capitalizeWords(
+                                            "${patientData!['fName']} ${patientData!['mName']} ${patientData!['lName']}")),
+                                    pateintInfo(
+                                        ffem: ffem,
+                                        stat: "Gender",
+                                        dynam: patientData!['gender']),
+                                    pateintInfo(
+                                        ffem: ffem,
+                                        stat: "Number",
+                                        dynam: "0${patientData!['number']}"),
+                                    pateintInfo(
+                                        ffem: ffem,
+                                        stat: "Age",
+                                        dynam: patientData!['age'].toString()),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        //------------------------------------------------------------------done----------------
+                        if (xrayImageURL != "")
+                          Column(
+                            children: [
+                              sectionTitle(title: 'Investigations'),
+                              const divider(),
+                              // shadowedBox(
+                              //     fem: fem, childWidget: Image.file(xrayImage!)),
+                              xRayShadowedBox(
+                                fem: fem,
+                                // childWidget: Image.network(
+                                //   xrayImageURL!,
+                                // )),
+                                childWidget: FutureBuilder<Uint8List>(
+                                  future: getProcessedImageBytes(
+                                      xrayImageURL, prediction),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                          child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ));
+                                    } else if (snapshot.hasError) {
+                                      return Center(
+                                          child:
+                                              Text('Error: ${snapshot.error}'));
+                                    } else if (snapshot.hasData) {
+                                      return Image.memory(snapshot.data!);
+                                    } else {
+                                      return Center(
+                                          child: Text('No image to display'));
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        //------------------------------------------------------------------done----------------
+                        if (choicesMap!['0'] != null)
+                          Column(
+                            children: [
+                              sectionTitle(title: 'Questionnaire Result'),
+                              const divider(),
+                              shadowedBox(
+                                fem: fem,
+                                childWidget: Text(
+                                  choicesMap!['description'].toString(),
+                                  style: const TextStyle(
+                                      fontSize: 15, color: Colors.blue),
+                                ),
+                              ),
+                              // shadowedBox(
+                              //     fem: fem, childWidget: Text(choicesMap!["0"].toString())),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  pateintInfo(
-                                      ffem: ffem,
-                                      stat: "Name",
-                                      dynam: capitalizeWords(
-                                          "${patientData!['fName']} ${patientData!['mName']} ${patientData!['lName']}")),
-                                  pateintInfo(
-                                      ffem: ffem,
-                                      stat: "Gender",
-                                      dynam: patientData!['gender']),
-                                  pateintInfo(
-                                      ffem: ffem,
-                                      stat: "Number",
-                                      dynam: "0${patientData!['number']}"),
-                                  pateintInfo(
-                                      ffem: ffem,
-                                      stat: "Age",
-                                      dynam: patientData!['age'].toString()),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Color(0xff26a6fe)),
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Colors.white),
+                                    ),
+                                    child: Text(_isVisible
+                                        ? 'Hide Questionnaire Answers'
+                                        : 'Show Questionnaire Answers'),
+                                  ),
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
-                      //------------------------------------------------------------------done----------------
-                      if (xrayImageURL != "")
-                        Column(
-                          children: [
-                            sectionTitle(title: 'Investigations'),
-                            const divider(),
-                            // shadowedBox(
-                            //     fem: fem, childWidget: Image.file(xrayImage!)),
-                            shadowedBox(
-                                fem: fem,
-                                childWidget: Image.network(
-                                  xrayImageURL!,
-                                )),
-                          ],
-                        ),
-                      //------------------------------------------------------------------done----------------
-                      if (choicesMap != {})
-                        Column(
-                          children: [
-                            sectionTitle(title: 'Questionnaire Result'),
-                            const divider(),
-                            shadowedBox(
-                              fem: fem,
-                              childWidget: Text(
-                                choicesMap!['description'].toString(),
-                                style: const TextStyle(
-                                    fontSize: 15, color: Colors.blue),
-                              ),
-                            ),
-                            // shadowedBox(
-                            //     fem: fem, childWidget: Text(choicesMap!["0"].toString())),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _isVisible = !_isVisible;
-                                    });
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Color(0xff26a6fe)),
-                                    foregroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.white),
-                                  ),
-                                  child: Text(_isVisible
-                                      ? 'Hide Questionnaire Answers'
-                                      : 'Show Questionnaire Answers'),
-                                ),
-                              ],
-                            ),
-                            Visibility(
-                              visible: _isVisible,
-                              child: shadowedBox(
-                                fem: fem,
-                                childWidget: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: questions.length,
-                                  itemBuilder: (context, index) =>
-                                      _cardsquestions(
-                                    fem: fem,
-                                    ffem: ffem,
-                                    question: questions[index]['question'],
-                                    answer: choicesMap!["$index"],
-                                    index: index,
+                              Visibility(
+                                visible: _isVisible,
+                                child: shadowedBox(
+                                  fem: fem,
+                                  childWidget: ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: questions.length,
+                                    itemBuilder: (context, index) =>
+                                        _cardsquestions(
+                                      fem: fem,
+                                      ffem: ffem,
+                                      question: questions[index]['question'],
+                                      answer: choicesMap!["$index"],
+                                      index: index,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      //------------------------------------------------------------------done----------------
-                      if (choicesMap != null &&
-                          choicesMap!['diagnoses'] !=
-                              "") // that's if there was no questionnaire at all or if diagnose is empty
-                        Column(
-                          children: [
-                            sectionTitle(title: 'Diagnoses'),
-                            const divider(),
-                            shadowedBox(
-                              fem: fem,
-                              childWidget: Center(
-                                child: Text(
-                                  choicesMap!['diagnoses'].toString(),
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xff26a6fe),
-                                      fontWeight: FontWeight.bold),
+                            ],
+                          ),
+                        //------------------------------------------------------------------done----------------
+                        if (choicesMap!['0'] != null &&
+                            choicesMap!['diagnoses'] != "" &&
+                            choicesMap!['diagnoses'] !=
+                                null) // that's if there was no questionnaire at all or if diagnose is empty
+                          Column(
+                            children: [
+                              sectionTitle(title: 'Diagnoses'),
+                              const divider(),
+                              shadowedBox(
+                                fem: fem,
+                                childWidget: Center(
+                                  child: Text(
+                                    choicesMap!['diagnoses'].toString(),
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Color(0xff26a6fe),
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              if (Navigator.canPop(context)) {
-                                Navigator.pop(context);
+                            ],
+                          ),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
                                 if (Navigator.canPop(context)) {
                                   Navigator.pop(context);
+                                  if (Navigator.canPop(context)) {
+                                    Navigator.pop(context);
+                                  }
                                 }
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(fem * 170, fem * 40),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(fem * 5)),
-                              backgroundColor: Color(0xff26a6fe),
-                            ),
-                            child: Text(
-                              'Approve',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 18 * ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2125 * ffem / fem,
-                                color: Color(0xffffffff),
+                              },
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(fem * 170, fem * 40),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(fem * 5)),
+                                backgroundColor: Color(0xff26a6fe),
+                              ),
+                              child: Text(
+                                'Approve',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18 * ffem,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2125 * ffem / fem,
+                                  color: Color(0xffffffff),
+                                ),
                               ),
                             ),
-                          ),
-                          const Spacer(),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(fem * 170, fem * 40),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(fem * 5)),
-                              backgroundColor: Color(0xff26a6fe),
-                            ),
-                            child: Text(
-                              '${widget.reportId}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 18 * ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2125 * ffem / fem,
-                                color: Color(0xffffffff),
+                            const Spacer(),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: Size(fem * 170, fem * 40),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(fem * 5)),
+                                backgroundColor: Color(0xff26a6fe),
+                              ),
+                              child: Text(
+                                '${widget.reportId}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18 * ffem,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2125 * ffem / fem,
+                                  color: Color(0xffffffff),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -323,7 +355,9 @@ class _ReportState extends State<report> {
               backColor: Colors.blue,
             ),
             body: const Center(
-              child: CircularProgressIndicator(color: Color(0xff26a6fe),),
+              child: CircularProgressIndicator(
+                color: Color(0xff26a6fe),
+              ),
             ),
           );
         }
@@ -473,6 +507,40 @@ class _ReportState extends State<report> {
             ),
           ),
           // child: Image.file(xrayImage!),
+        ),
+      ],
+    );
+  }
+
+  Column xRayShadowedBox({required double fem, required Widget childWidget}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(20 * fem, 20 * fem, 20 * fem, 20 * fem),
+          padding: EdgeInsets.fromLTRB(20 * fem, 15 * fem, 20 * fem, 15 * fem),
+          width: double.infinity,
+          // height: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25 * fem),
+            boxShadow: [
+              BoxShadow(
+                blurStyle: BlurStyle.solid,
+                color: Colors.blue.shade300,
+                offset: Offset(10 * fem, 10 * fem),
+                blurRadius: 20 * fem,
+              ),
+            ],
+          ),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: 300 * fem, // Set the maximum height here
+            ),
+            child: Center(
+              child: childWidget,
+            ),
+          ),
         ),
       ],
     );

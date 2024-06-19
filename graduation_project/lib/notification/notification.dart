@@ -1,56 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:graduation_project/notification/model_notification.dart';
 
 class notification extends StatelessWidget {
   final MessageViewModel viewModel = MessageViewModel();
 
   notification({super.key});
+
   @override
   Widget build(BuildContext context) {
-    double baseWidth = 430;
-    double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      // appBar: AppBar(
-      //   bottomOpacity: 0,
-      //   elevation: 0,
-      //   toolbarHeight: fem * 60,
-      //   backgroundColor: Colors.white,
-      //   leading: IconButton(
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //     icon: Icon(
-      //       CupertinoIcons.arrow_left,
-      //       color: Colors.black,
-      //       size: fem * 35,
-      //     ),
-      //     iconSize: fem * 52,
-      //   ),
-      //   title: Text(
-      //     'Notification ',
-      //     style: TextStyle(
-      //       fontSize: 25 * ffem,
-      //       fontWeight: FontWeight.w700,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      // ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(15 * fem, 5 * fem, 13 * fem, 10 * fem),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            CupertinoIcons.arrow_left,
+            color: Colors.black,
+            size: screenWidth * 0.06,
+          ),
+        ),
+        title: Text(
+          'Notification',
+          style: TextStyle(
+            fontSize: screenWidth * 0.05,
+            fontWeight: FontWeight.w700,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: screenWidth*0.03),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Container(
-            //   margin: EdgeInsets.fromLTRB(20 * fem, 0, 42 * fem, 0 * fem),
-            //   width: double.infinity,
-            //   height: 1.5 * fem,
-            //   decoration: const BoxDecoration(
-            //     color: Color(0xff26a6fe),
-            //   ),
-            // ),
             Expanded(
               child: ListView.builder(
                 itemCount: viewModel.data.length,
@@ -61,14 +50,13 @@ class notification extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(
-                            1 * fem, 15 * fem, 0 * fem, 5 * fem),
+                        margin: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
                         child: Text(
                           key,
                           style: TextStyle(
                             color: Colors.grey[700],
-                            fontSize: 21 * fem,
-                            fontWeight: FontWeight.w800,
+                            fontSize: screenWidth * 0.04,
+                            // fontWeight: FontWeight.w800,
                           ),
                         ),
                       ),
@@ -79,10 +67,11 @@ class notification extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           Message message = messages[index];
                           return cardnotifi(
-                              fem: fem,
-                              ffem: ffem,
-                              date: message.dateSend,
-                              time: message.time);
+                            screenWidth: screenWidth,
+                            screenHeight: screenHeight,
+                            date: message.dateSend,
+                            time: message.time,
+                          );
                         },
                       ),
                     ],
@@ -96,139 +85,76 @@ class notification extends StatelessWidget {
     );
   }
 
-  Container cardnotifi(
-      {required double fem,
-      required double ffem,
-      required String time,
-      required String date}) {
+  Widget cardnotifi({
+    required double screenWidth,
+    required double screenHeight,
+    required String time,
+    required String date,
+  }) {
     return Container(
-      margin: EdgeInsets.fromLTRB(3 * fem, 11 * fem, 3 * fem, 3 * fem),
-      padding: EdgeInsets.fromLTRB(8 * fem, 11 * fem, 6 * fem, 11 * fem),
-      width: double.infinity,
-      height: 80 * fem,
+      height: screenHeight*0.05,
+      margin: EdgeInsets.symmetric(vertical: screenHeight * 0.0015),
+      // padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.01, vertical: screenHeight * 0.01),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8 * fem),
+        borderRadius: BorderRadius.circular(screenWidth * 0.02),
         boxShadow: [
           BoxShadow(
             color: Colors.black54,
-            offset: Offset(0 * fem, 4 * fem),
-            blurRadius: 4 * fem,
+            offset: Offset(0, screenHeight * 0.005),
+            blurRadius: screenWidth * 0.02,
           ),
         ],
       ),
       child: Row(
         children: [
-          Icon(Icons.notifications_active,
-              size: fem * 40, color: Color(0xff26a6fe)),
-          Container(
-            margin: EdgeInsets.fromLTRB(10 * fem, 8 * fem, 0 * fem, 0 * fem),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'New Patient',
-                  style: TextStyle(
-                    fontSize: 20 * ffem,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.black,
-                  ),
+          Icon(Icons.notifications_active, size: screenWidth * 0.08, color: Color(0xff26a6fe)),
+          SizedBox(width: screenWidth * 0.03),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'New Patient',
+                style: TextStyle(
+                  fontSize: screenWidth * 0.04,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-                Text(
-                  'You can see the report....',
-                  style: TextStyle(
-                    fontSize: 15 * ffem,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[700],
-                  ),
+              ),
+              Text(
+                'You can see the report....',
+                style: TextStyle(
+                  fontSize: screenWidth * 0.03,
+                  // fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Spacer(),
-          Container(
-            margin: EdgeInsets.fromLTRB(0 * fem, 8 * fem, 5 * fem, 0 * fem),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  date,
-                  style: TextStyle(
-                    fontSize: 15 * ffem,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[700],
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                date,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.03,
+                  // fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
                 ),
-                Text(
-                  time,
-                  style: TextStyle(
-                    fontSize: 15 * ffem,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[700],
-                  ),
+              ),
+              Text(
+                time,
+                style: TextStyle(
+                  fontSize: screenWidth * 0.03,
+                  // fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:graduation_project/navigationbar/navigationbar.dart';
-
-// class notification extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     double baseWidth = 390;
-//     double fem = MediaQuery.of(context).size.width / baseWidth;
-//     double ffem = fem * 0.97;
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           bottomOpacity: 0,
-//           elevation: 0,
-//           toolbarHeight: fem * 60,
-//           backgroundColor: Colors.white,
-//           leading: IconButton(
-//             onPressed: () {
-//               Navigator.pop(context);
-//             },
-//             icon: Icon(
-//               CupertinoIcons.arrow_left,
-//               color: Colors.black,
-//               size: fem * 35,
-//             ),
-//             iconSize: fem * 52,
-//           ),
-//           title: Text(
-//             'Notification ',
-//             style: TextStyle(
-//               fontSize: 25 * ffem,
-//               fontWeight: FontWeight.w700,
-//               color: Colors.black,
-//             ),
-//           ),
-//         ),
-//         body: Container(
-//           // margin: EdgeInsets.fromLTRB(40 * fem, 0, 42 * fem, 34 * fem),
-//           width: double.infinity,
-//           height: 1,
-//           decoration: BoxDecoration(
-//             color: Color(0xff26a6fe),
-//           ),
-//         ),
-
-//       ),
-//     );
-//   }
-// }

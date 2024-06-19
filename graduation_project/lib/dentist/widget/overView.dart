@@ -13,10 +13,12 @@ class _overViewState extends State<overView> {
   final int total=350 ;
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      margin:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05, vertical: screenSize.height*0.01),
       width: double.infinity,
-      height: 158,
+      height: screenSize.height*0.2,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10), // make it circular

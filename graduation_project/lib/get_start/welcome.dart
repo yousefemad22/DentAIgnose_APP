@@ -78,6 +78,8 @@ class _WelcomeState extends State<Welcome> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Container(
@@ -95,61 +97,84 @@ class _WelcomeState extends State<Welcome> {
             body: SingleChildScrollView(
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40),
-                    child: Container(
-                        width: 200,
-                        height: 200,
-                        child: Image(image: AssetImage('images/لوجو.png'))),
+                  SizedBox(
+                    height: screenSize.height*0.1,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 70),
-                    child: Text(
-                      'DentAIgnose',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w500,
+                  Container(
+                    margin: EdgeInsets.only(left: screenSize.width*.05),
+                    child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 20,
+                        child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const Icon(Icons.arrow_back,
+                                color: Color(0xFF26A6FE)))),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(image: AssetImage('images/لوجو.png'),
+                        height: screenSize.height*0.15,
                       ),
-                    ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'DentAIgnose',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: screenSize.width*0.05,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height :screenSize.height*.05,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    padding:
+                    EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child: const Text(
+                      child:  Text(
                         'W e l c o m e',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize:screenSize.width*0.1 ,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                    padding: EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child: const Text(
+                      child:  Text(
                         'B a c k - D r ...',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize: screenSize.width*0.1,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: screenSize.height*.05,
+                  ),
                   Padding(
-                    padding: EdgeInsets.all(18),
+                    padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                     child: SizedBox(
-                        height: 40,
-                        width: 350,
+                        height: screenSize.height*0.045,
+                        width: screenSize.width*1,
                         child: TextField(
                           controller: _email,
                           decoration: const InputDecoration(
@@ -237,10 +262,10 @@ class _WelcomeState extends State<Welcome> {
                   //         ),
                   //       )),
                   Padding(
-                    padding: EdgeInsets.only(top: 10, left: 18, right: 18),
+                    padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0.01),
                     child: SizedBox(
-                        height: 40,
-                        width: 350,
+                        height: screenSize.height*0.045,
+                        width: screenSize.width*1,
                         child: TextFormField(
                           controller: _password,
                           obscureText: true,
@@ -268,42 +293,50 @@ class _WelcomeState extends State<Welcome> {
                           ),
                         )),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => forgetPassword(),
-                          ));
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 5),
-                      child: Text(
-                        'Forget Password?',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                        //textAlign: TextAlign.end,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.01),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: screenSize.width*0.55,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => forgetPassword(),
+                                ));
+                          },
+                          child: Text(
+                            'Forget Password?',
+                            style: TextStyle(fontSize: screenSize.width*0.035, color: Colors.white),
+                            //textAlign: TextAlign.end,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  SizedBox(
+                    height: screenSize.height*0.05,
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Padding(
-                            padding:
-                                EdgeInsets.only(top: 30, bottom: 10, left: 20),
-                            child: Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 40,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              //textAlign: TextAlign.start,
+                       Padding(
+                          padding: EdgeInsets.only(left: screenSize.width*.05),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: screenSize.width*0.06,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
                             ),
+                            //textAlign: TextAlign.start,
                           )),
                       Padding(
-                        padding: const EdgeInsets.only(left: 180, top: 30),
+                        padding:  EdgeInsets.only(right:screenSize.width*.05 ),
                         child: GestureDetector(
                           onTap: () {
                             bool f = false;
@@ -351,26 +384,30 @@ class _WelcomeState extends State<Welcome> {
                             _email.text = "";
                             _password.text = "";
                           },
-                          child: const Icon(
+                          child:  Icon(
                             Icons.login,
-                            size: 40,
+                            size: screenSize.width*.08,
                             color: Colors.white,
                           ),
                         ),
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: screenSize.height*0.04,
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: EdgeInsets.only(right: screenSize.width*0.01, top: screenSize.height*.01),
                         child: Text(
                           "Don't have account?",
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(fontSize: screenSize.width*.03, color: Colors.black),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 8),
+                        padding: EdgeInsets.only(right: screenSize.width*0.02, top: screenSize.height*.01),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
@@ -381,7 +418,9 @@ class _WelcomeState extends State<Welcome> {
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
-                              fontSize: 25,
+                              decoration: TextDecoration.underline,
+                              decorationColor: Colors.white,
+                              fontSize: screenSize.width*0.03,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),

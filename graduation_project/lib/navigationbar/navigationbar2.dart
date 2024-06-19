@@ -108,7 +108,7 @@ class _navigationbarState extends State<navigationbar2> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ChatBotPage(),
+                                builder: (context) => ChatScreen(),
                               ));
                         },
                       ),

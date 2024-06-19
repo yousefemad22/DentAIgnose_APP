@@ -5,13 +5,15 @@ class sectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Container(
-      margin: const EdgeInsets.only(left: 15, top: 10),
+      margin:  EdgeInsets.only(left: screenSize.width*0.05, top: screenSize.height*0.01),
       width: double.infinity,
       child:  Text(
         '$title',
         style: TextStyle(
-            fontSize: 20,
+            fontSize: screenSize.width*0.05,
             fontWeight: FontWeight.bold,
             color: Color(0xff26a6fe)),
       ),

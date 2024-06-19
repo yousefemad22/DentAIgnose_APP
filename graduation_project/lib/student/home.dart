@@ -32,219 +32,195 @@ class _studentPageState extends State<studentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    visible_add = false;
-                    visible_add_box = false;
-                    visible_questioniers = true;
-                    visible_questioniers_box = true;
-                  });
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Visibility(
-                      visible: visible_questioniers,
-                      child: Container(
-                        width: 88,
-                        height: 101,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100), // Top left corner
-                            topRight: Radius.circular(100), // Top right corner
-                          ),
-                          color: Color(0xff9de8fd),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/questioniers.png',
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          'Questioniers',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    visible_add = true;
-                    visible_add_box = true;
-                    visible_questioniers = false;
-                    visible_questioniers_box = false;
-                  });
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Visibility(
-                      visible: visible_add,
-                      child: Container(
-                        width: 88,
-                        height: 101,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100), // Top left corner
-                            topRight: Radius.circular(100), // Top right corner
-                          ),
-                          color: Color(0xff9de8fd),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/add.png',
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Add',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Visibility(
-            visible: visible_add_box,
-            child: Stack(
-              alignment: Alignment.center,
+    final Size screenSize = MediaQuery.of(context).size;
+
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
+          children: [
+            SizedBox(
+              height: screenSize.height * 0.05,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15),
-                  width: 358,
-                  height: 108,
-                  decoration: BoxDecoration(
-                    color: Color(0xff9de8fd),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x3f000000),
-                        offset: Offset(0, 4),
-                        blurRadius: 2,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      visible_add = false;
+                      visible_add_box = false;
+                      visible_questioniers = true;
+                      visible_questioniers_box = true;
+                    });
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Visibility(
+                        visible: visible_questioniers,
+                        child: Container(
+                          width: screenSize.width * 0.2,
+                          height: screenSize.height * 0.12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100), // Top left corner
+                              topRight:
+                                  Radius.circular(100), // Top right corner
+                            ),
+                            color: Color(0xff9de8fd),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/questioniers.png',
+                          ),
+                          Text(
+                            'Questioniers',
+                            style: TextStyle(
+                                fontSize: screenSize.width * 0.03,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Xray())));
+                    setState(() {
+                      visible_add = true;
+                      visible_add_box = true;
+                      visible_questioniers = false;
+                      visible_questioniers_box = false;
+                    });
                   },
-                  child: Container(
-                    width: 266,
-                    height: 66,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Visibility(
+                        visible: visible_add,
+                        child: Container(
+                          width: screenSize.width * 0.2,
+                          height: screenSize.height * 0.12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100), // Top left corner
+                              topRight:
+                                  Radius.circular(100), // Top right corner
+                            ),
+                            color: Color(0xff9de8fd),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/add.png',
+                          ),
+                          Text(
+                            'Add',
+                            style: TextStyle(
+                                fontSize: screenSize.width * 0.03,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Visibility(
+              visible: visible_add_box,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    // margin: EdgeInsets.symmetric(horizontal: screenSize.width*0.0),
+                    width: screenSize.width * .9,
+                    height: screenSize.height * 0.12,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffffffff),
+                      color: Color(0xff9de8fd),
                       boxShadow: [
                         BoxShadow(
                           color: Color(0x3f000000),
                           offset: Offset(0, 4),
                           blurRadius: 2,
                         ),
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 4),
-                          blurRadius: 2,
-                        ),
                       ],
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      'X-rays',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                    ),
-                    Image.asset('images/x-ray 1.png')
-                  ],
-                )
-              ],
-            ),
-          ),
-          Visibility(
-            visible: visible_questioniers_box,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: 358,
-                  height: 108,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff9de8fd),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x3f000000),
-                        offset: Offset(0, 4),
-                        blurRadius: 2,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: ((context) => Xray())));
+                    },
+                    child: Container(
+                      width: screenSize.width * 0.8,
+                      height: screenSize.height * .08,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xffffffff),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // print('fill');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Design(userData: widget.studentData))));
-                  },
-                  child: Container(
-                    width: 266,
-                    height: 66,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xffffffff),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 4),
-                          blurRadius: 2,
-                        ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'X-rays',
+                        style: TextStyle(
+                            fontSize: screenSize.width * 0.035,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset('images/x-ray 1.png')
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Visibility(
+              visible: visible_questioniers_box,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    // margin: const EdgeInsets.symmetric(horizontal: 15),
+                    width: screenSize.width * .9,
+                    height: screenSize.height * 0.12,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff9de8fd),
+                      boxShadow: [
                         BoxShadow(
                           color: Color(0x3f000000),
                           offset: Offset(0, 4),
@@ -253,39 +229,69 @@ class _studentPageState extends State<studentPage> {
                       ],
                     ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text(
-                      'Fill questionnaires',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () {
+                      // print('fill');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) =>
+                                  Design(userData: widget.studentData))));
+                    },
+                    child: Container(
+                      width: screenSize.width * 0.8,
+                      height: screenSize.height * .08,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xffffffff),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
                     ),
-                    Image.asset(
-                      'images/question.png',
-                      width: 38,
-                      height: 43,
-                    )
-                  ],
-                )
-              ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'Fill questionnaires',
+                        style: TextStyle(
+                            fontSize: screenSize.width * .035,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Image.asset(
+                        'images/question.png',
+                        width: screenSize.width * 0.1,
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          sectionTitle(title: 'Learn'),
-          learnsection(),
-          const SizedBox(
-            height: 15,
-          ),
-          sectionTitle(title: 'Reports'),
-          allReports(),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
+            SizedBox(
+              height: screenSize.height * 0.01,
+            ),
+            sectionTitle(title: 'Learn'),
+            learnsection(),
+            SizedBox(
+              height: screenSize.height * 0.01,
+            ),
+            sectionTitle(title: 'Reports'),
+            allReports(),
+            SizedBox(
+              height: screenSize.height * 0.01,
+            ),
+          ],
+        ),
       ),
     );
   }

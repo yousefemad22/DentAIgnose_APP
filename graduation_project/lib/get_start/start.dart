@@ -15,6 +15,8 @@ class Start extends StatefulWidget {
 class _StartState extends State<Start> {
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -25,73 +27,79 @@ class _StartState extends State<Start> {
             colors: [Color(0xFF1bade1), Color(0xFF26a6fe), Color(0xFF9de8fc)],
           ),
         ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.15,
-                    bottom: MediaQuery.of(context).size.height * 0.05),
-                child: Image(
-                  image: AssetImage('images/لوجو.png'),
-                  // image: AssetImage('images/XrayTest.jpg'),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(),
-                    child: Text(
-                      'Dent',
-                      style: TextStyle(color: Colors.white, fontSize: 40),
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: screenSize.height * 0.05),
+                  child: Image(
+                    width: screenSize.width * 0.8,
+                    image: AssetImage(
+                      'images/لوجو.png',
                     ),
+                    // image: AssetImage('images/XrayTest.jpg'),
                   ),
-                  Text('AI',
-                      style: TextStyle(color: Colors.white, fontSize: 50)),
-                  Text('gnose',
-                      style: TextStyle(color: Colors.white, fontSize: 40)),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.05),
-                child: Text('Find your best Dentists',
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
-              ),
-              Text('without wasting time',
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.05),
-                child: GestureDetector(
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(),
+                      child: Text(
+                        'DentAIgnose',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: screenSize.width * 0.1,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: screenSize.height*0.02),
+                  child: Text('Find your best Dentists',
+                      style: TextStyle(color: Colors.white, fontSize: screenSize.width * 0.05)),
+                ),
+                Text('without wasting time',
+                    style: TextStyle(color: Colors.white, fontSize: screenSize.width * 0.05)),
+                SizedBox(
+                  height: screenSize.height*0.05,
+                ),
+                GestureDetector(
                   onTap: () {
                     print(',jascjs');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Login()));
                   },
                   child: Container(
-                    padding: EdgeInsets.only(top: 17),
+
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(40),
                     ),
-                    width: MediaQuery.of(context).size.width * 0.64,
-                    height: MediaQuery.of(context).size.height * 0.14,
-                    child: Text(
-                      'Get Started',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    width: screenSize.width* 0.5,
+                    height: screenSize.height * 0.05,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Get Started',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: screenSize.width * 0.05,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

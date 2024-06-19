@@ -1,101 +1,195 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
+import 'package:chat_bubbles/bubbles/bubble_normal.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class ChatBotPage extends StatefulWidget {
-  @override
-  _ChatBotPageState createState() => _ChatBotPageState();
+class Message {
+  bool isSender;
+  String msg;
+  Message(this.isSender, this.msg);
 }
 
-class _ChatBotPageState extends State<ChatBotPage> {
-  List<types.Message> _messages = [];
-  final _user = types.User(id: 'user');
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({super.key});
 
-  void _handleSendPressed(types.PartialText message) async {
-    final textMessage = types.TextMessage(
-      author: _user,
-      createdAt: DateTime.now().millisecondsSinceEpoch,
-      id: _randomString(),
-      text: message.text,
-    );
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
 
-    setState(() {
-      _messages.insert(0, textMessage);
-    });
+class _ChatScreenState extends State<ChatScreen> {
+  TextEditingController controller = TextEditingController();
+  ScrollController scrollController = ScrollController();
+  List<Message> msgs = [];
+  bool isTyping = false;
 
-    _getBotResponse(message.text);
-  }
+  Future<void> sendMsg() async {
+    String text = controller.text;
+    String apiKey = "api-key";
+    controller.clear();
+    int retryCount = 0;
+    int maxRetries = 5;
+    int delay = 1000; // initial delay of 1 second
 
-  Future<void> _getBotResponse(String query) async {
-    try {
-      final response = await http.post(
-        Uri.parse('https://api.openai.com/v1/completions'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_OPENAI_KEY',
-        },
-        body: jsonEncode({
-          "model": "text-davinci-003",  // Specify the correct model
-          "prompt": query,
-          "max_tokens": 150
-        }),
-      );
+    while (retryCount < maxRetries) {
+      try {
+        if (text.isNotEmpty) {
+          setState(() {
+            msgs.insert(0, Message(true, text));
+            isTyping = true;
+          });
+          scrollController.animateTo(0.0,
+              duration: const Duration(seconds: 1), curve: Curves.easeOut);
 
-      if (response.statusCode == 200) {
-        final botResponse = jsonDecode(response.body)['choices'][0]['text'].trim();
-        final botMessage = types.TextMessage(
-          author: types.User(id: 'bot'),
-          createdAt: DateTime.now().millisecondsSinceEpoch,
-          id: _randomString(),
-          text: botResponse,
-        );
+          var response = await http.post(
+            Uri.parse("https://api.openai.com/v1/chat/completions"),
+            headers: {
+              "Authorization": "Bearer $apiKey",
+              "Content-Type": "application/json"
+            },
+            body: jsonEncode({
+              "model": "gpt-3.5-turbo",
+              "messages": [
+                {"role": "user", "content": text}
+              ]
+            }),
+          );
 
-        setState(() {
-          _messages.insert(0, botMessage);
-        });
-      } else {
-        // Handle HTTP errors
-        throw Exception('Failed to fetch response: ${response.statusCode}');
+          if (response.statusCode == 200) {
+            var json = jsonDecode(response.body);
+            setState(() {
+              isTyping = false;
+              msgs.insert(
+                  0,
+                  Message(
+                      false,
+                      json["choices"][0]["message"]["content"]
+                          .toString()
+                          .trimLeft()));
+            });
+            scrollController.animateTo(0.0,
+                duration: const Duration(seconds: 1), curve: Curves.easeOut);
+            break; // Exit the loop if the request is successful
+          } else if (response.statusCode == 429) {
+            retryCount++;
+            print('Too Many Requests. Retry attempt $retryCount');
+            await Future.delayed(Duration(milliseconds: delay));
+            delay *= 2; // Increase delay exponentially
+          } else {
+            print('Error: ${response.statusCode} - ${response.reasonPhrase}');
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                    "Error ${response.statusCode}: ${response.reasonPhrase}")));
+            break; // Exit the loop for other errors
+          }
+        }
+      } on Exception catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Some error occurred, please try again! Error: $e")));
+        break; // Exit the loop on exception
       }
-    } catch (e) {
-      // Handle general errors
-      final errorMessage = types.TextMessage(
-        author: types.User(id: 'bot'),
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-        id: _randomString(),
-        text: 'Error: ${e.toString()}',
-      );
-
-      setState(() {
-        _messages.insert(0, errorMessage);
-      });
     }
-  }
-
-  String _randomString() {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    final rnd = Random();
-    return String.fromCharCodes(Iterable.generate(
-      10,
-      (_) => chars.codeUnitAt(rnd.nextInt(chars.length)),
-    ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Chat Bot'),
-      //   backgroundColor: Colors.blueGrey,
-      // ),
-      body: Chat(
-        messages: _messages,
-        onSendPressed: _handleSendPressed,
-        user: _user,
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: 8),
+        Expanded(
+          child: ListView.builder(
+            controller: scrollController,
+            itemCount: msgs.length,
+            shrinkWrap: true,
+            reverse: true,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: isTyping && index == 0
+                    ? Column(
+                        children: [
+                          BubbleNormal(
+                            text: msgs[0].msg,
+                            isSender: true,
+                            color: Colors.blue.shade100,
+                          ),
+                          BubbleNormal(
+                            text: "Typing...",
+                            isSender: false,
+                            color: Colors.blue.shade100,
+                          ),
+                          // const Padding(
+                          //   padding: EdgeInsets.only(left: 16, top: 4),
+                          //   child: Align(
+                          //     alignment: Alignment.centerLeft,
+                          //     child: Text("Typing..."),
+                          //   ),
+                          // ),
+                        ],
+                      )
+                    : BubbleNormal(
+                        text: msgs[index].msg,
+                        isSender: msgs[index].isSender,
+                        color: msgs[index].isSender
+                            ? Colors.blue.shade100
+                            : Colors.grey.shade200,
+                      ),
+              );
+            },
+          ),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: TextField(
+                      controller: controller,
+                      textCapitalization: TextCapitalization.sentences,
+                      onSubmitted: (value) {
+                        sendMsg();
+                      },
+                      textInputAction: TextInputAction.send,
+                      showCursor: true,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Enter text",
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                sendMsg();
+              },
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: const Icon(
+                  Icons.send,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+          ],
+        ),
+      ],
     );
   }
 }
