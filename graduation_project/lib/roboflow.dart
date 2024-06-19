@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ImagePredictionService {
   static final String API_KEY = 'api-key';
-  static final String MODEL_ENDPOINT = 'dental-annotation/5';
+  static final String MODEL_ENDPOINT = 'dental-annotation/7';
 
   Future<Map<String, dynamic>> predictImage(String image) async {
     final File tempFile = File(image);
@@ -21,11 +21,13 @@ class ImagePredictionService {
     try {
       final HttpClient httpClient = HttpClient();
       request = await httpClient.postUrl(Uri.parse(uploadURL));
-      request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+      request.headers.set('Content-Type', 'application/json');
+      // request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
       request.headers.set('Content-Length', encodedFile.length.toString());
       request.headers.set('Content-Language', 'en-US');
       request.add(utf8.encode(encodedFile));
       response = await request.close();
+      print("respose: $response");
       final String responseBody = await response.transform(utf8.decoder).join();
       return json.decode(responseBody);
     } catch (e) {

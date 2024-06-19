@@ -19,32 +19,42 @@ class Login extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF1bade1), Color(0xFF26a6fe), Color(0xFF9de8fc)
-                ]
-            )
-        ),
+              Color(0xFF1bade1),
+              Color(0xFF26a6fe),
+              Color(0xFF9de8fc)
+            ])),
         child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: screenSize.height * 0.1, left: screenSize.width * 0.1, right: screenSize.width * 0.1),
+                  margin: EdgeInsets.only(
+                      top: screenSize.height * 0.1,
+                      left: screenSize.width * 0.1,
+                      right: screenSize.width * 0.1),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: Color(0XFF005d9a)),
                   width: screenSize.width * 0.8,
-                  height: 70,  // Fixed height as it is a small element
+                  height: screenSize.height * 0.1,
                   child: Center(
                     child: Text(
                       'Login as',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 50, color: Colors.white, fontWeight: FontWeight.w700,),
+                      style: TextStyle(
+                        fontSize: screenSize.width * .1,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 30, left: screenSize.width * 0.12, right: screenSize.width * 0.12),
+                  margin: EdgeInsets.only(
+                      top: screenSize.height * .05,
+                      left: screenSize.width * 0.12,
+                      right: screenSize.width * 0.12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(70),
                     color: Colors.white,
@@ -60,10 +70,10 @@ class Login extends StatelessWidget {
                       Spacer(),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return Welcome();
-                              }));
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return Welcome();
+                          }));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -73,16 +83,24 @@ class Login extends StatelessWidget {
                           child: Text(
                             'Dentist',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500,),
+                            style: TextStyle(
+                              fontSize: screenSize.width * .06,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                          height: 60,
+                          height: screenSize.height * .07,
                           width: 190, // Consider making this relative to screen size
                         ),
                       ),
                       Spacer(),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => student_login(),));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => student_login(),
+                              ));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -92,16 +110,25 @@ class Login extends StatelessWidget {
                           child: Text(
                             'Student',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30, color: Colors.white,fontWeight: FontWeight.w500,),
+                            style: TextStyle(
+                              fontSize: screenSize.width * .06,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                          height: 60,
-                          width: 190, // Consider making this relative to screen size
+                          height: screenSize.height * .07,
+                          width:
+                              190, // Consider making this relative to screen size
                         ),
                       ),
                       Spacer(),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => reciptionist_login(),));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => reciptionist_login(),
+                              ));
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -111,10 +138,15 @@ class Login extends StatelessWidget {
                           child: Text(
                             'Receptionist',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 30, color: Colors.white,fontWeight: FontWeight.w500,),
+                            style: TextStyle(
+                              fontSize: screenSize.width * .05,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                          height: 60,
-                          width: 190, // Consider making this relative to screen size
+                          height: screenSize.height * .07,
+                          width:
+                              190, // Consider making this relative to screen size
                         ),
                       ),
                       Spacer(),

@@ -60,6 +60,7 @@ class _WelcomeState extends State<reciptionist_login> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -76,51 +77,61 @@ class _WelcomeState extends State<reciptionist_login> {
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 50.0,
+                 SizedBox(
+                  height: screenSize.height*0.1,
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: screenSize.width*.05),
+                  child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      child: GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: const Icon(Icons.arrow_back,
+                              color: Color(0xFF26A6FE)))),
+                ),
+                // SizedBox(
+                //   width: 20.0,
+                // ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image(
+                      image: AssetImage("images/لوجو.png"),
+                      height: screenSize.height*0.15,
+                    ),
+                  ],
                 ),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // SizedBox(width: 5,),
-                      CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 20,
-                          child: GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: const Icon(Icons.arrow_back,
-                                  color: Color(0xFF26A6FE)))),
-                      // SizedBox(
-                      //   width: 20.0,
-                      // ),
-                      Text(
-                        'DentAIgnose',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 37,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'DentAIgnose',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenSize.width*0.05,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Image(
-                        image: AssetImage("images/لوجو.png"),
-                        height: 50,
-                      ),
-                    ]),
-                const SizedBox(
-                  height: 50.0,
+                    ),
+                  ],
+                ),
+                 SizedBox(
+                  height :screenSize.height*.05,
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                       EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: const Text(
+                    child:  Text(
                       'W e l c o m e',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 40,
+                        fontSize:screenSize.width*0.1 ,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -128,23 +139,23 @@ class _WelcomeState extends State<reciptionist_login> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                       EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    child: const Text(
+                    child:  Text(
                       'B a c k ...',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize: screenSize.width*0.1,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 45.0,
+                 SizedBox(
+                  height: screenSize.height*.05,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                   child: TextFormField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -166,11 +177,11 @@ class _WelcomeState extends State<reciptionist_login> {
                     //   },
                   ),
                 ),
-                const SizedBox(
-                  height: 10.0,
+                 SizedBox(
+                  height: screenSize.height*.02,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                   child: TextFormField(
                     controller: _password,
                     decoration: InputDecoration(
@@ -200,12 +211,12 @@ class _WelcomeState extends State<reciptionist_login> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10, top: 5),
+                  padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.01),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(
-                        width: 220,
+                        width: screenSize.width*0.55,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -217,24 +228,24 @@ class _WelcomeState extends State<reciptionist_login> {
                         },
                         child: Text(
                           'Forget Password?',
-                          style: TextStyle(fontSize: 15, color: Colors.white),
+                          style: TextStyle(fontSize: screenSize.width*0.035, color: Colors.white),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 15,
+                 SizedBox(
+                  height: screenSize.height*0.05,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10),
+                     Padding(
+                      padding: EdgeInsets.only(left: screenSize.width*.05),
                       child: Text(
                         'Login',
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: screenSize.width*0.06,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -245,7 +256,7 @@ class _WelcomeState extends State<reciptionist_login> {
                     //   width: 30,
                     // ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding:  EdgeInsets.only(right:screenSize.width*.05 ),
                       child: GestureDetector(
                         onTap: () {
                           if (!_email.text.endsWith("@receptionist.com")) {
@@ -254,9 +265,9 @@ class _WelcomeState extends State<reciptionist_login> {
                             return showWrongCredentialsDialog(context, "Error",
                                 "Email must ends with @receptionist.com");
                           }
-                      
+
                           bool f = false;
-                      
+
                           Map receptionistData = {
                             "id": "",
                             // "dentistId": "",
@@ -271,9 +282,9 @@ class _WelcomeState extends State<reciptionist_login> {
                             'gender': "",
                             'number': "",
                           };
-                      
+
                           var check = (_email.text, _password.text);
-                      
+
                           // check for account existance
                           for (var i = 0; i < allAccounts.length; i++) {
                             if (check == allAccounts[i]) {
@@ -287,7 +298,7 @@ class _WelcomeState extends State<reciptionist_login> {
                           if (f) {
                             // showWrongCredentialsDialog(context, "Logged in",
                             //     "Intern Student Logged in Successfully.");
-                      
+
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
                               return receptionCallPage(
@@ -309,7 +320,7 @@ class _WelcomeState extends State<reciptionist_login> {
                           backgroundColor: Colors.white,
                           child: Icon(
                             Icons.arrow_forward,
-                            size: 30,
+                            size: screenSize.width*.08,
                             color: Colors.cyan,
                           ),
                         ),

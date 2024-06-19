@@ -89,7 +89,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
   Widget build(BuildContext context) {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
-    double ffem = fem * 0.97;
+    double ffem = fem * 0.90;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -112,7 +112,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
           title: Text(
             'Edit Profile ',
             style: TextStyle(
-              fontSize: 25 * ffem,
+              fontSize: 22 * ffem,
               fontWeight: FontWeight.w700,
               color: Colors.black,
             ),

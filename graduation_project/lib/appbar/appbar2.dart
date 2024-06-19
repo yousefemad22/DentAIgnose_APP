@@ -10,79 +10,75 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          margin: const EdgeInsets.only(
-            left: 5,
-            right: 5,
-          ),
-          height: 100.0,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(20.0),
-              bottomRight: Radius.circular(20.0),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(.8),
-                // spreadRadius:5,
-                blurRadius: 50,
-                offset: const Offset(0, 20),
+    final Size screenSize = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(horizontal:screenSize.width*0.03 ),
+            height: screenSize.height*0.5,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(20.0),
+                bottomRight: Radius.circular(20.0),
               ),
-            ],
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(.8),
+                  // spreadRadius:5,
+                  blurRadius: 50,
+                  offset: const Offset(0, 20),
+                ),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          child: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+          Positioned(
+            child: AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    radius: 25.0,
-                    backgroundImage: AssetImage('images/3403753 1.png'),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    capitalizeWords("${userData['fName'] + " " + userData['lName']}"),
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF26A6FE),
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 25.0,
+                        backgroundImage: AssetImage('images/3403753 1.png'),
+                      ),
+                      Text(
+                        capitalizeWords("${userData['fName'] + " " + userData['lName']}"),
+                        style: TextStyle(
+                          fontSize: screenSize.width*0.04,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF26A6FE),
                         ),
-                  ),
-                  const SizedBox(
-                    width: 120,
+                      ),
+                    ],
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         'images/logo2.png',
-                        width: 65,
-                        height: 42,
+                        width: screenSize.width*0.15,
                       ),
-                      const Text('DentAIgnose',
+                       Text('DentAIgnose',
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: screenSize.width*0.03,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF26A6FE)))
                     ],
                   ),
                 ],
               ),
+              backgroundColor: Colors.transparent,
             ),
-            backgroundColor: Colors.transparent,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
   @override
-  Size get preferredSize => Size.fromHeight(75.0);
+  Size get preferredSize => Size.fromHeight(70.0);
 }

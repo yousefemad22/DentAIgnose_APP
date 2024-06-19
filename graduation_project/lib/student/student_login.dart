@@ -59,6 +59,8 @@ class _WelcomeState extends State<student_login> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Container(
@@ -75,51 +77,62 @@ class _WelcomeState extends State<student_login> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                  height: 50.0,
+               SizedBox(
+                height: screenSize.height*0.1,
                 ),
+                Container(
+                  margin: EdgeInsets.only(left: screenSize.width*.05),
+                  child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      child: GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: const Icon(Icons.arrow_back,
+                              color: Color(0xFF26A6FE)))),
+                ),
+                // SizedBox(
+                //   width: 20.0,
+                // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage("images/لوجو.png"),
+                    height: screenSize.height*0.15,
+                  ),
+                ],
+              ),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // SizedBox(width: 5,),
-                      CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 20,
-                          child: GestureDetector(
-                              onTap: () => Navigator.pop(context),
-                              child: const Icon(Icons.arrow_back,
-                                  color: Color(0xFF26A6FE)))),
-                      // SizedBox(
-                      //   width: 20.0,
-                      // ),
-                      Text(
-                        'DentAIgnose',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 37,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'DentAIgnose',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: screenSize.width*0.05,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Image(
-                        image: AssetImage("images/لوجو.png"),
-                        height: 50,
-                      ),
-                    ]),
-                const SizedBox(
-                  height: 50.0,
+                    ),
+                  ],
+                ),
+
+                 SizedBox(
+                  height :screenSize.height*.05,
                 ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child:  Text(
                     'W e l c o m e',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 40,
+                      fontSize:screenSize.width*0.1 ,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -127,23 +140,23 @@ class _WelcomeState extends State<student_login> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: const Text(
+                  child:  Text(
                     'B a c k ...',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 40,
+                        fontSize:screenSize.width*0.1 ,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 45.0,
+               SizedBox(
+                height: screenSize.height*.05,
               ),
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                 child: TextFormField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -164,11 +177,11 @@ class _WelcomeState extends State<student_login> {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 10.0,
+               SizedBox(
+                height: screenSize.height*.02,
               ),
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                 child: TextFormField(
                   controller: _password,
                   decoration: InputDecoration(
@@ -198,12 +211,12 @@ class _WelcomeState extends State<student_login> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10, top: 5),
+                padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.01),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      width: 220,
+                      width: screenSize.width*0.55,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -215,26 +228,27 @@ class _WelcomeState extends State<student_login> {
                       },
                       child: Text(
                         'Forget Password?',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
+                        style: TextStyle(fontSize: screenSize.width*0.035, color: Colors.white),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
+               SizedBox(
+                height: screenSize.height*0.05,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(left: screenSize.width*.05),
                     child: GestureDetector(
                       onTap: () {},
-                      child: const Expanded(
+                      child:  Expanded(
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: screenSize.width*0.06,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
@@ -242,78 +256,76 @@ class _WelcomeState extends State<student_login> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Expanded(
-                    child: Padding(
-                        padding: EdgeInsets.only(left: 180),
-                        child: GestureDetector(
-                          onTap: () {
-                            if (!_email.text.endsWith("@intern.com")) {
-                              _email.text = "";
-                              _password.text = "";
-                              return showWrongCredentialsDialog(context,
-                                  "Error", "Email must ends with @intern.com");
-                            }
-
-                            bool f = false;
-
-                            Map studentData = {
-                              "id": "",
-                              // "dentistId": "",
-                              // "accountId": "",
-                              "email": "",
-                              "password": "",
-                              // "personId": "",
-                              'fName': "",
-                              'mName': "",
-                              'lName': "",
-                              'age': "",
-                              'gender': "",
-                              'number': "",
-                            };
-
-                            var check = (_email.text, _password.text);
-
-                            // check for account existance
-                            for (var i = 0; i < allAccounts.length; i++) {
-                              if (check == allAccounts[i]) {
-                                f = true;
-                                studentData['id'] = i;
-                                studentData['email'] = _email.text;
-                                studentData['password'] = _password.text;
-                              }
-                            }
-                            // if account exists
-                            if (f) {
-                              // showWrongCredentialsDialog(context, "Logged in",
-                              //     "Intern Student Logged in Successfully.");
-
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return studentCallPage(studentData: studentData);
-                                // return studentPage(studentData: studentData);
-                              }));
-                            } else {
-                              // if not exist
-                              showWrongCredentialsDialog(
-                                  context, "Error", "Wrong email or password.");
-                            }
+                  // const SizedBox(
+                  //   width: 30,
+                  // ),
+                  Padding(
+                      padding:  EdgeInsets.only(right:screenSize.width*.05 ),
+                      child: GestureDetector(
+                        onTap: () {
+                          if (!_email.text.endsWith("@intern.com")) {
                             _email.text = "";
                             _password.text = "";
-                          },
-                          child: CircleAvatar(
-                            radius: 27,
-                            backgroundColor: Colors.white,
-                            child: Icon(
-                              Icons.arrow_forward,
-                              size: 30,
-                              color: Colors.cyan,
-                            ),
+                            return showWrongCredentialsDialog(context,
+                                "Error", "Email must ends with @intern.com");
+                          }
+
+                          bool f = false;
+
+                          Map studentData = {
+                            "id": "",
+                            // "dentistId": "",
+                            // "accountId": "",
+                            "email": "",
+                            "password": "",
+                            // "personId": "",
+                            'fName': "",
+                            'mName': "",
+                            'lName': "",
+                            'age': "",
+                            'gender': "",
+                            'number': "",
+                          };
+
+                          var check = (_email.text, _password.text);
+
+                          // check for account existance
+                          for (var i = 0; i < allAccounts.length; i++) {
+                            if (check == allAccounts[i]) {
+                              f = true;
+                              studentData['id'] = i;
+                              studentData['email'] = _email.text;
+                              studentData['password'] = _password.text;
+                            }
+                          }
+                          // if account exists
+                          if (f) {
+                            // showWrongCredentialsDialog(context, "Logged in",
+                            //     "Intern Student Logged in Successfully.");
+
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return studentCallPage(studentData: studentData);
+                              // return studentPage(studentData: studentData);
+                            }));
+                          } else {
+                            // if not exist
+                            showWrongCredentialsDialog(
+                                context, "Error", "Wrong email or password.");
+                          }
+                          _email.text = "";
+                          _password.text = "";
+                        },
+                        child: CircleAvatar(
+                          radius: 27,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.arrow_forward,
+                            size:  screenSize.width*.08,
+                            color: Colors.cyan,
                           ),
-                        )),
-                  ),
+                        ),
+                      )),
                 ],
               ),
             ],

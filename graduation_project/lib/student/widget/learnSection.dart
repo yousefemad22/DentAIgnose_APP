@@ -12,16 +12,18 @@ class learnsection extends StatefulWidget {
 class _learnsectionState extends State<learnsection> {
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Learn()));
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 15),
-        padding: const EdgeInsets.all(10),
+        margin:  EdgeInsets.symmetric(horizontal: screenSize.width*0.04),
+        // padding: const EdgeInsets.all(10),
         width: double.infinity,
-        height: 99,
+        height: screenSize.height*0.12,
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
           borderRadius: BorderRadius.circular(10),

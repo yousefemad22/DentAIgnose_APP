@@ -65,314 +65,314 @@ class _receptionPage extends State<receptionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    visible_add = false;
-                    visible_add_box = false;
-                    visible_questioniers = true;
-                    visible_questioniers_box = true;
-                  });
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Visibility(
-                      visible: visible_questioniers,
-                      child: Container(
-                        width: 88,
-                        height: 101,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100), // Top left corner
-                            topRight: Radius.circular(100), // Top right corner
-                          ),
-                          color: Color(0xff9de8fd),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/questioniers.png',
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Text(
-                          'Questioniers',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    visible_add = true;
-                    visible_add_box = true;
-                    visible_questioniers = false;
-                    visible_questioniers_box = false;
-                  });
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Visibility(
-                      visible: visible_add,
-                      child: Container(
-                        width: 88,
-                        height: 101,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100), // Top left corner
-                            topRight: Radius.circular(100), // Top right corner
-                          ),
-                          color: Color(0xff9de8fd),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'images/add.png',
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Add',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Visibility(
-            visible: visible_add_box,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: 358,
-                  height: 108,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff9de8fd),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x3f000000),
-                        offset: Offset(0, 4),
-                        blurRadius: 2,
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: ((context) => PatientDataForm(
-                                      userData: widget.receptionistData,
-                                    ))));
-                      },
-                      child: Container(
-                        width: 133,
-                        height: 66,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xffffffff),
-                          boxShadow: [
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Patient',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Image.asset(
-                              'images/patient 1.png',
-                              width: 38,
-                              height: 43,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) => Xray())));
-                      },
-                      child: Container(
-                        width: 133,
-                        height: 66,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xffffffff),
-                          boxShadow: [
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                            const BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0, 4),
-                              blurRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'X-rays',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Image.asset('images/x-ray 1.png')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+    final Size screenSize = MediaQuery.of(context).size;
+
+    return SafeArea(
+      child: Scaffold(
+        body: ListView(
+          children: [
+             SizedBox(
+              height:screenSize.height*0.05 ,
             ),
-          ),
-          Visibility(
-            visible: visible_questioniers_box,
-            child: Stack(
-              alignment: Alignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  width: 358,
-                  height: 108,
-                  decoration: const BoxDecoration(
-                    color: Color(0xff9de8fd),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0x3f000000),
-                        offset: Offset(0, 4),
-                        blurRadius: 2,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      visible_add = false;
+                      visible_add_box = false;
+                      visible_questioniers = true;
+                      visible_questioniers_box = true;
+                    });
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Visibility(
+                        visible: visible_questioniers,
+                        child: Container(
+                          width: screenSize.width*0.2,
+                          height: screenSize.height*0.12,
+                          decoration:  BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100), // Top left corner
+                              topRight: Radius.circular(100), // Top right corner
+                            ),
+                            color: Color(0xff9de8fd),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/questioniers.png',
+                          ),
+                          // const SizedBox(
+                          //   height: 5,
+                          // ),
+                           Text(
+                            'Questioniers',
+                            style: TextStyle(
+                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Design(userData: widget.receptionistData)));
+                    setState(() {
+                      visible_add = true;
+                      visible_add_box = true;
+                      visible_questioniers = false;
+                      visible_questioniers_box = false;
+                    });
                   },
-                  child: Container(
-                    width: 266,
-                    height: 66,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xffffffff),
-                      boxShadow: [
-                        const BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 4),
-                          blurRadius: 2,
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Visibility(
+                        visible: visible_add,
+                        child: Container(
+                          width: screenSize.width*0.2,
+                          height: screenSize.height*0.12,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100), // Top left corner
+                              topRight: Radius.circular(100), // Top right corner
+                            ),
+                            color: Color(0xff9de8fd),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
                         ),
-                        const BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0, 4),
-                          blurRadius: 2,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text(
-                          'Fill questionnaires',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                        Image.asset(
-                          'images/question.png',
-                          width: 38,
-                          height: 43,
-                        )
-                      ],
-                    ),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/add.png',
+                          ),
+
+                           Text(
+                            'Add',
+                            style: TextStyle(
+                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          sectionTitle(title: 'Reports'),
-          const divider(),
-          allReports(),
-          const SizedBox(
-            height: 10,
-          ),
-          sectionTitle(title: 'Overview'),
-          const divider(),
-          const overView(),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
+            Visibility(
+              visible: visible_add_box,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    // margin: const EdgeInsets.symmetric(horizontal: 15),
+                    width: screenSize.width*.9,
+                    height: screenSize.height*0.12,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff9de8fd),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0x3f000000),
+                          offset: Offset(0, 4),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => PatientDataForm(
+                                        userData: widget.receptionistData,
+                                      ))));
+                        },
+                        child: Container(
+                          width: screenSize.width*0.4,
+                          height: screenSize.height*.08,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xffffffff),
+                            boxShadow: [
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                               Text(
+                                'Patient',
+                                style: TextStyle(
+                                    fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                              ),
+                              Image.asset(
+                                'images/patient 1.png',
+
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: ((context) => Xray())));
+                        },
+                        child: Container(
+                          width: screenSize.width*0.4,
+                          height: screenSize.height*.08,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xffffffff),
+                            boxShadow: [
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                              const BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0, 4),
+                                blurRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                               Text(
+                                'X-rays',
+                                style: TextStyle(
+                                    fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                              ),
+                              Image.asset('images/x-ray 1.png')
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: visible_questioniers_box,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    // margin: const EdgeInsets.symmetric(horizontal: 15),
+                    width: screenSize.width*0.9,
+                    height: screenSize.height*.12,
+                    decoration: const BoxDecoration(
+                      color: Color(0xff9de8fd),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0x3f000000),
+                          offset: Offset(0, 4),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Design(userData: widget.receptionistData)));
+                    },
+                    child: Container(
+                      width: screenSize.width*0.8,
+                      height: screenSize.height*.08,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xffffffff),
+                        boxShadow: [
+                          const BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                          const BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                           Text(
+                            'Fill questionnaires',
+                            style: TextStyle(
+                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                          ),
+                          Image.asset(
+                            'images/question.png',
+                            width: screenSize.width*0.1,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+             SizedBox(
+              height: screenSize.height*0.01,
+            ),
+            sectionTitle(title: 'Reports'),
+            const divider(),
+            allReports(),
+             SizedBox(
+              height: screenSize.height*0.01,
+            ),
+            sectionTitle(title: 'Overview'),
+            const divider(),
+            const overView(),
+            //  SizedBox(
+            //   height: screenSize.height*0.01,
+            // ),
+          ],
+        ),
       ),
     );
   }

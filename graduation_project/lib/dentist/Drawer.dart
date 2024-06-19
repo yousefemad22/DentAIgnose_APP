@@ -5,6 +5,7 @@ import 'package:graduation_project/dentist/home.dart';
 import 'package:graduation_project/get_start/create_account.dart';
 import 'package:graduation_project/get_start/login.dart';
 import 'package:graduation_project/notification/notification.dart';
+import 'package:graduation_project/receptionist/allReceptionists.dart';
 
 class drawer extends StatelessWidget {
   final Map dentistData;
@@ -13,6 +14,8 @@ class drawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+
     return Stack(
       children: [
         Container(
@@ -31,16 +34,16 @@ class drawer extends StatelessWidget {
         Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 50, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.05, left: screenSize.width*0.04),
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 40.0,
+                    radius: screenSize.width*0.09,
                     backgroundImage:
                         NetworkImage('https://example.com/avatar.jpg'),
                   ),
                   SizedBox(
-                    width: 10,
+                    width: screenSize.width*0.05,
                   ),
                   Column(
                     children: [
@@ -53,7 +56,7 @@ class drawer extends StatelessWidget {
                                   ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: screenSize.width*0.05,
                                 color: Colors.white,
                                 decoration: TextDecoration.none,
                               ),
@@ -63,7 +66,7 @@ class drawer extends StatelessWidget {
                                   dentistData['lName'].substring(1),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: screenSize.width*0.05,
                                 color: Colors.white,
                                 decoration: TextDecoration.none,
                               ),
@@ -73,15 +76,15 @@ class drawer extends StatelessWidget {
                       ),
                       Text(
                         'Doctor',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: TextStyle(fontSize: screenSize.width*0.04, color: Colors.white),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: screenSize.height*0.04,
             ),
             const Divider(
               color: Colors.white, // Set the color of the divider
@@ -91,7 +94,7 @@ class drawer extends StatelessWidget {
                   50, // Set the end indent (right padding) of the divider
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -99,25 +102,25 @@ class drawer extends StatelessWidget {
                     return dentistPage(dentistData: dentistData);
                   }));
                 },
-                child: const Row(
+                child:Row(
                   children: [
                     Icon(
                       Icons.home,
-                      size: 30,
+                      size: screenSize.width*0.08,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: screenSize.width*.02,
                     ),
                     Text(
                       "Home",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -125,25 +128,25 @@ class drawer extends StatelessWidget {
                     return notification();
                   }));
                 },
-                child: const Row(
+                child:  Row(
                   children: [
                     Icon(
                       Icons.notifications,
-                      size: 30,
+                      size: screenSize.width*0.08,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: screenSize.width*.02,
                     ),
                     Text(
                       "Notifications",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -154,25 +157,25 @@ class drawer extends StatelessWidget {
                         ),
                       ));
                 },
-                child: const Row(
+                child:  Row(
                   children: [
                     Icon(
                       Icons.person,
-                      size: 30,
+                      size: screenSize.width*0.08,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: screenSize.width*.02,
                     ),
                     Text(
                       "Profile",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+             SizedBox(
+              height: screenSize.height*0.04,
             ),
             const Divider(
               color: Colors.white, // Set the color of the divider
@@ -182,64 +185,70 @@ class drawer extends StatelessWidget {
                   50, // Set the end indent (right padding) of the divider
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            Create_account(user: "receptionists"),
+                            All_reciptionist(who: "receptionists",),
                       ));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) =>
+                  //           Create_account(user: "receptionists"),
+                  //     ));
                 },
-                child: const Row(
+                child:  Row(
                   children: [
                     Icon(
                       Icons.person_rounded,
-                      size: 40,
+                      size: screenSize.width*0.08,
                     ),
                     SizedBox(
-                      width: 10,
+                      width: screenSize.width*.02,
                     ),
                     Text(
                       " Receptionist",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 20, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            Create_account(user: "students"),
+                            All_reciptionist(who: "students",),
                       ));
                 },
                 child: Row(
                   children: [
                     Image.asset(
                       'images/doctor.png',
-                      width: 40,
-                      height: 35,
+                      width:screenSize.width*0.07,
+                      // height: 35,
                     ),
-                    const SizedBox(
-                      width: 10,
+                     SizedBox(
+                      width: screenSize.width*.04,
                     ),
-                    const Text(
+                     Text(
                       "Intern Student",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+             SizedBox(
+              height: screenSize.height*0.04,
             ),
             const Divider(
               color: Colors.white, // Set the color of the divider
@@ -249,7 +258,7 @@ class drawer extends StatelessWidget {
                   50, // Set the end indent (right padding) of the divider
             ),
             Container(
-              margin: const EdgeInsets.only(top: 0, left: 20),
+              margin:  EdgeInsets.only(top: screenSize.height*0.02, left: screenSize.width*0.04),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -262,15 +271,15 @@ class drawer extends StatelessWidget {
                   children: [
                     Image.asset(
                       'images/logout.png',
-                      width: 40,
+                      width:screenSize.width*0.06,
                       height: 35,
                     ),
-                    const SizedBox(
-                      width: 10,
+                     SizedBox(
+                      width: screenSize.width*.02,
                     ),
-                    const Text(
+                    Text(
                       "Logout",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: screenSize.width*0.04),
                     )
                   ],
                 ),

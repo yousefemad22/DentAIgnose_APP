@@ -1,12 +1,12 @@
-import 'dart:io';
-import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:http/http.dart' as http;
+import 'dart:typed_data';
 
 class ImageFromUrl extends StatefulWidget {
-  String imageURL;
-  Map prediction;
+  final String imageURL;
+  final Map prediction;
   ImageFromUrl({required this.imageURL, required this.prediction});
 
   @override
@@ -15,19 +15,20 @@ class ImageFromUrl extends StatefulWidget {
 
 class _ImageFromUrlState extends State<ImageFromUrl> {
   img.Image? originalImage;
-  img.Image? croppedImage;
+  List<img.Image> croppedImages = [];
+  List predForCroppedImages = [];
+  List confForCroppedImages = [];
 
   @override
   void initState() {
     super.initState();
-    print(widget.prediction);
     loadImageAndCrop();
   }
 
   Future<void> loadImageAndCrop() async {
     originalImage = await fetchAndDecodeImage(widget.imageURL);
     if (originalImage != null) {
-      cropImageBasedOnPrediction(originalImage!, widget.prediction);
+      cropImageBasedOnPredictions(originalImage!, widget.prediction);
     }
   }
 
@@ -46,49 +47,27 @@ class _ImageFromUrlState extends State<ImageFromUrl> {
     }
   }
 
-  // void cropImageBasedOnPrediction(img.Image image, Map prediction) {
-  //   final bbox = prediction['predictions'][1]; // Assuming the bounding box data is here
-  //   final x = bbox['x'].toInt();
-  //   final y = bbox['y'].toInt();
-  //   final width = bbox['width'].toInt();
-  //   final height = bbox['height'].toInt();
-
-  //   croppedImage = img.copyCrop(image, x, y, width, height);
-  //   setState(() {}); // Update UI to show cropped image
-  // }
-
-  void cropImageBasedOnPrediction(img.Image image, Map prediction) {
-    final bbox =
-        prediction['predictions'][0]; // Assuming the bounding box data is here
-
-    // If bounding box values are normalized or based on a different image size, scale them
-    // Suppose 'originalWidth' and 'originalHeight' are the dimensions used for bounding box calculation
-    final originalWidth = prediction['image']['width'];
-    final originalHeight = prediction['image']['height'];
-
-    // Calculate the scale factors
-    double scaleX = image.width / originalWidth;
-    double scaleY = image.height / originalHeight;
-
-    // Apply scale factors to the bounding box coordinates and dimensions
-    final x = (bbox['x'] * scaleX).toInt();
-    final y = (bbox['y'] * scaleY).toInt();
-    final width = (bbox['width'] * scaleX).toInt();
-    final height = (bbox['height'] * scaleY).toInt();
-
-    // Crop the image
-    croppedImage = img.copyCrop(image, x, y, width, height);
-    setState(() {
-      print(widget.prediction);
-    }); // Update UI to show cropped image
+  void cropImageBasedOnPredictions(img.Image image, Map prediction) {
+    croppedImages.clear(); // Clear previous cropped images
+    final predictions = prediction['predictions'] as List<dynamic>;
+    for (var bbox in predictions) {
+      final width = bbox['width'].toInt();
+      final height = bbox['height'].toInt();
+      final x = bbox['x'].toInt();
+      final y = bbox['y'].toInt();
+      croppedImages.add(img.copyCrop(image, x, y, width, height));
+      predForCroppedImages.add(bbox['class']);
+      confForCroppedImages.add(bbox['confidence']);
+    }
+    setState(() {}); // Update UI to show all cropped images
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         title: Text("Image Crop Example"),
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -97,17 +76,39 @@ class _ImageFromUrlState extends State<ImageFromUrl> {
               if (originalImage != null)
                 Image.memory(Uint8List.fromList(img.encodePng(originalImage!))),
               SizedBox(height: 20),
-              if (croppedImage != null)
-                Column(
-                  children: [
-                    Image.memory(
-                        Uint8List.fromList(img.encodePng(croppedImage!))),
-                    Text(
-                        widget.prediction['predictions'][0]['class'].toString()),
-                    Text(
-                        widget.prediction['predictions'][0]['confidence'].toString()),
-                  ],
-                ),
+              // Wrap(
+              //   spacing: 10,
+              //   children: croppedImages.map((cropped) {
+              //     return Column(
+              //       children: [
+              //         Image.memory(Uint8List.fromList(img.encodePng(cropped))),
+              //         // Add any additional information here like class, confidence, etc.
+              //       ],
+              //     );
+              //   }).toList(),
+              // ),
+              Container(
+                height: 200,
+                child: ListView.builder(
+                    itemCount: croppedImages.length,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Image.memory(Uint8List.fromList(
+                                  img.encodePng(croppedImages[index]))),
+                              SizedBox(height: 5),
+                              Text(predForCroppedImages[index]),
+                              SizedBox(height: 5),
+                              Text(confForCroppedImages[index].toString()),
+                            ],
+                          ),
+                        ],
+                      );
+                    }),
+              ),
               ElevatedButton(
                 onPressed: loadImageAndCrop,
                 child: Text('Reload and Recrop'),
@@ -119,6 +120,7 @@ class _ImageFromUrlState extends State<ImageFromUrl> {
     );
   }
 }
+
 
 
 // import 'dart:io';
