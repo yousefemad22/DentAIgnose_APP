@@ -92,8 +92,8 @@ class _receptionPage extends State<receptionPage> {
                       Visibility(
                         visible: visible_questioniers,
                         child: Container(
-                          width: screenSize.width*0.2,
-                          height: screenSize.height*0.12,
+                          width: screenSize.width*0.3,
+                          height: screenSize.height*0.15,
                           decoration:  BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(100), // Top left corner
@@ -122,7 +122,7 @@ class _receptionPage extends State<receptionPage> {
                            Text(
                             'Questioniers',
                             style: TextStyle(
-                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                                fontSize: screenSize.width*0.045, fontWeight: FontWeight.bold),
                           )
                         ],
                       )
@@ -144,8 +144,8 @@ class _receptionPage extends State<receptionPage> {
                       Visibility(
                         visible: visible_add,
                         child: Container(
-                          width: screenSize.width*0.2,
-                          height: screenSize.height*0.12,
+                          width: screenSize.width*0.3,
+                          height: screenSize.height*0.15,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(100), // Top left corner
@@ -172,7 +172,7 @@ class _receptionPage extends State<receptionPage> {
                            Text(
                             'Add',
                             style: TextStyle(
-                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                                fontSize: screenSize.width*0.045, fontWeight: FontWeight.bold),
                           )
                         ],
                       )
@@ -238,7 +238,7 @@ class _receptionPage extends State<receptionPage> {
                                Text(
                                 'Patient',
                                 style: TextStyle(
-                                    fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                                    fontSize: screenSize.width*0.045, fontWeight: FontWeight.bold),
                               ),
                               Image.asset(
                                 'images/patient 1.png',
@@ -278,7 +278,7 @@ class _receptionPage extends State<receptionPage> {
                                Text(
                                 'X-rays',
                                 style: TextStyle(
-                                    fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                                    fontSize: screenSize.width*0.045, fontWeight: FontWeight.bold),
                               ),
                               Image.asset('images/x-ray 1.png')
                             ],
@@ -343,7 +343,7 @@ class _receptionPage extends State<receptionPage> {
                            Text(
                             'Fill questionnaires',
                             style: TextStyle(
-                                fontSize: screenSize.width*0.03, fontWeight: FontWeight.bold),
+                                fontSize: screenSize.width*0.045, fontWeight: FontWeight.bold),
                           ),
                           Image.asset(
                             'images/question.png',

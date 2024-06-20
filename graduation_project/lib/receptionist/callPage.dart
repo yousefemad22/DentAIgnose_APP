@@ -27,8 +27,10 @@ class _receptionPage extends State<receptionCallPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        bottomNavigationBar: reciptionistNavigationBar(receptionistData: widget.receptionistData),
+      home: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar: reciptionistNavigationBar(receptionistData: widget.receptionistData),
+        ),
       ),
     );
   }

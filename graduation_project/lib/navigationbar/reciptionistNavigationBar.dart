@@ -69,45 +69,47 @@ class _NavigationBarState extends State<reciptionistNavigationBar> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return SafeArea(
-      child: Scaffold(
-        appBar: appbar2(userData: widget.receptionistData),
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: _pages,
-        ),
-        bottomNavigationBar: Stack(
-          children: <Widget>[
-            Positioned(
-              child: Container(
-                margin:  EdgeInsets.only(left:  screenSize.width*0.05,right: screenSize.width*0.05 , top: screenSize.width*0.02),
-                height: screenSize.height*0.1,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, -3),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: appbar2(userData: widget.receptionistData),
+          body: IndexedStack(
+            index: _selectedIndex,
+            children: _pages,
+          ),
+          bottomNavigationBar: Stack(
+            children: <Widget>[
+              Positioned(
+                child: Container(
+                  margin:  EdgeInsets.only(left:  screenSize.width*0.05,right: screenSize.width*0.05 , top: screenSize.width*0.02),
+                  height: screenSize.height*0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    buildNavItem('images/home.png', 'Home', 0),
-                    buildNavItem('images/magnifying-glass.png', 'Search', 1),
-                    buildNavItem('images/notification.png', 'Notification', 2),
-                    buildNavItem('images/user.png', 'Profile', 3),
-                  ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, -3),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      buildNavItem('images/home.png', 'Home', 0),
+                      buildNavItem('images/magnifying-glass.png', 'Search', 1),
+                      buildNavItem('images/notification.png', 'Notification', 2),
+                      buildNavItem('images/user.png', 'Profile', 3),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

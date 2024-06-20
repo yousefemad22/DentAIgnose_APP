@@ -196,7 +196,7 @@ class _XrayState extends State<Xray> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: screenSize.height * 0.1,
+                  height: screenSize.height * 0.15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -209,17 +209,17 @@ class _XrayState extends State<Xray> {
                         child: Column(
                           children: [
                             Icon(
-                                size: screenSize.width * 0.15,
+                                size: screenSize.width * 0.2,
                                 Icons.file_upload_outlined,
                                 color: Colors.white),
                             SizedBox(
-                              height: screenSize.width * 0.05,
+                              height: screenSize.width * 0.08,
                             ),
                             Text(
                               " Choose image ",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: screenSize.width * 0.04,
+                                fontSize: screenSize.width * 0.06,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -234,17 +234,17 @@ class _XrayState extends State<Xray> {
                         child: Column(
                           children: [
                             Icon(
-                                size: screenSize.width * 0.15,
+                                size: screenSize.width * 0.2,
                                 Icons.camera,
                                 color: Colors.white),
                             SizedBox(
-                              height: screenSize.height * 0.04,
+                              height: screenSize.height * 0.035,
                             ),
                             Text(
                               " Capture image ",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: screenSize.width * 0.04,
+                                fontSize: screenSize.width * 0.06,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -253,12 +253,12 @@ class _XrayState extends State<Xray> {
                       ),
                     if (pred != null)
                       Container(
-                        width: screenSize.width * 0.15,
+                        width: screenSize.width * 0.2,
                         child: Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
                             pred != null ? pred.toString() : "DAMN",
-                            style: TextStyle(color: Colors.white, fontSize: 15),
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
                         ),
                       ),
@@ -296,7 +296,7 @@ class _XrayState extends State<Xray> {
                   ],
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.1,
+                  height: screenSize.height * 0.2,
                 ),
                 OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -351,7 +351,8 @@ class _XrayState extends State<Xray> {
                         'Upload file',
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: screenSize.width * 0.04,
+                          fontSize: screenSize.width * 0.06,
+                          fontWeight: FontWeight.w700
                         ),
                       ),
                     )),

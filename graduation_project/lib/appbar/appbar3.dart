@@ -47,7 +47,7 @@ class _appbar3State extends State<appbar3> {
                 Text(
                   widget.title,
                   style: TextStyle(
-                      fontSize: screenSize.width * 0.045,
+                      fontSize: screenSize.width * 0.06,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
@@ -73,7 +73,7 @@ class _appbar3State extends State<appbar3> {
                   Text(
                     'DentAIgnose',
                     style: TextStyle(
-                        fontSize: screenSize.width * .03,
+                        fontSize: screenSize.width * .04,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   )
