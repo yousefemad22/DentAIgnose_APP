@@ -35,9 +35,9 @@ class _StartState extends State<Start> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: screenSize.height * 0.05),
+                  padding: EdgeInsets.only(bottom: screenSize.height * 0.1),
                   child: Image(
-                    width: screenSize.width * 0.8,
+                    width: screenSize.width * 1.0,
                     image: AssetImage(
                       'images/لوجو.png',
                     ),
@@ -47,20 +47,17 @@ class _StartState extends State<Start> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(),
-                      child: Text(
-                        'DentAIgnose',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: screenSize.width * 0.1,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    Text(
+                      'DentAIgnose',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: screenSize.width * 0.12,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: screenSize.height*0.02),
+                  margin: EdgeInsets.only(top: screenSize.height*0.06),
                   child: Text('Find your best Dentists',
                       style: TextStyle(color: Colors.white, fontSize: screenSize.width * 0.05)),
                 ),

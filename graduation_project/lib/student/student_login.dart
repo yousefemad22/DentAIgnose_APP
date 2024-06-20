@@ -113,15 +113,15 @@ class _WelcomeState extends State<student_login> {
                       'DentAIgnose',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: screenSize.width*0.05,
-                        fontWeight: FontWeight.bold,
+                        fontSize: screenSize.width*0.08,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
                 ),
 
                  SizedBox(
-                  height :screenSize.height*.05,
+                  height :screenSize.height*.07,
                 ),
               Padding(
                 padding:
@@ -133,7 +133,7 @@ class _WelcomeState extends State<student_login> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize:screenSize.width*0.1 ,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -148,7 +148,7 @@ class _WelcomeState extends State<student_login> {
                     style: TextStyle(
                         color: Colors.white,
                         fontSize:screenSize.width*0.1 ,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -216,7 +216,7 @@ class _WelcomeState extends State<student_login> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      width: screenSize.width*0.55,
+                      width: screenSize.width*0.6,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -228,14 +228,14 @@ class _WelcomeState extends State<student_login> {
                       },
                       child: Text(
                         'Forget Password?',
-                        style: TextStyle(fontSize: screenSize.width*0.035, color: Colors.white),
+                        style: TextStyle(fontSize: screenSize.width*0.045, color: Colors.white),
                       ),
                     ),
                   ],
                 ),
               ),
                SizedBox(
-                height: screenSize.height*0.05,
+                height: screenSize.height*0.07,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -248,7 +248,7 @@ class _WelcomeState extends State<student_login> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            fontSize: screenSize.width*0.06,
+                            fontSize: screenSize.width*0.09,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),

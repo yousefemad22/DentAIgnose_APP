@@ -13,7 +13,7 @@ class sectionTitle extends StatelessWidget {
       child:  Text(
         '$title',
         style: TextStyle(
-            fontSize: screenSize.width*0.05,
+            fontSize: screenSize.width*0.065,
             fontWeight: FontWeight.bold,
             color: Color(0xff26a6fe)),
       ),

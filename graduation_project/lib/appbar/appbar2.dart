@@ -16,7 +16,7 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
         children: <Widget>[
           Container(
             margin: EdgeInsets.symmetric(horizontal:screenSize.width*0.03 ),
-            height: screenSize.height*0.5,
+            // height: screenSize.height*0.2,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: const BorderRadius.only(
@@ -40,15 +40,20 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircleAvatar(
-                        radius: 25.0,
+                        radius: 20.0,
                         backgroundImage: AssetImage('images/3403753 1.png'),
+                      ),
+                      SizedBox(
+                        width: screenSize.width*0.03,
                       ),
                       Text(
                         capitalizeWords("${userData['fName'] + " " + userData['lName']}"),
                         style: TextStyle(
-                          fontSize: screenSize.width*0.04,
+                          fontSize: screenSize.width*0.045,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF26A6FE),
                         ),
@@ -65,7 +70,7 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
                       ),
                        Text('DentAIgnose',
                           style: TextStyle(
-                              fontSize: screenSize.width*0.03,
+                              fontSize: screenSize.width*0.035,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF26A6FE)))
                     ],
@@ -80,5 +85,5 @@ class appbar2 extends StatelessWidget implements PreferredSizeWidget {
     );
   }
   @override
-  Size get preferredSize => Size.fromHeight(70.0);
+  Size get preferredSize => Size.fromHeight(65.0);
 }

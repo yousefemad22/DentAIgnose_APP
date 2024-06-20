@@ -24,12 +24,12 @@ class _ovColumnState extends State<ovColumn> {
           children: [
             Image.asset(
               'images/circle.png',
-              width: screenSize.width*0.2,
+              width: screenSize.width*0.3,
               // height: 92,
             ),
             Image.asset(
               widget.img!,
-              width: screenSize.width*0.2,
+              width: screenSize.width*0.3,
               // height: 92,
             ),
           ],
@@ -37,14 +37,17 @@ class _ovColumnState extends State<ovColumn> {
         Text(
           widget.num!,
           style: TextStyle(
-              fontSize: screenSize.width*0.045,
+              fontSize: screenSize.width*0.08,
               fontWeight: FontWeight.bold,
               color: Color(0XFF1FAAEB)),
+        ),
+        SizedBox(
+          height: screenSize.height*0.001,
         ),
         Text(
           widget.range!,
           style: TextStyle(
-              fontSize: screenSize.width*0.04,
+              fontSize: screenSize.width*0.07,
               fontWeight: FontWeight.bold,
               color: Color(0XFF1FAAEB)),
         ),

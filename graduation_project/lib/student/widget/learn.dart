@@ -63,8 +63,8 @@ class _LearnState extends State<Learn> {
         title: Text(
           'Learn',
           style: TextStyle(
-            fontSize: screenSize.width * 0.055,
-            // fontWeight: FontWeight.w800,
+            fontSize: screenSize.width * 0.065,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
@@ -106,7 +106,7 @@ class _LearnState extends State<Learn> {
                               'Articles',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: screenSize.width * 0.05,
+                                  fontSize: screenSize.width * 0.065,
 
                                   // height: 1.2125,
                                   color: _showArticles
@@ -145,7 +145,7 @@ class _LearnState extends State<Learn> {
                               'Videos',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: screenSize.width * 0.05,
+                                  fontSize: screenSize.width * 0.065,
                                   // height: 1.2125,
                                   color: _showVideo
                                       ? Colors.white
@@ -184,7 +184,7 @@ class _LearnState extends State<Learn> {
                               'Podcast',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: screenSize.width * 0.05,
+                                  fontSize: screenSize.width * 0.065,
                                   // height: 1.2125,
                                   color: _showPodcast
                                       ? Colors.white

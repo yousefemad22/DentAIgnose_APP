@@ -20,8 +20,10 @@ class _dentistPageState extends State<dentistHomes> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        bottomNavigationBar: navigationbar(dentistData: widget.dentistData),
+      home: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar: navigationbar(dentistData: widget.dentistData),
+        ),
       ),
     );
   }

@@ -59,8 +59,8 @@ class _studentPageState extends State<studentPage> {
                       Visibility(
                         visible: visible_questioniers,
                         child: Container(
-                          width: screenSize.width * 0.2,
-                          height: screenSize.height * 0.12,
+                          width: screenSize.width * 0.3,
+                          height: screenSize.height * 0.15,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(100), // Top left corner
@@ -87,7 +87,7 @@ class _studentPageState extends State<studentPage> {
                           Text(
                             'Questioniers',
                             style: TextStyle(
-                                fontSize: screenSize.width * 0.03,
+                                fontSize: screenSize.width * 0.045,
                                 fontWeight: FontWeight.bold),
                           )
                         ],
@@ -110,8 +110,8 @@ class _studentPageState extends State<studentPage> {
                       Visibility(
                         visible: visible_add,
                         child: Container(
-                          width: screenSize.width * 0.2,
-                          height: screenSize.height * 0.12,
+                          width: screenSize.width * 0.3,
+                          height: screenSize.height * 0.15,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(100), // Top left corner
@@ -138,7 +138,7 @@ class _studentPageState extends State<studentPage> {
                           Text(
                             'Add',
                             style: TextStyle(
-                                fontSize: screenSize.width * 0.03,
+                                fontSize: screenSize.width * 0.045,
                                 fontWeight: FontWeight.bold),
                           )
                         ],
@@ -155,7 +155,7 @@ class _studentPageState extends State<studentPage> {
                 children: [
                   Container(
                     // margin: EdgeInsets.symmetric(horizontal: screenSize.width*0.0),
-                    width: screenSize.width * .9,
+                    width: screenSize.width * 0.9,
                     height: screenSize.height * 0.12,
                     decoration: BoxDecoration(
                       color: Color(0xff9de8fd),
@@ -200,7 +200,7 @@ class _studentPageState extends State<studentPage> {
                       Text(
                         'X-rays',
                         style: TextStyle(
-                            fontSize: screenSize.width * 0.035,
+                            fontSize: screenSize.width * 0.045,
                             fontWeight: FontWeight.bold),
                       ),
                       Image.asset('images/x-ray 1.png')
@@ -265,7 +265,7 @@ class _studentPageState extends State<studentPage> {
                       Text(
                         'Fill questionnaires',
                         style: TextStyle(
-                            fontSize: screenSize.width * .035,
+                            fontSize: screenSize.width * .045,
                             fontWeight: FontWeight.bold),
                       ),
                       Image.asset(
@@ -278,17 +278,17 @@ class _studentPageState extends State<studentPage> {
               ),
             ),
             SizedBox(
-              height: screenSize.height * 0.01,
+              height: screenSize.height * 0.02,
             ),
             sectionTitle(title: 'Learn'),
             learnsection(),
             SizedBox(
-              height: screenSize.height * 0.01,
+              height: screenSize.height * 0.02,
             ),
             sectionTitle(title: 'Reports'),
             allReports(),
             SizedBox(
-              height: screenSize.height * 0.01,
+              height: screenSize.height * 0.02,
             ),
           ],
         ),

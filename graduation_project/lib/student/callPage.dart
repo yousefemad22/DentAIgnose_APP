@@ -19,8 +19,10 @@ class _studentPageState extends State<studentCallPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        bottomNavigationBar: studentNavigationBar(studentData: widget.studentData),
+      home: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar: studentNavigationBar(studentData: widget.studentData),
+        ),
       ),
     );
   }

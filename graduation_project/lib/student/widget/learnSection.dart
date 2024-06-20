@@ -23,7 +23,7 @@ class _learnsectionState extends State<learnsection> {
         margin:  EdgeInsets.symmetric(horizontal: screenSize.width*0.04),
         // padding: const EdgeInsets.all(10),
         width: double.infinity,
-        height: screenSize.height*0.12,
+        height: screenSize.height*0.15,
         decoration: BoxDecoration(
           color: const Color(0xffffffff),
           borderRadius: BorderRadius.circular(10),

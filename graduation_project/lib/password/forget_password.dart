@@ -31,6 +31,9 @@ class forgetPassword extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  SizedBox(
+                    height: screenHeight * 0.05,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -48,10 +51,23 @@ class forgetPassword extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Image(
-                        image: AssetImage("images/لوجو.png"),
-                        height: screenHeight * 0.1,
-                        width: screenWidth * 0.2,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage("images/لوجو.png"),
+                            width: screenWidth * 0.2,
+                            // height: screenHeight * .1,
+                          ),
+                          Text(
+                            "Dentalgnose",
+                            style: TextStyle(
+                              fontSize: screenWidth * 0.04,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
                       ),
                     ],
                   ),
@@ -61,20 +77,20 @@ class forgetPassword extends StatelessWidget {
                       'Forget Password',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: screenWidth * 0.07,
+                        fontSize: screenWidth * 0.09,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.04),
+                  SizedBox(height: screenHeight * 0.05),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                     child: Text(
                       'Please enter your e-mail to reset the password.',
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        fontSize: screenWidth * 0.04,
+                        fontSize: screenWidth * 0.055,
                         color: Colors.white.withOpacity(0.7),
                         fontWeight: FontWeight.bold,
                       ),
@@ -82,9 +98,9 @@ class forgetPassword extends StatelessWidget {
                   ),
                   SizedBox(height: screenHeight * 0.1),
                   Text(
-                    'Your e-mail ',
+                    'Your E-mail ',
                     style: TextStyle(
-                      fontSize: screenWidth * 0.05,
+                      fontSize: screenWidth * 0.06,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -98,7 +114,7 @@ class forgetPassword extends StatelessWidget {
                       fillColor: Colors.white,
                       filled: true,
                       suffixIcon: const Icon(Icons.remove_red_eye_outlined),
-                      hintText: 'Enter your e-mail',
+                      hintText: 'Enter your email',
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.07),
@@ -107,7 +123,7 @@ class forgetPassword extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.white,
-                        fixedSize: Size(screenWidth * 0.5, screenHeight * 0.07),
+                        fixedSize: Size(screenWidth * 0.5, screenHeight * 0.06),
                         alignment: Alignment.center,
                       ),
                       onPressed: () {
@@ -122,7 +138,8 @@ class forgetPassword extends StatelessWidget {
                         'Reset Password',
                         style: TextStyle(
                           color: Colors.black87,
-                          fontSize: screenWidth * 0.04,
+                          fontSize: screenWidth * 0.05,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                     ),

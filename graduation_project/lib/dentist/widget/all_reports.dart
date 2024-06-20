@@ -23,7 +23,7 @@ class _allReportsState extends State<allReports> {
         margin: EdgeInsets.symmetric(horizontal: screenSize.width*0.04),
         // padding: EdgeInsets.all(10),
         width: double.infinity,
-        height: screenSize.height*0.12,
+        height: screenSize.height*0.15,
         decoration: BoxDecoration(
           color: Color(0xffffffff),
           borderRadius: BorderRadius.circular(10),
@@ -51,7 +51,7 @@ class _allReportsState extends State<allReports> {
                   Text(
                     'All Reports ',
                     style: TextStyle(
-                        fontSize: screenSize.width*0.05,
+                        fontSize: screenSize.width*0.065,
                         fontWeight: FontWeight.bold,
                         color: Color(0xff26a6fe)),
                   ),

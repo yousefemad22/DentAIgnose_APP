@@ -70,7 +70,7 @@ class _Create_accountState extends State<Create_account> {
               Color(0xFF9de8fc)
             ]),
           image: DecorationImage(
-              image: AssetImage("images/لوجو.png"),
+              image: AssetImage("images/لوجوs.png"),
               opacity: 0.3,
               alignment: Alignment.center),
         ),
@@ -79,7 +79,7 @@ class _Create_accountState extends State<Create_account> {
           body: SafeArea(
             child: SingleChildScrollView(
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: screenSize.height*0.05),
@@ -130,6 +130,9 @@ class _Create_accountState extends State<Create_account> {
                             "Last Name", _lName, screenSize.width*0.3, false),
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: screenSize.height*0.04,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,6 +210,9 @@ class _Create_accountState extends State<Create_account> {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: screenSize.height*0.04,
+                  ),
                   Text(
                     'Number',
                     //textAlign: TextAlign.left,
@@ -218,6 +224,9 @@ class _Create_accountState extends State<Create_account> {
                   ),
                   customTextFieldInSizedBox(
                       "Number", _number, screenSize.width*0.9, false),
+                  SizedBox(
+                    height: screenSize.height*0.04,
+                  ),
                   Text(
                     'Email',
                     //textAlign: TextAlign.left,
@@ -228,6 +237,9 @@ class _Create_accountState extends State<Create_account> {
                     ),
                   ),
                   customTextFieldInSizedBox("Email", _email, screenSize.width*0.9, false),
+                  SizedBox(
+                    height: screenSize.height*0.04,
+                  ),
                   Text(
                     'Password',
                     textAlign: TextAlign.left,
@@ -239,6 +251,9 @@ class _Create_accountState extends State<Create_account> {
                   ),
                   customTextFieldInSizedBox(
                       "New Password", _password, screenSize.width*0.9, true),
+                  SizedBox(
+                    height: screenSize.height*0.04,
+                  ),
                   Text(
                     'Confirm Password',
                     textAlign: TextAlign.left,
@@ -258,7 +273,7 @@ class _Create_accountState extends State<Create_account> {
                         Text(
                           'Sign Up',
                           style: TextStyle(
-                            fontSize: screenSize.width*0.06,
+                            fontSize: screenSize.width*0.07,
                             color: Colors.white,
                             fontWeight: FontWeight.w700,
                           ),

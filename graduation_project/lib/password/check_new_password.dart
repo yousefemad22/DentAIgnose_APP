@@ -54,7 +54,7 @@ class Screen2 extends StatelessWidget {
                         Text(
                           "Dentalgnose",
                           style: TextStyle(
-                            fontSize: screenWidth * 0.02,
+                            fontSize: screenWidth * 0.04,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -65,25 +65,25 @@ class Screen2 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: screenHeight * .08,
+                height: screenHeight * .1,
               ),
               Text(
                 "Check your email",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: screenWidth * .08,
+                  fontSize: screenWidth * .1,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(screenWidth * 0.04),
+                padding: EdgeInsets.all(screenWidth * 0.1),
                 child: Text(
                   "We sent a reset link to contact@dscode...com \n enter 5 digit "
                   "code that mentioned in the email ",
                   style: TextStyle(
                     color: Color(0xFFD9D6D6),
-                    fontSize: screenWidth * .03,
+                    fontSize: screenWidth * .04,
                   ),
                 ),
               ),
@@ -120,7 +120,7 @@ class Screen2 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: screenHeight * 0.05,
+                height: screenHeight * 0.1,
               ),
               ElevatedButton(
                   onPressed: () {},
@@ -132,18 +132,18 @@ class Screen2 extends StatelessWidget {
                     "Verify Code",
                     style: TextStyle(
                       color: Colors.black87,
-                      fontSize: screenWidth * 0.045,
-                      fontWeight: FontWeight.w500,
+                      fontSize: screenWidth * 0.06,
+                      fontWeight: FontWeight.bold,
                     ),
                   )),
               SizedBox(
-                height: screenHeight * 0.05,
+                height: screenHeight * 0.1,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                  Text(
                   "Haven't got the email yet?",
                   style: TextStyle(
-                      fontSize: screenWidth* .03, color: Colors.black),
+                      fontSize: screenWidth* .04, color: Colors.black),
                 ),
                 TextButton(
                   onPressed: () {},
@@ -152,7 +152,7 @@ class Screen2 extends StatelessWidget {
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       decorationColor: Colors.white,
-                      fontSize: screenWidth*0.03,
+                      fontSize: screenWidth*0.04,
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
                     ),

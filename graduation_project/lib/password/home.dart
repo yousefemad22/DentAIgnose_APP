@@ -31,8 +31,49 @@ class Home extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: screenSize.height * 0.05,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenSize.width * .05),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              // size: 25,
+                              color: Color(0xFF1A7AC5),
+                            ),
+                          )),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage("images/لوجو.png"),
+                            width: screenSize.width * 0.2,
+                            // height: screenHeight * .1,
+                          ),
+                          Text(
+                            "Dentalgnose",
+                            style: TextStyle(
+                              fontSize: screenSize.width * 0.04,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                  SizedBox(
-                  height: screenSize.height*0.15 ,
+                  height: screenSize.height*0.08 ,
                 ),
 
                  Row(
@@ -41,32 +82,32 @@ class Home extends StatelessWidget {
                      Text('Set a new password ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: screenSize.width*0.06,
+                            fontSize: screenSize.width*0.08,
                             color: Colors.white,
                             fontWeight: FontWeight.bold)),
                    ],
                  ),
                  SizedBox(
-                  height: screenSize.height*0.05 ,
+                  height: screenSize.height*0.06 ,
                 ),
 
                 Container(
-                  margin: EdgeInsets.only(left: screenSize.width*0.05),
+                  margin: EdgeInsets.symmetric(horizontal: screenSize.width*0.05),
                   child: Text(
                       'Create a new password. Ensure it differs from previous ones for security',
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                          fontSize: screenSize.width*0.03,
+                          fontSize: screenSize.width*0.05,
                           color: Colors.white.withOpacity(.7),
                           fontWeight: FontWeight.bold)),
                 ),
                  SizedBox(
-                  height: screenSize.height*0.05,
+                  height: screenSize.height*0.06,
                 ),
 
                  Text('password ',
                     style: TextStyle(
-                        fontSize: screenSize.width*0.05,
+                        fontSize: screenSize.width*0.07,
                         color: Colors.white,
                         fontWeight: FontWeight.bold)),
                  SizedBox(
@@ -90,7 +131,7 @@ class Home extends StatelessWidget {
 
                  Text('Confirm password ',
                     style: TextStyle(
-                        fontSize: screenSize.width*0.05,
+                        fontSize: screenSize.width*0.07,
                         color: Colors.white,
                         fontWeight: FontWeight.bold)),
                  SizedBox(
@@ -131,7 +172,7 @@ class Home extends StatelessWidget {
                     },
                     child:  Text(
                       'Update Password',
-                      style: TextStyle(color: Colors.black87,  fontSize: screenSize.width*0.03),
+                      style: TextStyle(color: Colors.black87,  fontSize: screenSize.width*0.045,fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

@@ -127,7 +127,7 @@ class _NavigationBarState extends State<studentNavigationBar> {
         InkWell(
           child: Image.asset(
             assetPath,
-            width: screenSize.width * 0.08,
+            width: screenSize.width * 0.07,
             // height: 32,
             color: _selectedIndex == index ? Colors.blue : Colors.black,
           ),
@@ -138,7 +138,7 @@ class _NavigationBarState extends State<studentNavigationBar> {
         Text(
           label,
           style: TextStyle(
-            fontSize: screenSize.width * 0.03,
+            fontSize: screenSize.width * 0.04,
             fontWeight: FontWeight.bold,
           ),
         ),

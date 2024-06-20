@@ -18,7 +18,7 @@ class _overViewState extends State<overView> {
     return Container(
       margin:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05, vertical: screenSize.height*0.01),
       width: double.infinity,
-      height: screenSize.height*0.2,
+      height: screenSize.height*0.3,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10), // make it circular

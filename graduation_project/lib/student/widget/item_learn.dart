@@ -33,11 +33,11 @@ class _itemState extends State<item> {
         children: [
           Image.asset(widget.img!),
           SizedBox(
-            height: 5,
+            height: 15,
           ),
           Text(
             widget.text!,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           )
         ],
       ),

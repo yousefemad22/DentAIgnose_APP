@@ -47,7 +47,7 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
                           radius: 20.0,
                           backgroundImage: AssetImage('images/3403753 1.png')),
                        SizedBox(
-                        width: screenSize.width*0.02,
+                        width: screenSize.width*0.03,
                       ),
                       RichText(
                         text: TextSpan(
@@ -58,7 +58,7 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
                                   ' ',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: screenSize.width*0.04,
+                                fontSize: screenSize.width*0.05,
                                 color: Color(0xFF26A6FE),
                                 decoration: TextDecoration.none,
                               ),
@@ -68,7 +68,7 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
                                   dentistData['lName'].substring(1),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: screenSize.width*0.04,
+                                fontSize: screenSize.width*0.05,
                                 color: Color(0xFF26A6FE),
                                 decoration: TextDecoration.none,
                               ),
@@ -84,12 +84,12 @@ class appbar extends StatelessWidget implements PreferredSizeWidget {
                     children: [
                       Image.asset(
                         'images/logo2.png',
-                        width: screenSize.width*0.1,
+                        width: screenSize.width*0.12,
                         // height: 42,
                       ),
                        Text('DentAIgnose',
                           style: TextStyle(
-                              fontSize: screenSize.width*0.03,
+                              fontSize: screenSize.width*0.035,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF26A6FE))),
                     ],

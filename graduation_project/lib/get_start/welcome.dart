@@ -127,14 +127,14 @@ class _WelcomeState extends State<Welcome> {
                         'DentAIgnose',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenSize.width*0.05,
-                          fontWeight: FontWeight.w500,
+                          fontSize: screenSize.width*0.08,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height :screenSize.height*.05,
+                    height :screenSize.height*.07,
                   ),
                   Padding(
                     padding:
@@ -173,7 +173,7 @@ class _WelcomeState extends State<Welcome> {
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
                     child: SizedBox(
-                        height: screenSize.height*0.045,
+                        height: screenSize.height*0.06,
                         width: screenSize.width*1,
                         child: TextField(
                           controller: _email,
@@ -264,7 +264,7 @@ class _WelcomeState extends State<Welcome> {
                   Padding(
                     padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0.01),
                     child: SizedBox(
-                        height: screenSize.height*0.045,
+                        height: screenSize.height*0.06,
                         width: screenSize.width*1,
                         child: TextFormField(
                           controller: _password,
@@ -294,12 +294,12 @@ class _WelcomeState extends State<Welcome> {
                         )),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.01),
+                    padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          width: screenSize.width*0.55,
+                          width: screenSize.width*0.6,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -311,7 +311,7 @@ class _WelcomeState extends State<Welcome> {
                           },
                           child: Text(
                             'Forget Password?',
-                            style: TextStyle(fontSize: screenSize.width*0.035, color: Colors.white),
+                            style: TextStyle(fontSize: screenSize.width*0.045, color: Colors.white),
                             //textAlign: TextAlign.end,
                           ),
                         ),
@@ -319,7 +319,7 @@ class _WelcomeState extends State<Welcome> {
                     ),
                   ),
                   SizedBox(
-                    height: screenSize.height*0.05,
+                    height: screenSize.height*0.06,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -329,9 +329,9 @@ class _WelcomeState extends State<Welcome> {
                           child: Text(
                             'Login',
                             style: TextStyle(
-                              fontSize: screenSize.width*0.06,
+                              fontSize: screenSize.width*0.09,
                               color: Colors.white,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w700,
                             ),
                             //textAlign: TextAlign.start,
                           )),
@@ -386,7 +386,7 @@ class _WelcomeState extends State<Welcome> {
                           },
                           child:  Icon(
                             Icons.login,
-                            size: screenSize.width*.08,
+                            size: screenSize.width*.1,
                             color: Colors.white,
                           ),
                         ),
@@ -394,7 +394,7 @@ class _WelcomeState extends State<Welcome> {
                     ],
                   ),
                   SizedBox(
-                    height: screenSize.height*0.04,
+                    height: screenSize.height*0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -403,7 +403,7 @@ class _WelcomeState extends State<Welcome> {
                         padding: EdgeInsets.only(right: screenSize.width*0.01, top: screenSize.height*.01),
                         child: Text(
                           "Don't have account?",
-                          style: TextStyle(fontSize: screenSize.width*.03, color: Colors.black),
+                          style: TextStyle(fontSize: screenSize.width*.045, color: Colors.black),
                         ),
                       ),
                       Padding(
@@ -420,7 +420,7 @@ class _WelcomeState extends State<Welcome> {
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               decorationColor: Colors.white,
-                              fontSize: screenSize.width*0.03,
+                              fontSize: screenSize.width*0.045,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),
