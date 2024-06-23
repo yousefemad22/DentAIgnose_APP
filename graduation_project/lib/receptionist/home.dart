@@ -251,7 +251,7 @@ class _receptionPage extends State<receptionPage> {
                       GestureDetector(
                         onTap: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: ((context) => Xray())));
+                              MaterialPageRoute(builder: ((context) => Xray(userData: widget.receptionistData,))));
                         },
                         child: Container(
                           width: screenSize.width*0.4,

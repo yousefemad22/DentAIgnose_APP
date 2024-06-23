@@ -36,7 +36,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
   }
 
   late DatabaseReference _databaseReference;
-  int? index, dentistIndex;
+  int? index, dentistIndex, indexAgain;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
     print("connected");
     _databaseReference.child("persons").onValue.listen((event) {
       dynamic des = event.snapshot.value;
-      index = des == null ? 0 :  des.length;
+      index = des == null ? 0 : des.length;
       print(index);
     });
   }
@@ -132,6 +132,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                 showWrongCredentialsDialog(context, "Error",
                                     "Full Name must have first, middle, last name seprated by space");
                               } else {
+    indexAgain = index; 
                                 print(fullName[0]);
                                 print(fullName[1]);
                                 print(fullName[2]);
@@ -149,7 +150,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
 
                                 DatabaseReference ref = FirebaseDatabase
                                     .instance
-                                    .ref("persons/${index.toString()}");
+                                    .ref("persons/${indexAgain.toString()}");
                                 ref.set(patientData);
 
                                 _nameController.text = "";
@@ -163,7 +164,7 @@ class _PatientDataFormState extends State<PatientDataForm> {
                                       builder: (context) => Design(
                                         userData: widget.userData,
                                         patientData: patientData,
-                                        patientId: index,
+                                        patientId: indexAgain,
                                       ),
                                     ));
                               }

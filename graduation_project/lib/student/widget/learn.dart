@@ -211,7 +211,7 @@ class _LearnState extends State<Learn> {
                   ),
                   Visibility(
                     visible: _showVideo,
-                    child: const Text("Working on API Videos"),
+                    child: videosData(context),
                     // child: VideoListPage(),
                   ),
                   Visibility(
@@ -487,4 +487,225 @@ class _podcastListPageState extends State<podcastListPage> {
       },
     );
   }
+}
+
+Container videosData(context) {
+  return Container(
+    height: MediaQuery.of(context).size.height * 0.75,
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          // One
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/4B_JfGxQ7O0?si=CWw0dlvUyGRhxR8S";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "How to Understand Your Dental X-ray",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "3 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Two
+          InkWell(
+            onTap: () async {
+              var url =
+                  "https://youtube.com/shorts/OrbHYnoCOmQ?si=bmj0Isby9uNfiRso";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "How to fix a broken tooth",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "2 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Three
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/zqjsehDJ3NQ?si=E3K0mLzHjG9lQGD7";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "Dental Assistant training:Suctioning",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "11 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Four
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/4NcYkEfwoio?si=76y6gDe-RD33zltX";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "Basic Dental Terminology for tooth classification Made Easy :Dental student study guide ",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "2 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Five
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/zg7pJT1oZf4?si=sRMeTEOOkMEEhlSh";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "Maxillary Central Incisor| The Definitive Tooth Anatomy Study Guide for Dental Students",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "1 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Six
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/Hpy5Jgzwr5o?si=tQkMQ4jgBG-FMNKz";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "AMAZING reconstruction of tooth damaged by caries: Endodontics",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "2 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Seven
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/RU-pJod9KFI?si=hy3ZHsDsVbF8BCyJ";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "How the Dentist Repairs a Chipped Tooth | Under the Dental Microscope ",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "1 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+          // Eight
+          InkWell(
+            onTap: () async {
+              var url = "https://youtu.be/UpcQH0T6qf8?si=IRA2g5fEzTfi84E5";
+              if (await canLaunch(url!)) {
+                await launch(url!);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Could not launch $url')));
+              }
+            },
+            child: Card(
+              color: const Color(0xff26a6fe),
+              child: ListTile(
+                title: Text(
+                  "Broken Tooth Fixed with Bonding",
+                  style: TextStyle(color: Colors.white),
+                ),
+                subtitle: Text(
+                  "2 years ago",
+                  style:
+                      TextStyle(color: const Color.fromARGB(255, 216, 216, 216)),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

@@ -45,12 +45,18 @@ class _ChatScreenState extends State<ChatScreen> {
             Uri.parse("https://api.openai.com/v1/chat/completions"),
             headers: {
               "Authorization": "Bearer $apiKey",
-              "Content-Type": "application/json"
+              // "Content-Type": "application/json"
+              "Content-Type": "application/json;charset=utf-8"
             },
             body: jsonEncode({
               "model": "gpt-3.5-turbo",
               "messages": [
-                {"role": "user", "content": text}
+                {
+                  "role": "system",
+                  "content":
+                      "I am dentAIgnose, dental diagnose app to help dentist and intern dentists for acheiving best of usage for time. Provides pre-diagnose for dentist or intern student. i don't interact directly with the patient, only through receptionists or dentists."
+                },
+                {"role": "user", "content": text},
               ]
             }),
           );

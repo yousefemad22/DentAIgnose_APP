@@ -48,10 +48,14 @@ class _WelcomeState extends State<reciptionist_login> {
         data = des;
         print("in data");
         while (i < data.length) {
-          print("in while");
-          print(data[i]['email']);
-          allAccounts.add((data[i]['email'], data[i]['password']));
-          i++;
+          if (data[i] == null) {
+            i++;
+          } else {
+            print("in while");
+            print(data[i]['email']);
+            allAccounts.add((data[i]['email'], data[i]['password']));
+            i++;
+          }
         }
         print(allAccounts);
       });

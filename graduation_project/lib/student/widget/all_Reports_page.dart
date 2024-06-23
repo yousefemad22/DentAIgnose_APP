@@ -208,8 +208,8 @@ class _ReportState extends State<Report> {
                             ),
                           )),
                       Text(
-                        // "By ${metaData!.user + " " + metaData!.userFname + " " + metaData!.userMname + " " + metaData!.userLname}",
-                        "By ",
+                        "By ${metaData!.user + " " + metaData!.userFname + " " + metaData!.userMname + " " + metaData!.userLname}",
+                        // "By ",
                         style: TextStyle(
                           fontSize: 15 * ffem,
                           fontWeight: FontWeight.w700,

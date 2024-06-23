@@ -18,7 +18,7 @@ import 'package:graduation_project/receptionist/cutXrays.dart';
 import 'package:graduation_project/receptionist/bounaryboxImage.dart';
 
 class Xray extends StatefulWidget {
-  Map? reportMap, choicesMap, patientData;
+  Map? reportMap, choicesMap, patientData, userData;
   dynamic firebaseRefrence, reportId, patientId;
   Xray(
       {super.key,
@@ -27,6 +27,7 @@ class Xray extends StatefulWidget {
       this.reportId,
       this.choicesMap,
       this.firebaseRefrence,
+      this.userData,
       this.patientData});
 
   @override
@@ -42,7 +43,7 @@ class _XrayState extends State<Xray> {
   final ImagePredictionService predictionService = ImagePredictionService();
   String? newImagePath;
   var pred;
-
+  bool reloadFlag = false;
   getCameraImage() async {
     final ImagePicker picker = ImagePicker();
 
@@ -110,7 +111,7 @@ class _XrayState extends State<Xray> {
       xrayIndex = des.length;
       // print(choiceIndex);
     });
-    
+
     if (widget.reportId == null) {
       // index for saving reports
       _databaseReference2 = FirebaseDatabase.instance
@@ -226,6 +227,11 @@ class _XrayState extends State<Xray> {
                           ],
                         ),
                       ),
+                    if (reloadFlag)
+                      Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.white,
+                      )),
                     if (image == null)
                       GestureDetector(
                         onTap: () {
@@ -267,7 +273,7 @@ class _XrayState extends State<Xray> {
                     //     cutTheShit(newImagePath, pred).toString(),
                     //     style: TextStyle(fontSize: 20),
                     //   ),
-                    if (image != null && pred == null)
+                    if (image != null && pred == null && reloadFlag == false)
                       Container(
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
@@ -303,6 +309,9 @@ class _XrayState extends State<Xray> {
                       backgroundColor: Colors.white,
                     ),
                     onPressed: () async {
+                      setState(() {
+                        reloadFlag = true;
+                      });
                       // Save Image in fire storage and gets its URL
                       var imageName = basename(finalImageData[0]!.path);
                       var refStorage =
@@ -350,10 +359,9 @@ class _XrayState extends State<Xray> {
                       child: Text(
                         'Upload file',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: screenSize.width * 0.06,
-                          fontWeight: FontWeight.w700
-                        ),
+                            color: Colors.black,
+                            fontSize: screenSize.width * 0.06,
+                            fontWeight: FontWeight.w700),
                       ),
                     )),
                 SizedBox(
@@ -381,7 +389,17 @@ class _XrayState extends State<Xray> {
     } else {
       widget.firebaseRefrence = FirebaseDatabase.instance
           .ref("reports/${widget.reportId.toString()}");
-      widget.reportMap = {'x-rayId': xrayIndex};
+      if (widget.userData!['email'].endsWith("@intern.com")) {
+        widget.reportMap = {
+          'x-rayId': xrayIndex,
+          'internId': widget.userData!['id']
+        };
+      } else {
+        widget.reportMap = {
+          'x-rayId': xrayIndex,
+          'receptionistId': widget.userData!['id']
+        };
+      }
       widget.firebaseRefrence.set(widget.reportMap);
     }
 

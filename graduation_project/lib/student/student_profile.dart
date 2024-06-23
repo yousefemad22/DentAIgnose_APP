@@ -143,7 +143,14 @@ class student_profile extends StatelessWidget {
                     studentData['email'].endsWith("@dentist.com") ||
                             studentData['email'].endsWith("@receptionist.com")
                         ? GestureDetector(
-                          child: buildCustomRow(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          All_reciptionist(who: "persons")));
+                            },
+                            child: buildCustomRow(
                               text: "All Patient",
                               icon1: Icon(Icons.group_rounded,
                                   color: Colors.black, size: fem * 30),
@@ -155,30 +162,8 @@ class student_profile extends StatelessWidget {
                               fem: fem,
                               ffem: ffem,
                             ),
-                        )
+                          )
                         : const SizedBox(
-                            height: 1,
-                          ),
-                    studentData['email'].endsWith("@dentist.com")
-                        ? GestureDetector(
-                          onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => All_reciptionist(
-                                          who: "receptionists")));
-                            },
-                          child: buildCustomRow(
-                              text: 'All Receptionists',
-                              icon1: Icon(Icons.person_3_sharp,
-                                  color: Colors.black, size: fem * 30),
-                              icon2: Icon(CupertinoIcons.right_chevron,
-                                  color: Colors.black, size: fem * 30),
-                              fem: fem,
-                              ffem: ffem,
-                            ),
-                        )
-                        : SizedBox(
                             height: 1,
                           ),
                     studentData['email'].endsWith("@dentist.com")
@@ -188,7 +173,29 @@ class student_profile extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => All_reciptionist(
-                                          who: "students")));
+                                          who: "receptionists")));
+                            },
+                            child: buildCustomRow(
+                              text: 'All Receptionists',
+                              icon1: Icon(Icons.person_3_sharp,
+                                  color: Colors.black, size: fem * 30),
+                              icon2: Icon(CupertinoIcons.right_chevron,
+                                  color: Colors.black, size: fem * 30),
+                              fem: fem,
+                              ffem: ffem,
+                            ),
+                          )
+                        : SizedBox(
+                            height: 1,
+                          ),
+                    studentData['email'].endsWith("@dentist.com")
+                        ? GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          All_reciptionist(who: "students")));
                             },
                             child: buildCustomRow(
                               text: 'All Interns',
