@@ -46,10 +46,14 @@ class _WelcomeState extends State<Welcome> {
         data = des;
         print("in data");
         while (i < data.length) {
-          print("in while");
-          print(data[i]['email']);
-          allAccounts.add((data[i]['email'], data[i]['password']));
-          i++;
+          if (data[i] == null) {
+            i++;
+          } else {
+            print("in while");
+            print(data[i]['email']);
+            allAccounts.add((data[i]['email'], data[i]['password']));
+            i++;
+          }
         }
         print(allAccounts);
       });
@@ -100,10 +104,10 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: screenSize.height*0.1,
+                    height: screenSize.height * 0.1,
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: screenSize.width*.05),
+                    margin: EdgeInsets.only(left: screenSize.width * .05),
                     child: CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 20,
@@ -115,8 +119,9 @@ class _WelcomeState extends State<Welcome> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image(image: AssetImage('images/لوجو.png'),
-                        height: screenSize.height*0.15,
+                      Image(
+                        image: AssetImage('images/لوجو.png'),
+                        height: screenSize.height * 0.15,
                       ),
                     ],
                   ),
@@ -127,54 +132,59 @@ class _WelcomeState extends State<Welcome> {
                         'DentAIgnose',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenSize.width*0.08,
+                          fontSize: screenSize.width * 0.08,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height :screenSize.height*.07,
+                    height: screenSize.height * .07,
                   ),
                   Padding(
-                    padding:
-                    EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * .05,
+                        vertical: screenSize.height * 0),
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child:  Text(
+                      child: Text(
                         'W e l c o m e',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize:screenSize.width*0.1 ,
+                          fontSize: screenSize.width * 0.1,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal:screenSize.width*.05, vertical: screenSize.height*0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * .05,
+                        vertical: screenSize.height * 0),
                     child: Container(
                       alignment: Alignment.centerLeft,
                       //padding: EdgeInsets.only(left: 6),
-                      child:  Text(
+                      child: Text(
                         'B a c k - D r ...',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: screenSize.width*0.1,
+                          fontSize: screenSize.width * 0.1,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: screenSize.height*.05,
+                    height: screenSize.height * .05,
                   ),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * 0.05,
+                        vertical: screenSize.height * 0),
                     child: SizedBox(
-                        height: screenSize.height*0.06,
-                        width: screenSize.width*1,
+                        height: screenSize.height * 0.06,
+                        width: screenSize.width * 1,
                         child: TextField(
                           controller: _email,
                           decoration: const InputDecoration(
@@ -262,10 +272,12 @@ class _WelcomeState extends State<Welcome> {
                   //         ),
                   //       )),
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: screenSize.width*0.05,vertical: screenSize.height*0.01),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenSize.width * 0.05,
+                        vertical: screenSize.height * 0.01),
                     child: SizedBox(
-                        height: screenSize.height*0.06,
-                        width: screenSize.width*1,
+                        height: screenSize.height * 0.06,
+                        width: screenSize.width * 1,
                         child: TextFormField(
                           controller: _password,
                           obscureText: true,
@@ -294,12 +306,14 @@ class _WelcomeState extends State<Welcome> {
                         )),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: screenSize.width*0.01, top: screenSize.height*.0),
+                    padding: EdgeInsets.only(
+                        left: screenSize.width * 0.01,
+                        top: screenSize.height * .0),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          width: screenSize.width*0.6,
+                          width: screenSize.width * 0.6,
                         ),
                         GestureDetector(
                           onTap: () {
@@ -311,7 +325,9 @@ class _WelcomeState extends State<Welcome> {
                           },
                           child: Text(
                             'Forget Password?',
-                            style: TextStyle(fontSize: screenSize.width*0.045, color: Colors.white),
+                            style: TextStyle(
+                                fontSize: screenSize.width * 0.045,
+                                color: Colors.white),
                             //textAlign: TextAlign.end,
                           ),
                         ),
@@ -319,24 +335,25 @@ class _WelcomeState extends State<Welcome> {
                     ),
                   ),
                   SizedBox(
-                    height: screenSize.height*0.06,
+                    height: screenSize.height * 0.06,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Padding(
-                          padding: EdgeInsets.only(left: screenSize.width*.05),
+                      Padding(
+                          padding:
+                              EdgeInsets.only(left: screenSize.width * .05),
                           child: Text(
                             'Login',
                             style: TextStyle(
-                              fontSize: screenSize.width*0.09,
+                              fontSize: screenSize.width * 0.09,
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),
                             //textAlign: TextAlign.start,
                           )),
                       Padding(
-                        padding:  EdgeInsets.only(right:screenSize.width*.05 ),
+                        padding: EdgeInsets.only(right: screenSize.width * .05),
                         child: GestureDetector(
                           onTap: () {
                             bool f = false;
@@ -384,9 +401,9 @@ class _WelcomeState extends State<Welcome> {
                             _email.text = "";
                             _password.text = "";
                           },
-                          child:  Icon(
+                          child: Icon(
                             Icons.login,
-                            size: screenSize.width*.1,
+                            size: screenSize.width * .1,
                             color: Colors.white,
                           ),
                         ),
@@ -394,25 +411,33 @@ class _WelcomeState extends State<Welcome> {
                     ],
                   ),
                   SizedBox(
-                    height: screenSize.height*0.05,
+                    height: screenSize.height * 0.05,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: screenSize.width*0.01, top: screenSize.height*.01),
+                        padding: EdgeInsets.only(
+                            right: screenSize.width * 0.01,
+                            top: screenSize.height * .01),
                         child: Text(
                           "Don't have account?",
-                          style: TextStyle(fontSize: screenSize.width*.045, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: screenSize.width * .045,
+                              color: Colors.black),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: screenSize.width*0.02, top: screenSize.height*.01),
+                        padding: EdgeInsets.only(
+                            right: screenSize.width * 0.02,
+                            top: screenSize.height * .01),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return Create_account(user: "dentists",);
+                              return Create_account(
+                                user: "dentists",
+                              );
                             }));
                           },
                           child: Text(
@@ -420,7 +445,7 @@ class _WelcomeState extends State<Welcome> {
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               decorationColor: Colors.white,
-                              fontSize: screenSize.width*0.045,
+                              fontSize: screenSize.width * 0.045,
                               color: Colors.white,
                               fontWeight: FontWeight.w500,
                             ),

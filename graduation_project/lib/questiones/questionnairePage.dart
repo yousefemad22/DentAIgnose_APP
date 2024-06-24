@@ -42,10 +42,10 @@ class _DesignState extends State<Design> {
       reportIndex = des == null ? 0 : des.length;
       print("reportIndex: $reportIndex");
     });
-    if (widget.patientId != null) {
-      widget.patientId--;
-      print("patientId: ${widget.patientId}");
-    }
+    // if (widget.patientId != null) {
+    //   widget.patientId--;
+    //   print("patientId: ${widget.patientId}");
+    // }
   }
 
   Future<bool?> showConfirmationDialog(BuildContext context) {

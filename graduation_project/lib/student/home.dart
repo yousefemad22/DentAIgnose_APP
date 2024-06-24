@@ -171,7 +171,7 @@ class _studentPageState extends State<studentPage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Xray())));
+                          MaterialPageRoute(builder: ((context) => Xray(userData: widget.studentData))));
                     },
                     child: Container(
                       width: screenSize.width * 0.8,
